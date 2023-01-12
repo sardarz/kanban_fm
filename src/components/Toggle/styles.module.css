@@ -1,0 +1,24 @@
+.outer {
+  position: relative;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 1.2rem;
+  background-color: var(--clr-primary-600);
+  cursor: pointer;
+  user-select: none;
+}
+
+.inner {
+  position: absolute;
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: #fff;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: left .3s ease;
+}
+
+.outer.dark .inner {
+  left: 2.3rem;
+}

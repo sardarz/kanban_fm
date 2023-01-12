@@ -1,7 +1,7 @@
-import React from "react";
 import SideBoardItem from "./SideBoardItem";
 import styles from "./styles.module.css";
 import SideBoardCreateItem from "./SideBoardCreateItem";
+import SideBoardToggleWrapper from "./SideBoardToggleWrapper";
 
 const SideBoard = () => {
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
@@ -15,6 +15,7 @@ const SideBoard = () => {
         return <SideBoardItem active={active} text={el} />;
       })}
       <SideBoardCreateItem />
+      <SideBoardToggleWrapper />
     </div>
   );
 };
