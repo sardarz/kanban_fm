@@ -34,3 +34,10 @@
 .outer.dark .inner {
   left: 2.3rem;
 }
+
+@media screen and (max-width: 375px) {
+  .toggleWrapper {
+    max-width: 23.5rem;
+    margin-left: 1.6rem;
+  }
+}

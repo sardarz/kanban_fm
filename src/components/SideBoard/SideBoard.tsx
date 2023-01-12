@@ -5,11 +5,11 @@ import SideBoardToggleWrapper from "../Toggle/SideBoardToggleWrapper";
 import HideSidebar from "./HideSidebar";
 import {ReactComponent as LightLogo} from "../../assets/logo-dark.svg"
 
-const SideBoard = () => {
+const SideBoard = ({isOpen}: {isOpen: boolean}) => {
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
   return (
-    <div className={`${styles.sideBoardWrapper}`}>
+    <div className={`${styles.sideBoardWrapper} ${isOpen ? styles.sideBoardOpen : ""}`}>
       <div className={styles.sideBoardLogoWrapper}>
         <LightLogo />
       </div>
