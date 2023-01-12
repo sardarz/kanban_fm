@@ -30,3 +30,18 @@ textarea {
 textarea {
   overflow: auto;
 }
+
+:root {
+  --clr-primary-600: #635fc7;
+  --clr-primary-300: #a8a4ff;
+  --clr-dark-600: #000112;
+  --clr-dark-500: #20212c;
+  --clr-dark-400: #2b2c37;
+  --clr-dark-300: #3e3f4e;
+  --clr-gray-600: #828fa3;
+  --clr-gray-500: #e4ebfa;
+  --clr-gray-400: #f4f7fd;
+  --clr-white: #fff;
+  --clr-accent-600: #ea5555;
+  --clr-accent-400: #ff9898;
+}
