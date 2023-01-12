@@ -44,4 +44,21 @@ textarea {
   --clr-white: #fff;
   --clr-accent-600: #ea5555;
   --clr-accent-400: #ff9898;
+
+  --heading-xl-fs: 2.4rem;
+  --heading-xl-lh: 3rem;
+  --heading-l-fs: 1.8rem;
+  --heading-l-lh: 2.3rem;
+  --heading-m-fs: 1.5rem;
+  --heading-m-lh: 1.9rem;
+  --heading-s-fs: 1.2rem;
+  --heading-s-lh: 1.5rem;
+  --heading-s-ls: .24rem;
+
+  --body-l-fs: 1.3rem;
+  --body-l-lh: 2.3rem;
+  --body-l-fw: 500;
+  --body-m-fs: 1.2rem;
+  --body-m-lh: 1.5rem;
+  --body-m-fw: 700;
 }
