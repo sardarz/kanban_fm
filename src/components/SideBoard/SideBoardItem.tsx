@@ -8,7 +8,11 @@ interface Props {
 
 const SideBoardItem = ({ text, active }: Props) => {
   return (
-    <div className={`${styles.sideBoardItemWrapper} ${active ? styles.active : ""}`}>
+    <div
+      className={`${styles.sideBoardItemWrapper} ${
+        active ? styles.active : ""
+      }`}
+    >
       <SideBoardLogo />
       <p>{text}</p>
     </div>

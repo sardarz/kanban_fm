@@ -6,7 +6,8 @@
   max-width: 30rem;
   width: 100%;
   transform: translateX(-105%);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
+  background-color: white;
 }
 
 .sideBoardWrapper.sideBoardOpen {
@@ -112,7 +113,7 @@
     top: 8rem;
     left: 5.4rem;
     transform: translateY(-200%);
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
 
   .sideBoardWrapper.sideBoardOpen {

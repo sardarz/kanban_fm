@@ -1,0 +1,39 @@
+.headerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  height: 9.7rem;
+}
+
+.headerWrapper:before {
+  content: '';
+  position: absolute;
+  height: 9.7rem;
+  width: 1px;
+  left: 20.9rem;
+  background-color: var(--clr-gray-500);
+}
+
+.headerLogoWrapper {
+  position: relative;
+  margin-left: 2.4rem;
+  margin-right: 3.2rem;
+}
+
+.headerMainWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 2.4rem;
+}
+
+.buttonHeaderWrapper {
+  margin-left: auto;
+  margin-right: 2.4rem;
+}
+
+.headerMenuLogoWrapper {
+  margin-right: 3.2rem;
+  cursor: pointer;
+}

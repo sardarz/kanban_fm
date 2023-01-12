@@ -3,15 +3,19 @@ import styles from "./styles.module.css";
 import SideBoardCreateItem from "./SideBoardCreateItem";
 import SideBoardToggleWrapper from "../Toggle/SideBoardToggleWrapper";
 import HideSidebar from "./HideSidebar";
-import {ReactComponent as LightLogo} from "../../assets/logo-dark.svg"
+import { ReactComponent as DarkLogo } from "../../assets/logo-dark.svg";
 
-const SideBoard = ({isOpen}: {isOpen: boolean}) => {
+const SideBoard = ({ isOpen }: { isOpen: boolean }) => {
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
   return (
-    <div className={`${styles.sideBoardWrapper} ${isOpen ? styles.sideBoardOpen : ""}`}>
+    <div
+      className={`${styles.sideBoardWrapper} ${
+        isOpen ? styles.sideBoardOpen : ""
+      }`}
+    >
       <div className={styles.sideBoardLogoWrapper}>
-        <LightLogo />
+        <DarkLogo />
       </div>
       <p className={styles.allBoards}>ALL BOARDS (3)</p>
       {boards.map((el) => {
