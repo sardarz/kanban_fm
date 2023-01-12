@@ -62,3 +62,7 @@ textarea {
   --body-m-lh: 1.5rem;
   --body-m-fw: 700;
 }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}

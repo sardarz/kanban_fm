@@ -1,0 +1,41 @@
+.sideBoardItemWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  height: 4.8rem;
+  transition: all .5s ease;
+}
+
+.sideBoardItemWrapper:has(p:hover) {
+  border-radius: 0 10rem 10rem 0;
+  background-color: var(--clr-gray-500);
+}
+
+.logoWrapper {
+  max-height: 1.6rem;
+  margin-left: 3.2rem;
+}
+
+.sideBoardItemWrapper p {
+  font-size: var(--heading-m-fs);
+  color: var(--clr-gray-600);
+  cursor: pointer;
+}
+
+.sideBoardItemWrapper.active.active {
+  background-color: var(--clr-primary-600);
+  border-radius: 0 10rem 10rem 0;
+}
+
+.sideBoardItemWrapper.active p {
+  color: var(--clr-white);
+}
+
+.sideBoardItemWrapper.active path {
+  fill: white;
+}
+
+.button.button {
+  color: var(--clr-primary-600);
+  font-weight: 700;
+}
