@@ -1,3 +1,15 @@
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  margin-left: 2.4rem;
+  height: 4.8rem;
+  max-width: 25.1rem;
+  border-radius: 6px;
+  background-color: var(--clr-gray-400);
+}
+
 .outer {
   position: relative;
   width: 4rem;

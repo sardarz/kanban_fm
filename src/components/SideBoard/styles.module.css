@@ -1,9 +1,42 @@
+.sideBoardWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 30rem;
+}
+
+.sideBoardWrapper::before {
+  content: '';
+  position: absolute;
+  left: 100%;
+  width: 1px;
+  height: 100%;
+  background-color: var(--clr-gray-500);
+}
+
+.sideBoardLogoWrapper {
+  margin-left: 3.4rem;
+  margin-top: 3.3rem;
+  margin-bottom: 5.4rem;
+}
+
+.allBoards {
+  margin-left: 3.2rem;
+  margin-bottom: 1.9rem;
+  color: var(--clr-gray-600);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.24rem;
+}
+
 .sideBoardItemWrapper {
   display: flex;
   align-items: center;
   gap: 1.6rem;
   height: 4.8rem;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
+  margin-right: 2.3rem;
 }
 
 .sideBoardItemWrapper:has(p:hover) {
@@ -39,3 +72,25 @@
   color: var(--clr-primary-600);
   font-weight: 700;
 }
+
+.createItem {
+  margin-bottom: auto;
+}
+
+.hideWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  margin-left: 3.1rem;
+  margin-top: 2.2rem;
+  margin-bottom: 4.7rem;
+}
+
+.hideWrapper p {
+  color: var(--clr-gray-600);
+  font-weight: 700;
+  font-size: var(--heading-m-fs);
+  line-height: var(--heading-m-lh);
+}
+
