@@ -1,0 +1,5 @@
+.showButtonWrapper {
+  position: absolute;
+  z-index: 10;
+  bottom: 3.2rem;
+}

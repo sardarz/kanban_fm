@@ -5,7 +5,12 @@ import SideBoardToggleWrapper from "../Toggle/SideBoardToggleWrapper";
 import HideSidebar from "./HideSidebar";
 import { ReactComponent as DarkLogo } from "../../assets/logo-dark.svg";
 
-const SideBoard = ({ isOpen }: { isOpen: boolean }) => {
+interface SideBoardProps {
+  isOpen: boolean;
+  closeSideBoard: () => void;
+}
+
+const SideBoard = ({ isOpen, closeSideBoard }: SideBoardProps) => {
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
   return (
@@ -26,7 +31,7 @@ const SideBoard = ({ isOpen }: { isOpen: boolean }) => {
       })}
       <SideBoardCreateItem />
       <SideBoardToggleWrapper />
-      <HideSidebar />
+      <HideSidebar onClick={closeSideBoard} />
     </div>
   );
 };

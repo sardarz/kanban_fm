@@ -4,6 +4,8 @@
   align-items: center;
   background-color: #fff;
   height: 9.7rem;
+  transition: all .3s ease;
+  overflow-x: hidden;
 }
 
 .headerWrapper:before {
@@ -26,6 +28,7 @@
   align-items: center;
   width: 100%;
   margin-left: 2.4rem;
+  transition: all .3s ease;
 }
 
 .buttonHeaderWrapper {
@@ -36,4 +39,21 @@
 .headerMenuLogoWrapper {
   margin-right: 3.2rem;
   cursor: pointer;
+}
+
+
+.sideOpen.headerWrapper {
+
+}
+
+.sideOpen.headerWrapper:before {
+  display: none;
+}
+
+.headerMainWrapper h1 {
+  transition: all .3s ease;
+}
+
+.sideOpen .headerMainWrapper h1 {
+  transform: translateX(9.1rem);
 }

@@ -1,0 +1,10 @@
+.showButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5.6rem;
+  height: 4.8rem;
+  border-radius: 0 10rem 10rem 0;
+  background-color: var(--clr-primary-600);
+  cursor: pointer;
+}
