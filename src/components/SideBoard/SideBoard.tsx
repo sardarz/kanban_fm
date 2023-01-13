@@ -4,7 +4,7 @@ import SideBoardCreateItem from "./SideBoardCreateItem";
 import SideBoardToggleWrapper from "../Toggle/SideBoardToggleWrapper";
 import HideSidebar from "./HideSidebar";
 import { ReactComponent as DarkLogo } from "../../assets/logo-dark.svg";
-import { boardCreated, getBoards } from "../../features/boards/boardsSlice";
+import { boardCreated, getBoards, updateCurrentlySelected } from "../../features/boards/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 interface SideBoardProps {
@@ -26,7 +26,6 @@ const SideBoard = ({ isOpen, closeSideBoard }: SideBoardProps) => {
         <DarkLogo />
       </div>
       <p
-        onClick={() => dispatch(boardCreated("kek"))}
         className={styles.allBoards}
       >
         ALL BOARDS ({boards.allIds.length})
@@ -35,7 +34,9 @@ const SideBoard = ({ isOpen, closeSideBoard }: SideBoardProps) => {
         let active = false;
         if (boards.currentlySelected === id) active = true;
         return (
-          <SideBoardItem key={id} active={active} text={boards.byId[id].name} />
+          <SideBoardItem onClick={() => {
+            dispatch(updateCurrentlySelected(id))
+          }} key={id} active={active} text={boards.byId[id].name} />
         );
       })}
       <SideBoardCreateItem />

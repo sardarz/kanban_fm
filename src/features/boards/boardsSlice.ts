@@ -27,7 +27,7 @@ const initialState: IBoards = {
     mp: {
       boardId: "mp",
       name: "Marketing Plan",
-      columnIds: [],
+      columnIds: ["ccc"],
     },
   },
   allIds: ["pl", "mp"],
@@ -47,10 +47,13 @@ const boardsSlice = createSlice({
       };
       state.allIds.push(id);
     },
+    updateCurrentlySelected(state, action) {
+      state.currentlySelected = action.payload;
+    },
   },
 });
 
-export const { boardCreated } = boardsSlice.actions;
+export const { boardCreated, updateCurrentlySelected } = boardsSlice.actions;
 
 export const getBoards = (state: RootState): IBoards => state.boards;
 

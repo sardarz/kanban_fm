@@ -15,8 +15,6 @@ interface ITasks {
   allIds: ID[];
 }
 
-
-
 const initialState: ITasks = {
   byId: {
     1: {
@@ -54,8 +52,27 @@ const initialState: ITasks = {
       subtasks: [],
       columnId: "bbb",
     },
+    6: {
+      title: "Conduct 5 wireframe tests",
+      description: "",
+      subtasks: [],
+      columnId: "ccc",
+    },
+    7: {
+      title: "Create wireframe prototype",
+      description: "",
+      subtasks: [],
+      columnId: "ccc",
+    },
+    8: {
+      title:
+        "Create paper prototypes and conduct 10 usability tests with potential customers",
+      description: "",
+      subtasks: [],
+      columnId: "ccc",
+    },
   },
-  allIds: [1, 2, 3, 4, 5],
+  allIds: [1, 2, 3, 4, 5, 6, 7, 8],
 };
 
 const tasksSlice = createSlice({
@@ -64,9 +81,7 @@ const tasksSlice = createSlice({
   reducers: {},
 });
 
-export const getTaskById =
-  (taskId: ID) =>
-  (state: RootState) =>
-    state.tasks.byId[taskId];
+export const getTaskById = (taskId: ID) => (state: RootState) =>
+  state.tasks.byId[taskId];
 
 export default tasksSlice.reducer;

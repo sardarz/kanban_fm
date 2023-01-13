@@ -26,6 +26,11 @@ const initialState: IColumns = {
       status: "doing",
       taskIds: [3, 4, 5],
     },
+    ccc: {
+      columnId: "ccc",
+      status: "todo",
+      taskIds: [6, 7, 8],
+    },
   },
   allIds: ["aaa", "bbb"],
 };

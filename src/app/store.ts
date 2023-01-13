@@ -3,7 +3,7 @@ import boardsReducer from "../features/boards/boardsSlice";
 import columnsReducer from "../features/columns/columnsSlice";
 import tasksReducer from "../features/tasks/tasksSlice";
 
-const store =  configureStore({
+const store = configureStore({
   reducer: {
     boards: boardsReducer,
     columns: columnsReducer,
@@ -11,6 +11,6 @@ const store =  configureStore({
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
-export default store
+export default store;

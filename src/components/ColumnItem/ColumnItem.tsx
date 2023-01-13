@@ -8,7 +8,7 @@ const ColumnItem = ({ taskId, columnId }: { taskId: ID; columnId: ID }) => {
   return (
     <div className={styles.cardWrapper}>
       <h3 className={styles.title}>{task.title}</h3>
-      <p className={styles.subtasks}>0 of 6 subtasks</p>
+      <p className={styles.subtasks}>0 of {task.subtasks.length} subtasks</p>
     </div>
   );
 };

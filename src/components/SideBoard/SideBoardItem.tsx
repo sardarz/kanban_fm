@@ -4,9 +4,10 @@ import styles from "./styles.module.css";
 interface Props {
   text: string;
   active: boolean;
+  onClick: () => void;
 }
 
-const SideBoardItem = ({ text, active }: Props) => {
+const SideBoardItem = ({ text, active, onClick }: Props) => {
   return (
     <div
       className={`${styles.sideBoardItemWrapper} ${
@@ -14,7 +15,7 @@ const SideBoardItem = ({ text, active }: Props) => {
       }`}
     >
       <SideBoardLogo />
-      <p>{text}</p>
+      <p onClick={onClick}>{text}</p>
     </div>
   );
 };
