@@ -11,4 +11,5 @@
   color: var(--clr-gray-600);
   letter-spacing: 0.24rem;
   font-weight: 700;
+  text-transform: uppercase;
 }

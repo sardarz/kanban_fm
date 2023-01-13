@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
-
-type ID = string | number;
+import { ID } from "../../common/utils/types";
 
 interface IBoards {
-  byId: IBoard
+  byId: IBoard;
   allIds: ID[];
   currentlySelected: ID;
 }
@@ -22,7 +21,7 @@ const initialState: IBoards = {
     pl: {
       boardId: "pl",
       name: "Platform Launch",
-      columnIds: [],
+      columnIds: ["aaa", "bbb"],
     },
     mp: {
       boardId: "mp",
@@ -42,7 +41,7 @@ const boardsSlice = createSlice({
       const id = uuidv4();
       state.byId[id] = {
         boardId: id,
-        name: action.payload.name,
+        name: action.payload,
         columnIds: [],
       };
       state.allIds.push(id);
@@ -53,6 +52,5 @@ const boardsSlice = createSlice({
 export const { boardCreated } = boardsSlice.actions;
 
 export const getBoards = (state: any): IBoards => state.boards;
-
 
 export default boardsSlice.reducer;

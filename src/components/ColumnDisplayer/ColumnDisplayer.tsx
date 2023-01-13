@@ -1,15 +1,21 @@
 import ColumnItem from "../ColumnItem/ColumnItem";
 import styles from "./styles.module.css";
+import { ID } from "../../common/utils/types";
+import { getColumns } from "../../features/columns/columnsSlice";
+import { useSelector } from "react-redux";
 
-const ColumnDisplayer = () => {
-  const columnItems = [1, 2, 3, 4,];
+const ColumnDisplayer = ({ columnId }: { columnId: ID }) => {
+  const columns = useSelector(getColumns);
+  const { taskIds, status } = columns.byId[columnId];
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.columnTitle}>TODO (4)</p>
+      <p className={styles.columnTitle}>
+        {status} ({taskIds.length})
+      </p>
       <div className={styles.columnDisplayer}>
-        {columnItems.map((c) => (
-          <ColumnItem />
+        {taskIds.map((c) => (
+          <ColumnItem key={columnId} />
         ))}
       </div>
     </div>
