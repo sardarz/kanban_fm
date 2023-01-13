@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Board from "./components/Board/Board";
 import Header from "./components/Header/Header";
 import ShowSideBoard from "./components/ShowSideBoard/ShowSideBoard";
 import SideBoard from "./components/SideBoard/SideBoard";
@@ -18,7 +19,7 @@ function App() {
         closeSideBoard={() => setIsSideBoardOpen(false)}
       />
       <Header isSideBoardOpen={isSideBoardOpen} />
-   
+      <Board isSideBoardOpen={isSideBoardOpen} />
     </div>
   );
 }

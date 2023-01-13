@@ -61,6 +61,8 @@ textarea {
   --body-m-fs: 1.2rem;
   --body-m-lh: 1.5rem;
   --body-m-fw: 700;
+
+  --header-height: 9.7rem;
 }
 
 body {

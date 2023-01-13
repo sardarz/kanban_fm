@@ -1,0 +1,63 @@
+/* Variables */
+.main {
+  --animationDurationOnSideOpen: 0.3s;
+  --animationDurationOnSideClose: 0.5s;
+
+  --mainPadding: 2.4rem;
+  --emptyBoardHeight: calc(100vh - var(--header-height) - 2 * var(--mainPadding));
+}
+
+.main {
+  padding: var(--mainPadding);
+  animation: moveBodyBack var(--animationDurationOnSideClose) ease forwards;
+}
+
+.main.sideOpen {
+  animation: moveBodyOnSideOpen var(--animationDurationOnSideOpen) ease forwards;
+}
+
+.container {
+}
+
+.mainContent {
+}
+
+.emptyBoardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: var(--emptyBoardHeight);
+  gap: 3.2rem;
+}
+
+.emptyText {
+  color: var(--clr-gray-600);
+  font-weight: 700;
+  font-size: var(--heading-l-fs);
+  line-height: var(--heading-l-lh);
+}
+
+@keyframes moveBodyOnSideOpen {
+  from {
+    transform: translateX(0);
+    width: 100%;
+  }
+
+  to {
+    width: calc(100% - 30rem);
+    transform: translateX(30rem);
+  }
+}
+
+@keyframes moveBodyBack {
+  from {
+    width: calc(100% - 30rem);
+    transform: translateX(30rem);
+  }
+
+  to {
+    transform: translateX(0);
+    width: 100%;
+  }
+}
