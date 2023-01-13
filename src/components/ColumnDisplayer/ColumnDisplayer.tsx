@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 const ColumnDisplayer = ({ columnId }: { columnId: ID }) => {
   const columns = useSelector(getColumns);
   const { taskIds, status } = columns.byId[columnId];
-
+  
   return (
     <div className={styles.wrapper}>
       <p className={styles.columnTitle}>
         {status} ({taskIds.length})
       </p>
       <div className={styles.columnDisplayer}>
-        {taskIds.map((c) => (
-          <ColumnItem key={columnId} />
+        {taskIds.map((taskId) => (
+          <ColumnItem key={columnId} columnId={columnId} taskId={taskId} />
         ))}
       </div>
     </div>

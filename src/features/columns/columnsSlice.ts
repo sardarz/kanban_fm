@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { RootState } from "../../app/store";
 import { ID } from "../../common/utils/types";
 
 interface IColumns {
@@ -18,12 +19,12 @@ const initialState: IColumns = {
     aaa: {
       columnId: "aaa",
       status: "todo",
-      taskIds: [],
+      taskIds: [1, 2],
     },
     bbb: {
       columnId: "bbb",
       status: "doing",
-      taskIds: [],
+      taskIds: [3, 4, 5],
     },
   },
   allIds: ["aaa", "bbb"],
@@ -35,6 +36,6 @@ const columnsSlice = createSlice({
   reducers: {},
 });
 
-export const getColumns = (state: any): IColumns => state.columns;
+export const getColumns = (state: RootState): IColumns => state.columns;
 
 export default columnsSlice.reducer;

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { RootState } from "../../app/store";
 import { ID } from "../../common/utils/types";
 
 interface IBoards {
@@ -51,6 +52,6 @@ const boardsSlice = createSlice({
 
 export const { boardCreated } = boardsSlice.actions;
 
-export const getBoards = (state: any): IBoards => state.boards;
+export const getBoards = (state: RootState): IBoards => state.boards;
 
 export default boardsSlice.reducer;
