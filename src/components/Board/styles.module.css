@@ -9,6 +9,8 @@
 
 .main {
   padding: var(--mainPadding);
+  overflow-x: auto;
+  height: calc(100vh - var(--header-height));
   animation: moveBodyBack var(--animationDurationOnSideClose) ease forwards;
 }
 
@@ -17,6 +19,7 @@
 }
 
 .container {
+
 }
 
 .mainContent {
@@ -26,8 +29,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: var(--emptyBoardHeight);
   justify-content: center;
-  height: var(--emptyBoardHeight);
   gap: 3.2rem;
 }
 

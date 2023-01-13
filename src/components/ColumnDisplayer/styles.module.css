@@ -1,0 +1,14 @@
+.columnDisplayer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.columnTitle {
+  margin-bottom: 2.4rem;
+  font-size: var(--heading-s-fs);
+  line-height: var(--heading-s-lh);
+  color: var(--clr-gray-600);
+  letter-spacing: 0.24rem;
+  font-weight: 700;
+}

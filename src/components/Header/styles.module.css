@@ -41,11 +41,6 @@
   cursor: pointer;
 }
 
-
-.sideOpen.headerWrapper {
-
-}
-
 .sideOpen.headerWrapper:before {
   display: none;
 }

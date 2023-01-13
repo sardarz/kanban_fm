@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../Button/Button";
+import ColumnsDisplayer from "../ColumnsDisplayer/ColumnsDisplayer";
 import styles from "./styles.module.css";
 
 interface BoardProps {
@@ -18,7 +19,7 @@ const EmptyBoard = () => {
 };
 
 const Board = ({ isSideBoardOpen }: BoardProps) => {
-  const [isBoardEmpty, setIsBoardEmpty] = useState(true);
+  const [isBoardEmpty, setIsBoardEmpty] = useState(false);
 
   return (
     <main
@@ -26,7 +27,7 @@ const Board = ({ isSideBoardOpen }: BoardProps) => {
     >
       <div className={`${styles.container}`}>
         <div className={`${styles.mainContent}`}>
-          {isBoardEmpty ? <EmptyBoard /> : null}
+          {isBoardEmpty ? <EmptyBoard /> : <ColumnsDisplayer />}
         </div>
       </div>
     </main>

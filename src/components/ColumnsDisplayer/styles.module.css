@@ -1,0 +1,28 @@
+.columnsDisplayer {
+  display: grid;
+  gap: 2.4rem;
+  grid-auto-columns: 28rem;
+  grid-auto-flow: column;
+}
+
+.newColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 3.9rem);
+  background: linear-gradient(
+    180deg,
+    #e9effa 0%,
+    rgba(233, 239, 250, 0.5) 100%
+  );
+  border-radius: 6px;
+  align-self: end;
+  cursor: pointer;
+}
+
+.newColumn p {
+  font-size: var(--heading-xl-fs);
+  line-height: var(--heading-xl-lh);
+  color: var(--clr-gray-600);
+  font-weight: 700;
+}

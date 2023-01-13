@@ -1,0 +1,21 @@
+.cardWrapper {
+  padding: 2.3rem 1.6rem;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.title {
+  margin-bottom: .8rem;
+  font-size: var(--heading-m-fs);
+  line-height: var(--heading-m-lh);
+  color: var(--clr-dark-600);
+}
+
+.subtasks {
+  font-size: var(--body-m-fs);
+  line-height: var(--body-m-lh);
+  font-weight: 700;
+  color: var(--clr-gray-600);
+}
