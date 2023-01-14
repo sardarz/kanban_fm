@@ -15,9 +15,9 @@
   --subTitle-fw: var(--body-m-fw);
   --subTitle-font-clr: var(--clr-gray-600);
 
-  --placeHolder-opacity: 0.25;
+  --placeHolder-opacity: 0.4;
 
-  --btn-padding: .8rem 0 .9rem 0;
+  --btn-padding: 0.8rem 0 0.9rem 0;
   --btn-border-radius: 2rem;
 
   --btn-primary-bg-clr: var(--clr-primary-600);
@@ -40,5 +40,82 @@
 .modalContent {
   padding: 3.2rem;
   background-color: #fff;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 48rem;
 }
 
+.modalWrapper :global(.title) {
+  font-size: var(--title-fs);
+  line-height: var(--title-lh);
+  color: var(--title-font-clr);
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.subTitle) {
+  display: block;
+  margin-bottom: 8px;
+  font-size: var(--subTitle-fs);
+  font-weight: var(--subTitle-fw);
+  line-height: var(--subTitle-lh);
+  color: var(--subTitle-font-clr);
+}
+
+.modalWrapper button {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+  font-size: var(--body-fs);
+  line-height: var(--body-lh);
+  font-weight: 700;
+}
+
+.modalWrapper :global(.secondary) {
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.primary) {
+  color: var(--btn-primary-font-clr);
+  background-color: var(--btn-primary-bg-clr);
+}
+
+.modalWrapper :global(.secondary) {
+  color: var(--btn-secondary-font-clr);
+  background-color: var(--btn-secondary-bg-clr);
+}
+
+.modalWrapper input {
+  display: block;
+  padding: 0.7rem 1.6rem 0.8rem;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  outline: none;
+  font-size: var(--body-fs);
+  line-height: var(--body-lh);
+  color: var(--clr-dark-600);
+  font-weight: 500;
+  width: 100%;
+}
+
+.modalWrapper :global(.inputWrapper) {
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.columnsWrapper) {
+  margin-bottom: 1.2rem;
+}
+
+.modalWrapper :global(.columns) {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.modalWrapper input::placeholder {
+  opacity: var(--placeHolder-opacity);
+  color: var(--clr-dark-600);
+}
