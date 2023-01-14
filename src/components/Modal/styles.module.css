@@ -138,3 +138,57 @@
   color: black;
   opacity: 0.25;
 }
+
+/* ViewTask */
+
+.modalWrapper :global(.description) {
+  font-size: var(--body-l-fs);
+  line-height: var(--body-l-lh);
+  font-weight: var(--body-l-fw);
+  color: var(--clr-gray-600);
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.subtasksWrapper) {
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.viewTaskHeader) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+}
+
+.modalWrapper :global(.viewTaskHeader .title) {
+  margin-bottom: 0;
+}
+
+.modalWrapper :global(.viewTaskHeader) h3 {
+  max-width: 38.7rem;
+}
+
+.modalWrapper :global(.subtasks) {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* DeleteModal */
+
+.modalWrapper :global(.delete .title) {
+  color: var(--clr-accent-600);
+}
+
+.modalWrapper :global(.deleteBtnsWrapper) {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.modalWrapper :global(.deleteBtnsWrapper .primary) {
+  background-color: var(--clr-accent-600);
+}
+
+.modalWrapper :global(.deleteBtnsWrapper button) {
+  margin: 0;
+}

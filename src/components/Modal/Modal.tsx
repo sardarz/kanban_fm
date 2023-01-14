@@ -2,8 +2,10 @@ import React, { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { modalTypes } from "../../common/utils/modalTypes";
 import BoardModal from "./BoardModal/BoardModal";
+import DeleteModal from "./DeleteModal/DeleteModal";
 import styles from "./styles.module.css";
 import TaskModal from "./TaskModal/TaskModal";
+import ViewTaskModal from "./ViewTaskModal/ViewTaskModal";
 
 interface ModalProps {
   type: string;
@@ -22,7 +24,7 @@ const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
         className={`${styles.modalContent}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {type === modalTypes.addBoard ? <TaskModal /> : null}
+        {type === modalTypes.addBoard ? <DeleteModal type="board" /> : null}
       </div>
     </div>
   );
