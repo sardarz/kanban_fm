@@ -1,0 +1,44 @@
+/* Variables */
+.modalWrapper {
+  --title-fs: var(--heading-l-fs);
+  --title-lh: var(--heading-l-lh);
+  --title-font-clr: var(--clr-dark-600);
+  --title-delete-clr: var(--clr-accent-600);
+
+  --body-fs: var(--body-l-fs);
+  --body-lh: var(--body-l-lh);
+  --body-fw: var(--body-l-fw);
+  --body-font-clr: var(--clr-dark-600);
+
+  --subTitle-fs: var(--body-m-fs);
+  --subTitle-lh: var(--body-m-lh);
+  --subTitle-fw: var(--body-m-fw);
+  --subTitle-font-clr: var(--clr-gray-600);
+
+  --placeHolder-opacity: 0.25;
+
+  --btn-padding: .8rem 0 .9rem 0;
+  --btn-border-radius: 2rem;
+
+  --btn-primary-bg-clr: var(--clr-primary-600);
+  --btn-primary-font-clr: white;
+
+  --btn-secondary-bg-clr: rgba(99, 95, 199, 0.1);
+  --btn-secondary-font-clr: var(--clr-primary-600);
+}
+
+.modalWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  padding: 3.2rem;
+  background-color: #fff;
+}
+
