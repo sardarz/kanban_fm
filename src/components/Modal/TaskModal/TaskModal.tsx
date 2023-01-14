@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Dropdown from "../../Dropdown/Dropdown";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 
 const TaskModal = () => {
@@ -37,10 +38,10 @@ const TaskModal = () => {
         + Add New Subtask
       </button>
 
-      <p>status</p>
+      <Dropdown />
 
       <button type="button" className="primary">
-        Create New Board
+        Create New Task
       </button>
     </div>
   );

@@ -1,0 +1,65 @@
+.selectWrapper {
+  position: relative;
+  margin-bottom: 2.4rem;
+}
+
+.selectBtn {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #635fc7;
+  border-radius: 4px;
+  padding: 0.7rem 1.6rem 0.8rem;
+  cursor: pointer;
+}
+
+.selectBtn p {
+  font-size: 1.3rem;
+  line-height: 2.3rem;
+  font-weight: 500;
+  color: var(--clr-dark-600);
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconUp {
+  display: none;
+}
+
+.menuOpen .iconUp {
+  display: block;
+}
+
+.menuOpen .iconDown {
+  display: none;
+}
+
+.selectMenu {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 1.6rem;
+  background-color: #fff;
+  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2.3rem;
+  color: var(--clr-gray-600);
+}
+
+.menuOpen .selectMenu {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8rem;
+}
+
+.selectMenu li {
+  cursor: pointer;
+}
