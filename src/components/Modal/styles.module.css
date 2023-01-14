@@ -119,3 +119,22 @@
   opacity: var(--placeHolder-opacity);
   color: var(--clr-dark-600);
 }
+
+.modalWrapper textarea {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.6rem;
+  font-size: var(--body-l-fs);
+  line-height: var(--body-l-lh);
+  font-weight: 500;
+  color: var(--clr-gray-600);
+  outline: none;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  resize: none;
+}
+
+.modalWrapper textarea::placeholder {
+  color: black;
+  opacity: 0.25;
+}

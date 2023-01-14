@@ -1,21 +1,21 @@
-import modalStyles from "./addBoard.module.css";
-import styles from "../styles.module.css";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
+import { useState } from "react";
 
 const AddBoard = () => {
+  const [isNewBoard, setIsNewBoard] = useState(true);
   return (
     <div className="modalBox">
-      <h3 className="title">Add New Board</h3>
+      <h3 className="title">{isNewBoard ? "Add New Board" : "Edit Board"}</h3>
 
       <div className="inputWrapper">
         <label htmlFor="boardName" className="subTitle">
-          Name
+          {!isNewBoard && "Board "}Name
         </label>
         <input type="text" id="boardName" placeholder="e.g. Web Design" />
       </div>
 
       <div className="columnsWrapper">
-        <p className="subTitle">Columns</p>
+        <p className="subTitle">{!isNewBoard && "Board "}Columns</p>
         <div className="columns">
           <InputWithCloseBtn />
           <InputWithCloseBtn />
