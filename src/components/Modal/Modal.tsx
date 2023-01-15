@@ -24,7 +24,21 @@ const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
         className={`${styles.modalContent}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {type === modalTypes.addBoard ? <DeleteModal type="board" /> : null}
+        {type === modalTypes.addBoard ? (
+          <BoardModal isNewBoard={true} closeModal={closeModal}/>
+        ) : type === modalTypes.editBoard ? (
+          <BoardModal isNewBoard={false} />
+        ) : type === modalTypes.addTask ? (
+          <TaskModal isNewTask={true} closeModal={closeModal} />
+        ) : type === modalTypes.editTask ? (
+          <TaskModal isNewTask={false} />
+        ) : type === modalTypes.viewTask ? (
+          <ViewTaskModal />
+        ) : type === modalTypes.deleteBoard ? (
+          <DeleteModal type="board" />
+        ) : type === modalTypes.deleteTask ? (
+          <DeleteModal type="task" />
+        ) : null}
       </div>
     </div>
   );

@@ -127,7 +127,7 @@
   font-size: var(--body-l-fs);
   line-height: var(--body-l-lh);
   font-weight: 500;
-  color: var(--clr-gray-600);
+  color: var(--clr-dark-600);
   outline: none;
   border: 1px solid rgba(130, 143, 163, 0.25);
   border-radius: 4px;

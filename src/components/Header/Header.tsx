@@ -4,14 +4,24 @@ import styles from "./styles.module.css";
 import { ReactComponent as HeaderMenuLogo } from "../../assets/icon-vertical-ellipsis.svg";
 import ThreeDotsMenu from "../ThreeDotsMenu/ThreeDotsMenu";
 import { useState } from "react";
+import Modal from "../Modal/Modal";
+import { modalTypes } from "../../common/utils/modalTypes";
 
-const Header = ({ isSideBoardOpen }: { isSideBoardOpen: boolean }) => {
-  const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(true);
+const Header = ({
+  isSideBoardOpen,
+  isThreeDotsOpen,
+  setIsThreeDotsOpen,
+}: {
+  isSideBoardOpen: boolean;
+  isThreeDotsOpen: boolean;
+  setIsThreeDotsOpen: (v: boolean) => void;
+}) => {
+  const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
+
+  const closeAddTaskOpen = () => setIsAddTaskOpen(false);
+
   return (
     <div
-      onClick={() => {
-        setIsThreeDotsOpen(false);
-      }}
       className={`${styles.headerWrapper} ${
         isSideBoardOpen ? styles.sideOpen : ""
       }`}
@@ -23,14 +33,19 @@ const Header = ({ isSideBoardOpen }: { isSideBoardOpen: boolean }) => {
         <h1>Platform Launch</h1>
         <div
           className={styles.buttonHeaderWrapper}
-          style={{ maxWidth: "193px" }}
+          style={{ maxWidth: "164px" }}
         >
-          <Button text="+ Add New Task" />
+          <Button
+            text="+ Add New Task"
+            onClick={() => {
+              setIsAddTaskOpen(true);
+            }}
+          />
         </div>
         <div
           onClick={(e) => {
-            e.stopPropagation()
-            setIsThreeDotsOpen(true)
+            e.stopPropagation();
+            setIsThreeDotsOpen(true);
           }}
           className={styles.headerMenuLogoWrapper}
         >
@@ -38,6 +53,9 @@ const Header = ({ isSideBoardOpen }: { isSideBoardOpen: boolean }) => {
           <ThreeDotsMenu isOpen={isThreeDotsOpen} type="board" />
         </div>
       </div>
+      {isAddTaskOpen && (
+        <Modal type={modalTypes.addTask} closeModal={closeAddTaskOpen} />
+      )}
     </div>
   );
 };

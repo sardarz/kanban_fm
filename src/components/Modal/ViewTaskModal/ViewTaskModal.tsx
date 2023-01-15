@@ -1,8 +1,25 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { ReactComponent as ThreeDots } from "../../../assets/icon-vertical-ellipsis.svg";
+import {
+  getBoards,
+  getCurrentlySelected,
+} from "../../../features/boards/boardsSlice";
+import { getColumns } from "../../../features/columns/columnsSlice";
 import Dropdown from "../../Dropdown/Dropdown";
 import SubTaskViewer from "./SubTaskViewer";
 
 const ViewTaskModal = () => {
+  const currentlySelected = useSelector(getCurrentlySelected);
+  const boards = useSelector(getBoards);
+  const columnIds = boards.byId[currentlySelected].columnIds;
+  const columns = useSelector(getColumns);
+  const statuses = columnIds.map((id) => ({
+    status: columns.byId[id].status,
+    columnId: id,
+  }));
+  const [currentStatus, setCurrentStatus] = useState(0);
+
   const title =
     "Research pricing points of various competitors and trial different business models";
 
@@ -28,7 +45,11 @@ const ViewTaskModal = () => {
         </div>
       </div>
 
-      <Dropdown />
+      <Dropdown
+        statuses={statuses}
+        currentStatus={currentStatus}
+        setCurrentStatus={setCurrentStatus}
+      />
     </div>
   );
 };

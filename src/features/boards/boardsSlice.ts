@@ -55,6 +55,8 @@ const boardsSlice = createSlice({
 
 export const { boardCreated, updateCurrentlySelected } = boardsSlice.actions;
 
-export const getBoards = (state: RootState): IBoards => state.boards;
+export const getBoards = (state: RootState) => state.boards;
+
+export const getCurrentlySelected = (state: RootState) => state.boards.currentlySelected
 
 export default boardsSlice.reducer;

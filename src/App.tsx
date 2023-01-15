@@ -8,9 +8,15 @@ import styles from "./styles.module.css";
 
 function App() {
   const [isSideBoardOpen, setIsSideBoardOpen] = useState(false);
+  const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(false);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      onClick={() => {
+        setIsThreeDotsOpen(false);
+      }}
+    >
       <div className={styles.showButtonWrapper}>
         <ShowSideBoard onClick={() => setIsSideBoardOpen(true)} />
       </div>
@@ -18,7 +24,11 @@ function App() {
         isOpen={isSideBoardOpen}
         closeSideBoard={() => setIsSideBoardOpen(false)}
       />
-      <Header isSideBoardOpen={isSideBoardOpen} />
+      <Header
+        isSideBoardOpen={isSideBoardOpen}
+        isThreeDotsOpen={isThreeDotsOpen}
+        setIsThreeDotsOpen={setIsThreeDotsOpen}
+      />
       <Board isSideBoardOpen={isSideBoardOpen} />
     </div>
   );

@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import {
+  getBoards,
+  getCurrentlySelected,
+} from "../../features/boards/boardsSlice";
 import Button from "../Button/Button";
 import ColumnsDisplayer from "../ColumnsDisplayer/ColumnsDisplayer";
 import styles from "./styles.module.css";
@@ -13,13 +18,15 @@ const EmptyBoard = () => {
       <p className={styles.emptyText}>
         This board is empty. Create a new column to get started.
       </p>
-      <Button text="+ Add New Column " />
+      <Button onClick={() => {}} text="+ Add New Column " />
     </div>
   );
 };
 
 const Board = ({ isSideBoardOpen }: BoardProps) => {
-  const [isBoardEmpty, setIsBoardEmpty] = useState(false);
+  const currentlySelected = useSelector(getCurrentlySelected);
+  const columnAmountByThisBoard =
+    useSelector(getBoards).byId[currentlySelected].columnIds.length;
 
   return (
     <main
@@ -27,7 +34,7 @@ const Board = ({ isSideBoardOpen }: BoardProps) => {
     >
       <div className={`${styles.container}`}>
         <div className={`${styles.mainContent}`}>
-          {isBoardEmpty ? <EmptyBoard /> : <ColumnsDisplayer />}
+          {columnAmountByThisBoard === 0 ? <EmptyBoard /> : <ColumnsDisplayer />}
         </div>
       </div>
     </main>

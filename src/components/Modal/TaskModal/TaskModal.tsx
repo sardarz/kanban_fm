@@ -1,9 +1,71 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getBoards,
+  getCurrentlySelected,
+} from "../../../features/boards/boardsSlice";
+import {
+  addNewTaskToColumns,
+  getColumns,
+} from "../../../features/columns/columnsSlice";
 import Dropdown from "../../Dropdown/Dropdown";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
+import { v4 as uuidv4 } from "uuid";
+import { createNewTask } from "../../../features/tasks/tasksSlice";
 
-const TaskModal = () => {
-  const [isNewTask, setIsNewTask] = useState(true);
+const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?: () => void }) => {
+  const dispatch = useDispatch();
+
+  const [taskTitle, setTaskTitle] = useState("");
+
+  const [taskText, setTaskText] = useState("");
+
+  const [newSubtasks, setNewSubtasks] = useState([
+    { placeholder: "e.g. Make coffee", value: "" },
+    { placeholder: "e.g. Drink coffee and smile", value: "" },
+  ]);
+
+  const removeSubtask = (idx: number) => {
+    let temp = [...newSubtasks];
+    temp.splice(idx, 1);
+    setNewSubtasks(temp);
+  };
+
+  const updateSubtaskText = (idx: number, v: string) => {
+    let temp = newSubtasks.slice();
+    temp[idx].value = v;
+    setNewSubtasks(temp);
+  };
+
+  const currentlySelected = useSelector(getCurrentlySelected);
+  const boards = useSelector(getBoards);
+  const columnIds = boards.byId[currentlySelected].columnIds;
+  const columns = useSelector(getColumns);
+  const statuses = columnIds.map((id) => ({
+    status: columns.byId[id].status,
+    columnId: id,
+  }));
+  const [currentStatus, setCurrentStatus] = useState(0);
+
+  const onCreateNewTask = () => {
+    const newId = uuidv4();
+    const columnId = statuses[currentStatus].columnId as string;
+    let newTask = {
+      id: newId,
+      title: taskTitle,
+      description: taskText,
+      columnId,
+      subtasks: newSubtasks.map((el) => ({
+        title: el.value,
+        isCompleted: false,
+      })),
+    };
+
+    dispatch(createNewTask(newTask));
+    dispatch(addNewTaskToColumns({ taskID: newId, columnId }));
+    if (closeModal) closeModal()
+  };
+
   return (
     <div className="modalBox">
       <h3 className="title"> {isNewTask ? "Add New " : "Edit "} Task</h3>
@@ -15,32 +77,58 @@ const TaskModal = () => {
         <input
           type="text"
           id="boardName"
-          placeholder="e.g. Web Design"
-          value="Add authentication endpoints"
+          placeholder="e.g. Take coffee break"
+          value={taskTitle}
+          onChange={(e) => setTaskTitle(e.target.value)}
         />
       </div>
       <div className="inputWrapper">
         <label htmlFor="boardName" className="subTitle">
           Description
         </label>
-        <textarea rows={4} placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."></textarea>
+        <textarea
+          rows={4}
+          placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+        ></textarea>
       </div>
 
       <div className="columnsWrapper">
         <p className="subTitle">Subtasks</p>
         <div className="columns">
-          <InputWithCloseBtn />
-          <InputWithCloseBtn />
+          {newSubtasks.map((sub, idx) => (
+            <InputWithCloseBtn
+              onClick={() => removeSubtask(idx)}
+              key={sub.placeholder}
+              placeholder={sub.placeholder}
+              updateSubtaskText={updateSubtaskText}
+              idx={idx}
+            />
+          ))}
         </div>
       </div>
 
-      <button type="button" className="secondary">
+      <button
+        onClick={() => {
+          setNewSubtasks([
+            ...newSubtasks,
+            { placeholder: "Enter your subtask", value: "" },
+          ]);
+        }}
+        type="button"
+        className="secondary"
+      >
         + Add New Subtask
       </button>
 
-      <Dropdown />
+      <Dropdown
+        statuses={statuses}
+        currentStatus={currentStatus}
+        setCurrentStatus={setCurrentStatus}
+      />
 
-      <button type="button" className="primary">
+      <button type="button" className="primary" onClick={onCreateNewTask}>
         Create New Task
       </button>
     </div>

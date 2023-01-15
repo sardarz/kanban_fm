@@ -1,8 +1,6 @@
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
-import { useState } from "react";
 
-const AddBoard = () => {
-  const [isNewBoard, setIsNewBoard] = useState(true);
+const AddBoard = ({ isNewBoard, closeModal }: { isNewBoard: boolean, closeModal?: () => void }) => {
   return (
     <div className="modalBox">
       <h3 className="title">{isNewBoard ? "Add New Board" : "Edit Board"}</h3>
@@ -17,8 +15,8 @@ const AddBoard = () => {
       <div className="columnsWrapper">
         <p className="subTitle">{!isNewBoard && "Board "}Columns</p>
         <div className="columns">
-          <InputWithCloseBtn />
-          <InputWithCloseBtn />
+          {/* <InputWithCloseBtn placeholder="ke" onClick={() => {}} />
+          <InputWithCloseBtn placeholder="lol" onClick={() => {}} /> */}
         </div>
       </div>
 
