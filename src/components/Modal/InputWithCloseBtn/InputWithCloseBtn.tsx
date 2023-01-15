@@ -5,25 +5,29 @@ import { useState } from "react";
 interface Props {
   placeholder: string;
   onClick: () => void;
-  updateSubtaskText: (idx: number, v: string) => void
+  updateGivenText: (idx: number, v: string) => void
   idx: number
+  colName?: string
 }
 
 const InputWithCloseBtn = ({
   placeholder,
   onClick,
-  updateSubtaskText,
-  idx
+  updateGivenText,
+  idx,
+  colName
 }: Props) => {
-  const [value, setValue] = useState("");
+
+  const [value, setValue] = useState(colName ? colName : "");
+
   return (
     <div className={styles.wrapper}>
       <input
         type="text"
         value={value}
         onChange={(e) => {
-          updateSubtaskText(idx, e.target.value)
           setValue(e.target.value);
+          updateGivenText(idx, value)
         }}
         placeholder={placeholder}
       />

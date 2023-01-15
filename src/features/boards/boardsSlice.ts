@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
 import { ID } from "../../common/utils/types";
@@ -38,12 +38,15 @@ const boardsSlice = createSlice({
   name: "boards",
   initialState,
   reducers: {
-    boardCreated(state, action) {
+    boardCreated(
+      state,
+      action: PayloadAction<{ name: string; columnIds: string[] }>
+    ) {
       const id = uuidv4();
       state.byId[id] = {
         boardId: id,
-        name: action.payload,
-        columnIds: [],
+        name: action.payload.name,
+        columnIds: action.payload.columnIds,
       };
       state.allIds.push(id);
     },
@@ -57,6 +60,7 @@ export const { boardCreated, updateCurrentlySelected } = boardsSlice.actions;
 
 export const getBoards = (state: RootState) => state.boards;
 
-export const getCurrentlySelected = (state: RootState) => state.boards.currentlySelected
+export const getCurrentlySelected = (state: RootState) =>
+  state.boards.currentlySelected;
 
 export default boardsSlice.reducer;

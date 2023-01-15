@@ -39,6 +39,19 @@ const columnsSlice = createSlice({
   name: "columns",
   initialState,
   reducers: {
+    addNewColumnsOnBoardCreation(
+      state,
+      action: PayloadAction<{ id: string; value: string }[]>
+    ) {
+      action.payload.map((item) => {
+        state.byId[item.id] = {
+          columnId: item.id,
+          status: item.value,
+          taskIds: [],
+        };
+        state.allIds.push(item.id);
+      });
+    },
     addNewTaskToColumns(
       state,
       action: PayloadAction<{ taskID: ID; columnId: string }>
@@ -48,7 +61,8 @@ const columnsSlice = createSlice({
   },
 });
 
-export const { addNewTaskToColumns } = columnsSlice.actions;
+export const { addNewTaskToColumns, addNewColumnsOnBoardCreation } =
+  columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;
 

@@ -102,7 +102,7 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
               onClick={() => removeSubtask(idx)}
               key={sub.placeholder}
               placeholder={sub.placeholder}
-              updateSubtaskText={updateSubtaskText}
+              updateGivenText={updateSubtaskText}
               idx={idx}
             />
           ))}
