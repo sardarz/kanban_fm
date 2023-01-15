@@ -53,10 +53,17 @@ const boardsSlice = createSlice({
     updateCurrentlySelected(state, action) {
       state.currentlySelected = action.payload;
     },
+    boardEdited(
+      state,
+      action: PayloadAction<{ name: string; columnIds: ID[], id: ID }>
+    ) {
+      state.byId[action.payload.id].name = action.payload.name
+      state.byId[action.payload.id].columnIds = action.payload.columnIds
+    },
   },
 });
 
-export const { boardCreated, updateCurrentlySelected } = boardsSlice.actions;
+export const { boardCreated, boardEdited, updateCurrentlySelected } = boardsSlice.actions;
 
 export const getBoards = (state: RootState) => state.boards;
 

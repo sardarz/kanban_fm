@@ -1,23 +1,21 @@
 import styles from "./styles.module.css";
-import { ReactComponent as CloseIcon } from "../../../assets/icon-cross.svg";
+import { ReactComponent as CloseIcon } from "../../../../assets/icon-cross.svg";
 import { useEffect, useState } from "react";
 
 interface Props {
-  placeholder: string;
-  onClick: () => void;
-  updateGivenText: (idx: number, v: string) => void;
+  colName: string;
+  updateGivenText: (idx: number, value: string) => void;
   idx: number;
-  colName?: string;
+  removeColumn: (idx: number) => void;
 }
 
 const InputWithCloseBtn = ({
-  placeholder,
-  onClick,
+  colName,
   updateGivenText,
   idx,
-  colName,
+  removeColumn,
 }: Props) => {
-  const [value, setValue] = useState(colName ? colName : "");
+  const [value, setValue] = useState(colName);
 
   useEffect(() => {
     updateGivenText(idx, value);
@@ -30,12 +28,10 @@ const InputWithCloseBtn = ({
         value={value}
         onChange={(e) => {
           setValue((v) => (v = e.target.value));
-
-          console.log(value);
         }}
-        placeholder={placeholder}
+        placeholder="Enter column name"
       />
-      <div className={styles.closeBtn} onClick={onClick}>
+      <div className={styles.closeBtn} onClick={() => removeColumn(idx)}>
         <CloseIcon />
       </div>
     </div>

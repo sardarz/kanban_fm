@@ -50,7 +50,11 @@ const Header = ({
           className={styles.headerMenuLogoWrapper}
         >
           <HeaderMenuLogo />
-          <ThreeDotsMenu isOpen={isThreeDotsOpen} type="board" />
+          <ThreeDotsMenu
+            setIsThreeDotsOpen={setIsThreeDotsOpen}
+            isThreeDotsOpen={isThreeDotsOpen}
+            type="board"
+          />
         </div>
       </div>
       {isAddTaskOpen && (

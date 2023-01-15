@@ -170,13 +170,19 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     createNewTask(state, action: PayloadAction<ITask>) {
-      state.byId[action.payload.id] = action.payload
-      state.allIds.push(action.payload.id)
+      state.byId[action.payload.id] = action.payload;
+      state.allIds.push(action.payload.id);
     },
+    removeOldTasksOnBoardEdit(state, action: PayloadAction<string[]>) {
+      action.payload.map(id => {
+        delete state.byId[id]
+        state.allIds = state.allIds.filter(el => el !== id);
+      })
+    }
   },
 });
 
-export const { createNewTask } = tasksSlice.actions;
+export const { createNewTask, removeOldTasksOnBoardEdit } = tasksSlice.actions;
 
 export const getTaskById = (taskId: ID) => (state: RootState) =>
   state.tasks.byId[taskId];

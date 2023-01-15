@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { modalTypes } from "../../common/utils/modalTypes";
 import BoardModal from "./BoardModal/BoardModal";
+import EditBoard from "./BoardModal/EditBoard";
 import DeleteModal from "./DeleteModal/DeleteModal";
 import styles from "./styles.module.css";
 import TaskModal from "./TaskModal/TaskModal";
@@ -19,15 +20,21 @@ interface ModalWrapperProps {
 
 const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
   return (
-    <div className={`${styles.modalWrapper}`} onClick={closeModal}>
+    <div
+      onClick={(e) => {
+        if (type === modalTypes.editBoard) e.stopPropagation();
+        closeModal();
+      }}
+      className={`${styles.modalWrapper}`}
+    >
       <div
         className={`${styles.modalContent}`}
         onClick={(e) => e.stopPropagation()}
       >
         {type === modalTypes.addBoard ? (
-          <BoardModal isNewBoard={true} closeModal={closeModal}/>
+          <BoardModal isNewBoard={true} closeModal={closeModal} />
         ) : type === modalTypes.editBoard ? (
-          <BoardModal isNewBoard={false} />
+          <EditBoard isNewBoard={false} closeModal={closeModal} />
         ) : type === modalTypes.addTask ? (
           <TaskModal isNewTask={true} closeModal={closeModal} />
         ) : type === modalTypes.editTask ? (

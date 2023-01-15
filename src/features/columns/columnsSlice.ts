@@ -41,15 +41,15 @@ const columnsSlice = createSlice({
   reducers: {
     addNewColumnsOnBoardCreation(
       state,
-      action: PayloadAction<{ id: string; value: string }[]>
+      action: PayloadAction<{ columnId: string; status: string }[]>
     ) {
       action.payload.map((item) => {
-        state.byId[item.id] = {
-          columnId: item.id,
-          status: item.value,
+        state.byId[item.columnId] = {
+          columnId: item.columnId,
+          status: item.status,
           taskIds: [],
         };
-        state.allIds.push(item.id);
+        state.allIds.push(item.columnId);
       });
     },
     addNewTaskToColumns(
@@ -58,11 +58,37 @@ const columnsSlice = createSlice({
     ) {
       state.byId[action.payload.columnId].taskIds.push(action.payload.taskID);
     },
+    addNewColumns(
+      state,
+      action: PayloadAction<{ status: string; columnId: ID }[]>
+    ) {
+      action.payload.map((col) => {
+        if (!state.allIds.includes(col.columnId)) {
+          state.byId[col.columnId] = {
+            columnId: col.columnId,
+            status: col.status,
+            taskIds: [],
+          };
+          state.allIds.push(col.columnId);
+        }
+      });
+    },
+
+    removeOldColumns(state, action: PayloadAction<string[]>) {
+      action.payload.map((id) => {
+        delete state.byId[id];
+        state.allIds = state.allIds.filter((el) => el !== id);
+      });
+    },
   },
 });
 
-export const { addNewTaskToColumns, addNewColumnsOnBoardCreation } =
-  columnsSlice.actions;
+export const {
+  addNewTaskToColumns,
+  addNewColumns,
+  removeOldColumns,
+  addNewColumnsOnBoardCreation,
+} = columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;
 
