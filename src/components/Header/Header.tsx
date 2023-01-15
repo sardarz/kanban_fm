@@ -2,10 +2,16 @@ import { ReactComponent as DarkLogo } from "../../assets/logo-dark.svg";
 import Button from "../Button/Button";
 import styles from "./styles.module.css";
 import { ReactComponent as HeaderMenuLogo } from "../../assets/icon-vertical-ellipsis.svg";
+import ThreeDotsMenu from "../ThreeDotsMenu/ThreeDotsMenu";
+import { useState } from "react";
 
 const Header = ({ isSideBoardOpen }: { isSideBoardOpen: boolean }) => {
+  const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(true);
   return (
     <div
+      onClick={() => {
+        setIsThreeDotsOpen(false);
+      }}
       className={`${styles.headerWrapper} ${
         isSideBoardOpen ? styles.sideOpen : ""
       }`}
@@ -21,8 +27,15 @@ const Header = ({ isSideBoardOpen }: { isSideBoardOpen: boolean }) => {
         >
           <Button text="+ Add New Task" />
         </div>
-        <div className={styles.headerMenuLogoWrapper}>
+        <div
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsThreeDotsOpen(true)
+          }}
+          className={styles.headerMenuLogoWrapper}
+        >
           <HeaderMenuLogo />
+          <ThreeDotsMenu isOpen={isThreeDotsOpen} type="board" />
         </div>
       </div>
     </div>
