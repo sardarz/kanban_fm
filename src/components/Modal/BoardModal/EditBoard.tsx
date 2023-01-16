@@ -54,6 +54,7 @@ const AddBoard = ({
   >([]);
 
   const removeColumn = (idx: number) => {
+    console.log('kke', columns)
     const temp = columns.map((col, index) => {
       if (idx === index) {
         setIdsOfRemovedColumns([
@@ -83,8 +84,8 @@ const AddBoard = ({
     }).flat()
 
     dispatch(removeOldTasksOnBoardEdit(idsOfRemovedTasks as string[]))
-    dispatch(addNewColumns(newColumns))
     dispatch(removeOldColumns(idsOfRemovedColumns as string[]))
+    dispatch(addNewColumns(newColumns))
     dispatch(
       boardEdited({
         name: boardTitle,
@@ -121,7 +122,7 @@ const AddBoard = ({
               colName={col.status}
               updateGivenText={updateColumnText}
               idx={idx}
-              key={idx}
+              key={col.columnId}
               removeColumn={removeColumn}
             />
           ))}

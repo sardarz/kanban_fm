@@ -64,13 +64,13 @@ const columnsSlice = createSlice({
     ) {
       action.payload.map((col) => {
         if (!state.allIds.includes(col.columnId)) {
-          state.byId[col.columnId] = {
-            columnId: col.columnId,
-            status: col.status,
-            taskIds: [],
-          };
-          state.allIds.push(col.columnId);
         }
+        state.byId[col.columnId] = {
+          columnId: col.columnId,
+          status: col.status,
+          taskIds: state.byId[col.columnId]?.taskIds || [],
+        };
+        state.allIds.push(col.columnId);
       });
     },
 
