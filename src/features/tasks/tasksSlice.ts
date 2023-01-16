@@ -174,15 +174,30 @@ const tasksSlice = createSlice({
       state.allIds.push(action.payload.id);
     },
     removeOldTasksOnBoardEdit(state, action: PayloadAction<string[]>) {
-      action.payload.map(id => {
-        delete state.byId[id]
-        state.allIds = state.allIds.filter(el => el !== id);
-      })
+      action.payload.map((id) => {
+        delete state.byId[id];
+        state.allIds = state.allIds.filter((el) => el !== id);
+      });
+    },
+    updateSubtaskStatus(
+      state,
+      action: PayloadAction<{ idx: number; taskId: string }>
+    ) {
+      const currentStatus =
+        state.byId[action.payload.taskId].subtasks[action.payload.idx]
+          .isCompleted;
+      state.byId[action.payload.taskId].subtasks[
+        action.payload.idx
+      ].isCompleted = !currentStatus;
+    },
+    changeTaskColumnId(state, action: PayloadAction<{taskId: string, columnId: string}>) {
+      state.byId[action.payload.taskId].columnId = action.payload.columnId
     }
   },
 });
 
-export const { createNewTask, removeOldTasksOnBoardEdit } = tasksSlice.actions;
+export const { createNewTask, updateSubtaskStatus, removeOldTasksOnBoardEdit, changeTaskColumnId } =
+  tasksSlice.actions;
 
 export const getTaskById = (taskId: ID) => (state: RootState) =>
   state.tasks.byId[taskId];

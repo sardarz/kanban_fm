@@ -80,6 +80,24 @@ const columnsSlice = createSlice({
         state.allIds = state.allIds.filter((el) => el !== id);
       });
     },
+
+    removeTaskFromColumn(
+      state,
+      action: PayloadAction<{ columnId: string; taskId: ID }>
+    ) {
+      const targetIndex = state.byId[action.payload.columnId].taskIds.findIndex(
+        (el) => el === action.payload.taskId
+      );
+      console.log(state.byId[action.payload.columnId])
+      console.log('targetIndex', targetIndex)
+      state.byId[action.payload.columnId].taskIds.splice(targetIndex, 1);
+    },
+    addTaskToColumn(
+      state,
+      action: PayloadAction<{ columnId: string; taskId: ID }>
+    ) {
+      state.byId[action.payload.columnId].taskIds.push(action.payload.taskId);
+    },
   },
 });
 
@@ -88,6 +106,8 @@ export const {
   addNewColumns,
   removeOldColumns,
   addNewColumnsOnBoardCreation,
+  removeTaskFromColumn,
+  addTaskToColumn,
 } = columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;

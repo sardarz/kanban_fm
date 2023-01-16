@@ -11,18 +11,28 @@ import ViewTaskModal from "./ViewTaskModal/ViewTaskModal";
 interface ModalProps {
   type: string;
   closeModal: () => void;
+  taskId?: string;
+  columnId?: string;
 }
 
 interface ModalWrapperProps {
   type: string;
   closeModal: () => void;
+  taskId?: string;
+  columnId?: string;
 }
 
-const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
+const ModalWrapper = ({
+  type,
+  closeModal,
+  taskId,
+  columnId,
+}: ModalWrapperProps) => {
   return (
     <div
       onClick={(e) => {
-        if (type === modalTypes.editBoard) e.stopPropagation();
+        if (type === modalTypes.editBoard || type === modalTypes.viewTask)
+          e.stopPropagation();
         closeModal();
       }}
       className={`${styles.modalWrapper}`}
@@ -40,7 +50,11 @@ const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
         ) : type === modalTypes.editTask ? (
           <TaskModal isNewTask={false} />
         ) : type === modalTypes.viewTask ? (
-          <ViewTaskModal />
+          <ViewTaskModal
+            columnId={columnId ? columnId : null}
+            taskId={taskId ? taskId : ""}
+            closeModal={closeModal}
+          />
         ) : type === modalTypes.deleteBoard ? (
           <DeleteModal type="board" />
         ) : type === modalTypes.deleteTask ? (
@@ -51,14 +65,14 @@ const ModalWrapper = ({ type, closeModal }: ModalWrapperProps) => {
   );
 };
 
-const Modal = ({ type, closeModal }: ModalProps) => {
+const Modal = ({ type, closeModal, taskId, columnId }: ModalProps) => {
   const containerElement = useMemo(
     () => document.getElementById("modal-container") as HTMLElement,
     []
   );
 
   return createPortal(
-    <ModalWrapper closeModal={closeModal} type={type} />,
+    <ModalWrapper columnId={columnId} taskId={taskId} closeModal={closeModal} type={type} />,
     containerElement
   );
 };
