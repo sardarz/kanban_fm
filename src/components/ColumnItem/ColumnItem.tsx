@@ -8,6 +8,9 @@ import { modalTypes } from "../../common/utils/modalTypes";
 
 const ColumnItem = ({ taskId, columnId }: { taskId: ID; columnId: ID }) => {
   const task = useSelector(getTaskById(taskId));
+  const completedTaskAmount = task.subtasks.filter(
+    (el) => el.isCompleted
+  ).length;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
@@ -15,7 +18,7 @@ const ColumnItem = ({ taskId, columnId }: { taskId: ID; columnId: ID }) => {
   return (
     <div className={styles.cardWrapper} onClick={() => setIsModalOpen(true)}>
       <h3 className={styles.title}>{task.title}</h3>
-      <p className={styles.subtasks}>0 of {task.subtasks.length} subtasks</p>
+      <p className={styles.subtasks}>{completedTaskAmount} of {task.subtasks.length} subtasks</p>
   
       {isModalOpen && (
         <Modal

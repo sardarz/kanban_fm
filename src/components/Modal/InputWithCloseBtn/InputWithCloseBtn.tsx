@@ -8,6 +8,7 @@ interface Props {
   updateGivenText: (idx: number, v: string) => void;
   idx: number;
   colName?: string;
+  subtaskTitle?: string
 }
 
 const InputWithCloseBtn = ({
@@ -16,8 +17,9 @@ const InputWithCloseBtn = ({
   updateGivenText,
   idx,
   colName,
+  subtaskTitle
 }: Props) => {
-  const [value, setValue] = useState(colName ? colName : "");
+  const [value, setValue] = useState(colName ? colName : subtaskTitle ? subtaskTitle : "");
 
   useEffect(() => {
     updateGivenText(idx, value);

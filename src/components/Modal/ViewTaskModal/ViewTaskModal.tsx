@@ -54,6 +54,7 @@ const ViewTaskModal = ({
           <ThreeDots />
           <ThreeDotsMenu
             type="task"
+            task={task}
             isThreeDotsOpen={isThreeDotsOpen}
             setIsThreeDotsOpen={setIsThreeDotsOpen}
           />

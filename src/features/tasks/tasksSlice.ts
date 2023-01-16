@@ -10,10 +10,10 @@ interface ITasks {
   allIds: ID[];
 }
 
-interface ITask {
+export interface ITask {
   title: string;
   description: string;
-  subtasks: { title: string; isCompleted: boolean }[];
+  subtasks: { title: string; isCompleted: boolean; id: string }[];
   columnId: ID;
   id: ID;
 }
@@ -29,14 +29,17 @@ const initialState: ITasks = {
         {
           title: "Sign up page",
           isCompleted: true,
+          id: "aof"
         },
         {
           title: "Sign in page",
           isCompleted: false,
+          id: "adw"
         },
         {
           title: "Welcome page",
           isCompleted: false,
+          id: "ew2"
         },
       ],
       columnId: "aaa",
@@ -50,10 +53,12 @@ const initialState: ITasks = {
         {
           title: "Account page",
           isCompleted: false,
+          id: "ew1"
         },
         {
           title: "Billing page",
           isCompleted: false,
+          id: "eqw2"
         },
       ],
       columnId: "aaa",
@@ -67,10 +72,12 @@ const initialState: ITasks = {
         {
           title: "Internal testing",
           isCompleted: false,
+          id: "zvew2"
         },
         {
           title: "External testing",
           isCompleted: false,
+          id: "asdew2"
         },
       ],
       columnId: "bbb",
@@ -84,14 +91,17 @@ const initialState: ITasks = {
         {
           title: "Settings - Account page",
           isCompleted: true,
+          id: "sadzxew2"
         },
         {
           title: "Settings - Billing page",
           isCompleted: true,
+          id: "asdsadew2"
         },
         {
           title: "Search page",
           isCompleted: false,
+          id: "asdasew2"
         },
       ],
       columnId: "bbb",
@@ -105,14 +115,18 @@ const initialState: ITasks = {
         {
           title: "Upgrade plan",
           isCompleted: true,
+          id: "dsawq"
         },
         {
           title: "Cancel plan",
           isCompleted: true,
+          id: "dsadq221"
         },
         {
           title: "Update payment method",
           isCompleted: false,
+
+          id: "ew2xcv_"
         },
       ],
       columnId: "bbb",
@@ -125,14 +139,17 @@ const initialState: ITasks = {
         {
           title: "Sign up page",
           isCompleted: true,
+                  id: "ew2Z"
         },
         {
           title: "Sign in page",
           isCompleted: false,
+          id: "@ew2"
         },
         {
           title: "Welcome page",
           isCompleted: false,
+          id: "eW2"
         },
       ],
       columnId: "ccc",
@@ -145,10 +162,12 @@ const initialState: ITasks = {
         {
           title: "Add search endpoint",
           isCompleted: true,
+          id: "ew2DSA2"
         },
         {
           title: "Define search filters",
           isCompleted: false,
+          id: "eASDw2"
         },
       ],
       columnId: "ccc",
@@ -192,11 +211,15 @@ const tasksSlice = createSlice({
     },
     changeTaskColumnId(state, action: PayloadAction<{taskId: string, columnId: string}>) {
       state.byId[action.payload.taskId].columnId = action.payload.columnId
+    },
+    updateTask(state, action: PayloadAction<ITask>) {
+      const taskId = action.payload.id
+      state.byId[taskId] = action.payload
     }
   },
 });
 
-export const { createNewTask, updateSubtaskStatus, removeOldTasksOnBoardEdit, changeTaskColumnId } =
+export const { createNewTask, updateSubtaskStatus, removeOldTasksOnBoardEdit, changeTaskColumnId, updateTask } =
   tasksSlice.actions;
 
 export const getTaskById = (taskId: ID) => (state: RootState) =>

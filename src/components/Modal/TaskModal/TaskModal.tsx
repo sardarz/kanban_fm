@@ -58,6 +58,7 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
       subtasks: newSubtasks.map((el) => ({
         title: el.value,
         isCompleted: false,
+        id: uuidv4()
       })),
     };
 

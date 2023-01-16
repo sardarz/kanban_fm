@@ -19,17 +19,17 @@ const initialState: IColumns = {
     aaa: {
       columnId: "aaa",
       status: "Todo",
-      taskIds: [1, 2],
+      taskIds: ["1", "2"],
     },
     bbb: {
       columnId: "bbb",
       status: "Doing",
-      taskIds: [3, 4, 5],
+      taskIds: ["3", "4", "5"],
     },
     ccc: {
       columnId: "ccc",
       status: "Todo",
-      taskIds: [6, 7, 8],
+      taskIds: ["6", "7", "8"],
     },
   },
   allIds: ["aaa", "bbb", "ccc"],
@@ -88,8 +88,8 @@ const columnsSlice = createSlice({
       const targetIndex = state.byId[action.payload.columnId].taskIds.findIndex(
         (el) => el === action.payload.taskId
       );
-      console.log(state.byId[action.payload.columnId])
-      console.log('targetIndex', targetIndex)
+      // console.log(state.byId[action.payload.columnId])
+      // console.log('targetIndex', targetIndex)
       state.byId[action.payload.columnId].taskIds.splice(targetIndex, 1);
     },
     addTaskToColumn(

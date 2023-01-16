@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { modalTypes } from "../../common/utils/modalTypes";
+import { ITask } from "../../features/tasks/tasksSlice";
 import Modal from "../Modal/Modal";
 import styles from "./styles.module.css";
 
@@ -7,12 +8,14 @@ interface Props {
   type: string;
   isThreeDotsOpen: boolean;
   setIsThreeDotsOpen: (v: boolean) => void;
+  task?: ITask
 }
 
 const ThreeDotsMenu = ({
   type,
   isThreeDotsOpen,
   setIsThreeDotsOpen,
+  task
 }: Props) => {
   const text = type === "board" ? "board" : "task";
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +38,7 @@ const ThreeDotsMenu = ({
       </p>
       <p className={styles.delete}>Delete {text}</p>
       {isModalOpen && (
-        <Modal type={modalTypes.editBoard} closeModal={closeModal} />
+        <Modal type={type === "board" ? modalTypes.editBoard : modalTypes.editTask} closeModal={closeModal} task={task} />
       )}
     </div>
   );

@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { modalTypes } from "../../common/utils/modalTypes";
+import { ITask } from "../../features/tasks/tasksSlice";
 import BoardModal from "./BoardModal/BoardModal";
 import EditBoard from "./BoardModal/EditBoard";
 import DeleteModal from "./DeleteModal/DeleteModal";
 import styles from "./styles.module.css";
+import EditTask from "./TaskModal/EditTask";
 import TaskModal from "./TaskModal/TaskModal";
 import ViewTaskModal from "./ViewTaskModal/ViewTaskModal";
 
@@ -13,6 +15,7 @@ interface ModalProps {
   closeModal: () => void;
   taskId?: string;
   columnId?: string;
+  task?: ITask;
 }
 
 interface ModalWrapperProps {
@@ -20,6 +23,7 @@ interface ModalWrapperProps {
   closeModal: () => void;
   taskId?: string;
   columnId?: string;
+  task?: ITask;
 }
 
 const ModalWrapper = ({
@@ -27,6 +31,7 @@ const ModalWrapper = ({
   closeModal,
   taskId,
   columnId,
+  task,
 }: ModalWrapperProps) => {
   return (
     <div
@@ -48,7 +53,7 @@ const ModalWrapper = ({
         ) : type === modalTypes.addTask ? (
           <TaskModal isNewTask={true} closeModal={closeModal} />
         ) : type === modalTypes.editTask ? (
-          <TaskModal isNewTask={false} />
+          <EditTask task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.viewTask ? (
           <ViewTaskModal
             columnId={columnId ? columnId : null}
@@ -65,14 +70,20 @@ const ModalWrapper = ({
   );
 };
 
-const Modal = ({ type, closeModal, taskId, columnId }: ModalProps) => {
+const Modal = ({ type, closeModal, taskId, columnId, task }: ModalProps) => {
   const containerElement = useMemo(
     () => document.getElementById("modal-container") as HTMLElement,
     []
   );
 
   return createPortal(
-    <ModalWrapper columnId={columnId} taskId={taskId} closeModal={closeModal} type={type} />,
+    <ModalWrapper
+      columnId={columnId}
+      taskId={taskId}
+      closeModal={closeModal}
+      type={type}
+      task={task}
+    />,
     containerElement
   );
 };
