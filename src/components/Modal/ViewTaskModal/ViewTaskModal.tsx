@@ -45,18 +45,13 @@ const ViewTaskModal = ({ taskId }: { taskId: string }) => {
   ).length;
   const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(false);
 
-  const firstUpdate = useRef(0);
-
   useEffect(() => {
-    // Пропускаю два рендера, чтобы не диспатчить action, так как StrictMode рендерит два раза
-    if (firstUpdate.current < 2) {
-      firstUpdate.current++;
-      return;
+    if (currentColumnId !== task.columnId) {
+      const newData = { columnId: currentColumnId, taskId };
+      dispatch(removeTaskFromOldColumn({ taskId, columnId: task.columnId }));
+      dispatch(addTaskToNewColumn(newData));
+      dispatch(changeTaskColumnId(newData));
     }
-    const newData = { columnId: currentColumnId, taskId };
-    dispatch(removeTaskFromOldColumn({ taskId, columnId: task.columnId }));
-    dispatch(addTaskToNewColumn(newData));
-    dispatch(changeTaskColumnId(newData));
   }, [currentColumnId]);
 
   return (
