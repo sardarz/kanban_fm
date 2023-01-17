@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { ITask } from "../../features/tasks/tasksSlice";
+import DeleteModal from "../Modal/DeleteModal/DeleteModal";
 import Modal from "../Modal/Modal";
 import styles from "./styles.module.css";
 
@@ -8,19 +9,20 @@ interface Props {
   type: string;
   isThreeDotsOpen: boolean;
   setIsThreeDotsOpen: (v: boolean) => void;
-  task?: ITask
+  task?: ITask;
 }
 
 const ThreeDotsMenu = ({
   type,
   isThreeDotsOpen,
   setIsThreeDotsOpen,
-  task
+  task,
 }: Props) => {
   const text = type === "board" ? "board" : "task";
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   return (
     <div
@@ -36,9 +38,24 @@ const ThreeDotsMenu = ({
       >
         Edit {text}
       </p>
-      <p className={styles.delete}>Delete {text}</p>
+      <p className={styles.delete} onClick={() => setIsDeleteModalOpen(true)}>
+        Delete {text}
+      </p>
+      {isDeleteModalOpen && (
+        <Modal
+          type={
+            type === "board" ? modalTypes.deleteBoard : modalTypes.deleteTask
+          }
+          task={task}
+          closeModal={() => setIsDeleteModalOpen(false)}
+        />
+      )}
       {isModalOpen && (
-        <Modal type={type === "board" ? modalTypes.editBoard : modalTypes.editTask} closeModal={closeModal} task={task} />
+        <Modal
+          type={type === "board" ? modalTypes.editBoard : modalTypes.editTask}
+          closeModal={closeModal}
+          task={task}
+        />
       )}
     </div>
   );

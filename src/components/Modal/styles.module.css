@@ -176,6 +176,9 @@
 
 /* DeleteModal */
 
+.modalWrapper :global(.delete) {
+}
+
 .modalWrapper :global(.delete .title) {
   color: var(--clr-accent-600);
 }

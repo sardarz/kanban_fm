@@ -88,8 +88,6 @@ const columnsSlice = createSlice({
       const targetIndex = state.byId[action.payload.columnId].taskIds.findIndex(
         (el) => el === action.payload.taskId
       );
-      // console.log(state.byId[action.payload.columnId])
-      // console.log('targetIndex', targetIndex)
       state.byId[action.payload.columnId].taskIds.splice(targetIndex, 1);
     },
     addTaskToColumn(
@@ -97,6 +95,22 @@ const columnsSlice = createSlice({
       action: PayloadAction<{ columnId: string; taskId: ID }>
     ) {
       state.byId[action.payload.columnId].taskIds.push(action.payload.taskId);
+    },
+    deleteColumns(state, action: PayloadAction<ID[]>) {
+      action.payload.map((column) => {
+        const indexOfColumn = state.allIds.indexOf(column);
+        state.allIds.splice(indexOfColumn, 1);
+        delete state.byId[column];
+      });
+    },
+    deleteTaskFromColumn(
+      state,
+      action: PayloadAction<{ columnId: string; taskId: string }>
+    ) {
+      const indexOfTask = state.byId[action.payload.columnId].taskIds.indexOf(
+        action.payload.taskId
+      );
+      state.byId[action.payload.columnId].taskIds.splice(indexOfTask, 1);
     },
   },
 });
@@ -108,6 +122,8 @@ export const {
   addNewColumnsOnBoardCreation,
   removeTaskFromColumn,
   addTaskToColumn,
+  deleteColumns,
+  deleteTaskFromColumn,
 } = columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;

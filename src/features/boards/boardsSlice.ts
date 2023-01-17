@@ -55,15 +55,26 @@ const boardsSlice = createSlice({
     },
     boardEdited(
       state,
-      action: PayloadAction<{ name: string; columnIds: ID[], id: ID }>
+      action: PayloadAction<{ name: string; columnIds: ID[]; id: ID }>
     ) {
-      state.byId[action.payload.id].name = action.payload.name
-      state.byId[action.payload.id].columnIds = action.payload.columnIds
+      state.byId[action.payload.id].name = action.payload.name;
+      state.byId[action.payload.id].columnIds = action.payload.columnIds;
+    },
+    deleteBoard(state) {
+      const currentlySelected = state.currentlySelected;
+      const indexOfCS = state.allIds.indexOf(currentlySelected);
+      state.allIds.splice(indexOfCS, 1);
+      state.currentlySelected = state.allIds[0];
     },
   },
 });
 
-export const { boardCreated, boardEdited, updateCurrentlySelected } = boardsSlice.actions;
+export const {
+  boardCreated,
+  boardEdited,
+  updateCurrentlySelected,
+  deleteBoard,
+} = boardsSlice.actions;
 
 export const getBoards = (state: RootState) => state.boards;
 

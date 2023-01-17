@@ -29,17 +29,17 @@ const initialState: ITasks = {
         {
           title: "Sign up page",
           isCompleted: true,
-          id: "aof"
+          id: "aof",
         },
         {
           title: "Sign in page",
           isCompleted: false,
-          id: "adw"
+          id: "adw",
         },
         {
           title: "Welcome page",
           isCompleted: false,
-          id: "ew2"
+          id: "ew2",
         },
       ],
       columnId: "aaa",
@@ -53,12 +53,12 @@ const initialState: ITasks = {
         {
           title: "Account page",
           isCompleted: false,
-          id: "ew1"
+          id: "ew1",
         },
         {
           title: "Billing page",
           isCompleted: false,
-          id: "eqw2"
+          id: "eqw2",
         },
       ],
       columnId: "aaa",
@@ -72,12 +72,12 @@ const initialState: ITasks = {
         {
           title: "Internal testing",
           isCompleted: false,
-          id: "zvew2"
+          id: "zvew2",
         },
         {
           title: "External testing",
           isCompleted: false,
-          id: "asdew2"
+          id: "asdew2",
         },
       ],
       columnId: "bbb",
@@ -91,17 +91,17 @@ const initialState: ITasks = {
         {
           title: "Settings - Account page",
           isCompleted: true,
-          id: "sadzxew2"
+          id: "sadzxew2",
         },
         {
           title: "Settings - Billing page",
           isCompleted: true,
-          id: "asdsadew2"
+          id: "asdsadew2",
         },
         {
           title: "Search page",
           isCompleted: false,
-          id: "asdasew2"
+          id: "asdasew2",
         },
       ],
       columnId: "bbb",
@@ -115,18 +115,18 @@ const initialState: ITasks = {
         {
           title: "Upgrade plan",
           isCompleted: true,
-          id: "dsawq"
+          id: "dsawq",
         },
         {
           title: "Cancel plan",
           isCompleted: true,
-          id: "dsadq221"
+          id: "dsadq221",
         },
         {
           title: "Update payment method",
           isCompleted: false,
 
-          id: "ew2xcv_"
+          id: "ew2xcv_",
         },
       ],
       columnId: "bbb",
@@ -139,17 +139,17 @@ const initialState: ITasks = {
         {
           title: "Sign up page",
           isCompleted: true,
-                  id: "ew2Z"
+          id: "ew2Z",
         },
         {
           title: "Sign in page",
           isCompleted: false,
-          id: "@ew2"
+          id: "@ew2",
         },
         {
           title: "Welcome page",
           isCompleted: false,
-          id: "eW2"
+          id: "eW2",
         },
       ],
       columnId: "ccc",
@@ -162,12 +162,12 @@ const initialState: ITasks = {
         {
           title: "Add search endpoint",
           isCompleted: true,
-          id: "ew2DSA2"
+          id: "ew2DSA2",
         },
         {
           title: "Define search filters",
           isCompleted: false,
-          id: "eASDw2"
+          id: "eASDw2",
         },
       ],
       columnId: "ccc",
@@ -181,7 +181,7 @@ const initialState: ITasks = {
       columnId: "ccc",
     },
   },
-  allIds: [1, 2, 3, 4, 5, 6, 7, 8],
+  allIds: ["1", "2", "3", "4", "5", "6", "7", "8"],
 };
 
 const tasksSlice = createSlice({
@@ -209,18 +209,42 @@ const tasksSlice = createSlice({
         action.payload.idx
       ].isCompleted = !currentStatus;
     },
-    changeTaskColumnId(state, action: PayloadAction<{taskId: string, columnId: string}>) {
-      state.byId[action.payload.taskId].columnId = action.payload.columnId
+    changeTaskColumnId(
+      state,
+      action: PayloadAction<{ taskId: string; columnId: string }>
+    ) {
+      state.byId[action.payload.taskId].columnId = action.payload.columnId;
     },
     updateTask(state, action: PayloadAction<ITask>) {
-      const taskId = action.payload.id
-      state.byId[taskId] = action.payload
-    }
+      const taskId = action.payload.id;
+      state.byId[taskId] = action.payload;
+    },
+
+    deleteTasks(state, action: PayloadAction<ID[]>) {
+      action.payload.map((task) => {
+        const indexOfTask = state.allIds.indexOf(task.toString());
+        state.allIds.splice(indexOfTask, 1);
+        delete state.byId[task];
+      });
+    },
+    deleteTask(state, action: PayloadAction<string>) {
+      const indexOfDeletedTask = state.allIds.indexOf(action.payload);
+
+      delete state.byId[action.payload];
+      state.allIds.splice(indexOfDeletedTask, 1);
+    },
   },
 });
 
-export const { createNewTask, updateSubtaskStatus, removeOldTasksOnBoardEdit, changeTaskColumnId, updateTask } =
-  tasksSlice.actions;
+export const {
+  createNewTask,
+  updateSubtaskStatus,
+  removeOldTasksOnBoardEdit,
+  changeTaskColumnId,
+  updateTask,
+  deleteTasks,
+  deleteTask,
+} = tasksSlice.actions;
 
 export const getTaskById = (taskId: ID) => (state: RootState) =>
   state.tasks.byId[taskId];

@@ -61,9 +61,13 @@ const ModalWrapper = ({
             closeModal={closeModal}
           />
         ) : type === modalTypes.deleteBoard ? (
-          <DeleteModal type="board" />
+          <DeleteModal type="board" closeModal={closeModal} />
         ) : type === modalTypes.deleteTask ? (
-          <DeleteModal type="task" />
+          <DeleteModal
+            task={task as ITask}
+            type="task"
+            closeModal={closeModal}
+          />
         ) : null}
       </div>
     </div>
