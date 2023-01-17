@@ -6,7 +6,7 @@ interface IColumns {
   byId: {
     [key: string]: {
       columnId: string;
-      status: string;
+      columnName: string;
       taskIds: string[];
     };
   };
@@ -17,17 +17,17 @@ const initialState: IColumns = {
   byId: {
     aaa: {
       columnId: "aaa",
-      status: "Todo",
+      columnName: "Todo",
       taskIds: ["1", "2"],
     },
     bbb: {
       columnId: "bbb",
-      status: "Doing",
+      columnName: "Doing",
       taskIds: ["3", "4", "5"],
     },
     ccc: {
       columnId: "ccc",
-      status: "Todo",
+      columnName: "Todo",
       taskIds: ["6", "7", "8"],
     },
   },
@@ -40,12 +40,12 @@ const columnsSlice = createSlice({
   reducers: {
     addNewColumnsOnBoardCreation(
       state,
-      action: PayloadAction<{ columnId: string; status: string }[]>
+      action: PayloadAction<{ columnId: string; columnName: string }[]>
     ) {
       action.payload.map((item) => {
         state.byId[item.columnId] = {
           columnId: item.columnId,
-          status: item.status,
+          columnName: item.columnName,
           taskIds: [],
         };
         state.allIds.push(item.columnId);
@@ -59,14 +59,14 @@ const columnsSlice = createSlice({
     },
     addNewColumns(
       state,
-      action: PayloadAction<{ status: string; columnId: string }[]>
+      action: PayloadAction<{ columnName: string; columnId: string }[]>
     ) {
       action.payload.map((col) => {
         if (!state.allIds.includes(col.columnId)) {
         }
         state.byId[col.columnId] = {
           columnId: col.columnId,
-          status: col.status,
+          columnName: col.columnName,
           taskIds: state.byId[col.columnId]?.taskIds || [],
         };
         state.allIds.push(col.columnId);

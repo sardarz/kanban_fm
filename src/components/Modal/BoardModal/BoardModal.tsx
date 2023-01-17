@@ -2,8 +2,15 @@ import { useState } from "react";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { boardCreated, getBoards, getCurrentlySelected } from "../../../features/boards/boardsSlice";
-import { addNewColumnsOnBoardCreation, getColumns } from "../../../features/columns/columnsSlice";
+import {
+  boardCreated,
+  getBoards,
+  getCurrentlySelected,
+} from "../../../features/boards/boardsSlice";
+import {
+  addNewColumnsOnBoardCreation,
+  getColumns,
+} from "../../../features/columns/columnsSlice";
 
 const AddBoard = ({
   isNewBoard,
@@ -13,17 +20,16 @@ const AddBoard = ({
   closeModal?: () => void;
 }) => {
   const dispatch = useDispatch();
-  
-  
-  const [boardTitle, setBoardTitle] = useState("")
+
+  const [boardTitle, setBoardTitle] = useState("");
   const [columns, setColumns] = useState([
-    { status: "Todo", columnId: uuidv4() },
-    { status: "Doing", columnId: uuidv4() },
+    { columnName: "Todo", columnId: uuidv4() },
+    { columnName: "Doing", columnId: uuidv4() },
   ]);
 
   const updateColumnText = (idx: number, v: string) => {
     const temp = columns.slice();
-    temp[idx].status = v;
+    temp[idx].columnName = v;
     setColumns(temp);
   };
 
@@ -35,13 +41,15 @@ const AddBoard = ({
 
   const onCreateNewBoard = () => {
     dispatch(
-      boardCreated({ name: boardTitle, columnIds: columns.map((el) => el.columnId) })
+      boardCreated({
+        name: boardTitle,
+        columnIds: columns.map((el) => el.columnId),
+      })
     );
     dispatch(addNewColumnsOnBoardCreation(columns));
     if (closeModal) closeModal();
   };
 
-  
   return (
     <div className="modalBox">
       <h3 className="title">{isNewBoard ? "Add New Board" : "Edit Board"}</h3>
@@ -69,7 +77,7 @@ const AddBoard = ({
               placeholder="Enter column name"
               updateGivenText={updateColumnText}
               idx={idx}
-              colName={col.status}
+              colName={col.columnName}
             />
           ))}
         </div>
@@ -79,7 +87,7 @@ const AddBoard = ({
         type="button"
         className="secondary"
         onClick={() => {
-          setColumns([...columns, { status: "", columnId: uuidv4()}]);
+          setColumns([...columns, { columnName: "", columnId: uuidv4() }]);
         }}
       >
         + Add New Column

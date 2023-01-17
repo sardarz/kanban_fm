@@ -12,43 +12,44 @@ import {
   getColumns,
   removeTaskFromColumn,
 } from "../../features/columns/columnsSlice";
- 
+
 import { changeTaskColumnId } from "../../features/tasks/tasksSlice";
-import { StatusMap } from "../Modal/TaskModal/EditTask";
+import { ColumnNamesMap } from "../Modal/TaskModal/EditTask";
 
 interface Props {
   currentStatus: number;
   setCurrentStatus: (s: number) => void;
-  statuses: { columnId: string; status: string }[];
+  columnNames: { columnId: string; columnName: string }[];
   isViewTaskModal?: boolean;
   currentColumnId?: string | null;
   taskId?: string;
   isEditTaskModal?: boolean;
   setCurrentColumnOfCurrentTask?: (columnName: string) => void;
   currentColumnOfCurrentTask?: string;
-  statusMap?: StatusMap
+  columnNamesMap?: ColumnNamesMap;
 }
 
 const Dropdown = ({
   currentStatus,
   setCurrentStatus,
-  statuses,
+  columnNames,
   isViewTaskModal,
   currentColumnId,
   taskId,
   isEditTaskModal,
   currentColumnOfCurrentTask,
   setCurrentColumnOfCurrentTask,
-  statusMap
+  columnNamesMap,
 }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const currentColumnForTask = statuses.find(
+  const currentColumnForTask = columnNames.find(
     (el) => el.columnId === currentColumnId
   );
 
-    const displayColumnName = statusMap?.[currentColumnOfCurrentTask as string].status
+  const displayColumnName =
+    columnNamesMap?.[currentColumnOfCurrentTask as string].columnName;
 
   if (isEditTaskModal) {
     return (
@@ -74,15 +75,16 @@ const Dropdown = ({
         </div>
 
         <ul className={styles.selectMenu}>
-          {statuses.map((s, idx) => (
+          {columnNames.map((s, idx) => (
             <li
               key={s.columnId}
               onClick={() => {
                 setIsMenuOpen(false);
-                if (setCurrentColumnOfCurrentTask)setCurrentColumnOfCurrentTask(s.columnId as string)
+                if (setCurrentColumnOfCurrentTask)
+                  setCurrentColumnOfCurrentTask(s.columnId);
               }}
             >
-              {s.status}
+              {s.columnName}
             </li>
           ))}
         </ul>
@@ -100,8 +102,8 @@ const Dropdown = ({
       >
         <p>
           {isViewTaskModal || isEditTaskModal
-            ? currentColumnForTask?.status
-            : statuses[currentStatus].status}
+            ? currentColumnForTask?.columnName
+            : columnNames[currentStatus].columnName}
         </p>
         <div className={`${styles.iconWrapper} `}>
           <div className={styles.iconDown}>
@@ -114,7 +116,7 @@ const Dropdown = ({
       </div>
 
       <ul className={styles.selectMenu}>
-        {statuses.map((s, idx) => (
+        {columnNames.map((s, idx) => (
           <li
             key={s.columnId}
             onClick={() => {
@@ -129,19 +131,17 @@ const Dropdown = ({
                 dispatch(
                   removeTaskFromColumn({ columnId: currentColumnId, taskId })
                 );
-                dispatch(
-                  addTaskToColumn({ columnId: s.columnId as string, taskId })
-                );
+                dispatch(addTaskToColumn({ columnId: s.columnId, taskId }));
                 dispatch(
                   changeTaskColumnId({
-                    taskId: taskId as string,
-                    columnId: s.columnId as string,
+                    taskId: taskId,
+                    columnId: s.columnId,
                   })
                 );
               }
             }}
           >
-            {s.status}
+            {s.columnName}
           </li>
         ))}
       </ul>

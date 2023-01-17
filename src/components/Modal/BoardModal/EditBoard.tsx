@@ -40,11 +40,11 @@ const AddBoard = ({
     const temp = columns.map((col) => {
       return {
         columnId: col.columnId,
-        status: col.status,
+        columnName: col.columnName,
         taskIds: col.taskIds.slice(),
       };
     });
-    temp[idx].status = v;
+    temp[idx].columnName = v;
     setColumns(temp);
   };
 
@@ -64,7 +64,7 @@ const AddBoard = ({
       } else
         return {
           columnId: col.columnId,
-          status: col.status,
+          columnName: col.columnName,
           taskIds: col.taskIds.slice(),
         };
     });
@@ -82,7 +82,7 @@ const AddBoard = ({
       } else return []
     }).flat()
 
-    dispatch(removeOldTasksOnBoardEdit(idsOfRemovedTasks as string[]))
+    dispatch(removeOldTasksOnBoardEdit(idsOfRemovedTasks))
     dispatch(removeOldColumns(idsOfRemovedColumns as string[]))
     dispatch(addNewColumns(newColumns))
     dispatch(
@@ -118,7 +118,7 @@ const AddBoard = ({
         <div className="columns">
           {columns.map((col, idx) => (
             <InputWithCloseBtn
-              colName={col.status}
+              colName={col.columnName}
               updateGivenText={updateColumnText}
               idx={idx}
               key={col.columnId}
@@ -134,7 +134,7 @@ const AddBoard = ({
         onClick={() => {
           setColumns([
             ...columns,
-            { status: "", columnId: uuidv4(), taskIds: [] },
+            { columnName: "", columnId: uuidv4(), taskIds: [] },
           ]);
         }}
       >

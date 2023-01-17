@@ -26,7 +26,7 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
     (state: RootState) => state.boards.byId[currentlySelected]
   );
   const columns = useSelector((state: RootState) => state.columns);
-  const currentColumns = currentlySelectedData.columnIds
+  const currentColumns = currentlySelectedData.columnIds;
 
   const currentTasks = currentColumns
     .map((column) => columns.byId[column].taskIds)
@@ -41,11 +41,11 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
 
   const onDeleteTask = () => {
     if (task) {
-      dispatch(deleteTask(task.id as string));
+      dispatch(deleteTask(task.id));
       dispatch(
         deleteTaskFromColumn({
-          taskId: task.id as string,
-          columnId: task.columnId as string,
+          taskId: task.id,
+          columnId: task.columnId,
         })
       );
     }
@@ -57,7 +57,10 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
     description = getDescriptionOfDeleteModal("task", task.title);
   }
   if (type === "board") {
-    description = getDescriptionOfDeleteModal("board", currentlySelectedData.name);
+    description = getDescriptionOfDeleteModal(
+      "board",
+      currentlySelectedData.name
+    );
   }
 
   return (

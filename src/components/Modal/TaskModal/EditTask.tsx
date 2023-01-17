@@ -19,11 +19,11 @@ import {
   updateTask,
 } from "../../../features/tasks/tasksSlice";
 
-export interface StatusMap {
+export interface ColumnNamesMap {
   [key: string]: {
-    status: string;
+    columnName: string;
     columnId: string;
-  }
+  };
 }
 
 const EditTask = ({
@@ -71,17 +71,19 @@ const EditTask = ({
   const boards = useSelector(getBoards);
   const columnIds = boards.byId[currentlySelected].columnIds;
   const columns = useSelector(getColumns);
-  const statuses = columnIds.map((id) => ({
-    status: columns.byId[id].status,
+  const columnNames = columnIds.map((id) => ({
+    columnName: columns.byId[id].columnName,
     columnId: id,
   }));
-  const statusMap = statuses.reduce((acc: StatusMap, cv) => {
-    acc[cv.columnId] = cv
-    return acc
-  }, {})
-  
+  const columnNamesMap = columnNames.reduce((acc: ColumnNamesMap, cv) => {
+    acc[cv.columnId] = cv;
+    return acc;
+  }, {});
+
   const [currentStatus, setCurrentStatus] = useState(0);
-  const [currentColumnOfCurrentTask, setCurrentColumnOfCurrentTask] = useState(task.columnId)
+  const [currentColumnOfCurrentTask, setCurrentColumnOfCurrentTask] = useState(
+    task.columnId
+  );
 
   const onSaveTask = () => {
     const updatedTask = {
@@ -98,17 +100,17 @@ const EditTask = ({
 
     dispatch(updateTask(updatedTask));
     if (task.columnId !== updatedTask.columnId) {
-      console.log("kek")
-      console.log('task.columnId', task.columnId)
-      console.log('updatedTask.columnId', updatedTask.columnId)
+      console.log("kek");
+      console.log("task.columnId", task.columnId);
+      console.log("updatedTask.columnId", updatedTask.columnId);
       dispatch(
         removeTaskFromColumn({
-          columnId: task.columnId as string,
+          columnId: task.columnId,
           taskId: task.id,
-        })  
+        })
       );
       dispatch(
-        addTaskToColumn({ columnId: updatedTask.columnId as string, taskId: task.id })
+        addTaskToColumn({ columnId: updatedTask.columnId, taskId: task.id })
       );
     }
     if (closeModal) closeModal();
@@ -172,15 +174,15 @@ const EditTask = ({
       </button>
 
       <Dropdown
-        statuses={statuses}
+        columnNames={columnNames}
         currentStatus={currentStatus}
         setCurrentStatus={setCurrentStatus}
         isEditTaskModal={true}
-        currentColumnId={task.columnId as string}
+        currentColumnId={task.columnId}
         taskId={task.id}
         setCurrentColumnOfCurrentTask={setCurrentColumnOfCurrentTask}
-        currentColumnOfCurrentTask={currentColumnOfCurrentTask as string}
-        statusMap={statusMap}
+        currentColumnOfCurrentTask={currentColumnOfCurrentTask}
+        columnNamesMap={columnNamesMap}
       />
 
       <button type="button" className="primary" onClick={onSaveTask}>

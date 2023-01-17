@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 
 const ColumnDisplayer = ({ columnId }: { columnId: string }) => {
   const columns = useSelector(getColumns);
-  const { taskIds, status } = columns.byId[columnId];
+  const { taskIds, columnName } = columns.byId[columnId];
   
   return (
     <div className={styles.wrapper}>
       <p className={styles.columnTitle}>
-        {status} ({taskIds.length})
+        {columnName} ({taskIds.length})
       </p>
       <div className={styles.columnDisplayer}>
         {taskIds.map((taskId) => (

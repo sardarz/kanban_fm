@@ -25,8 +25,8 @@ const ViewTaskModal = ({
   const boards = useSelector(getBoards);
   const columnIds = boards.byId[currentlySelected].columnIds;
   const columns = useSelector(getColumns);
-  const statuses = columnIds.map((id) => ({
-    status: columns.byId[id].status,
+  const columnNames = columnIds.map((id) => ({
+    columnName: columns.byId[id].columnName,
     columnId: id,
   }));
   const [currentStatus, setCurrentStatus] = useState(0);
@@ -79,7 +79,7 @@ const ViewTaskModal = ({
       </div>
 
       <Dropdown
-        statuses={statuses}
+        columnNames={columnNames}
         currentStatus={currentStatus}
         setCurrentStatus={setCurrentStatus}
         isViewTaskModal={true}

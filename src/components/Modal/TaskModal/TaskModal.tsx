@@ -13,7 +13,13 @@ import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 import { v4 as uuidv4 } from "uuid";
 import { createNewTask } from "../../../features/tasks/tasksSlice";
 
-const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?: () => void }) => {
+const TaskModal = ({
+  isNewTask,
+  closeModal,
+}: {
+  isNewTask: boolean;
+  closeModal?: () => void;
+}) => {
   const dispatch = useDispatch();
 
   const [taskTitle, setTaskTitle] = useState("");
@@ -41,15 +47,15 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
   const boards = useSelector(getBoards);
   const columnIds = boards.byId[currentlySelected].columnIds;
   const columns = useSelector(getColumns);
-  const statuses = columnIds.map((id) => ({
-    status: columns.byId[id].status,
+  const columnNames = columnIds.map((id) => ({
+    columnName: columns.byId[id].columnName,
     columnId: id,
   }));
   const [currentStatus, setCurrentStatus] = useState(0);
 
   const onCreateNewTask = () => {
     const newId = uuidv4();
-    const columnId = statuses[currentStatus].columnId as string;
+    const columnId = columnNames[currentStatus].columnId;
     let newTask = {
       id: newId,
       title: taskTitle,
@@ -58,13 +64,13 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
       subtasks: newSubtasks.map((el) => ({
         title: el.value,
         isCompleted: false,
-        id: uuidv4()
+        id: uuidv4(),
       })),
     };
 
     dispatch(createNewTask(newTask));
     dispatch(addNewTaskToColumns({ taskId: newId, columnId }));
-    if (closeModal) closeModal()
+    if (closeModal) closeModal();
   };
 
   return (
@@ -124,7 +130,7 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
       </button>
 
       <Dropdown
-        statuses={statuses}
+        columnNames={columnNames}
         currentStatus={currentStatus}
         setCurrentStatus={setCurrentStatus}
       />
