@@ -80,7 +80,7 @@ const columnsSlice = createSlice({
       });
     },
 
-    removeTaskFromColumn(
+    removeTaskFromOldColumn(
       state,
       action: PayloadAction<{ columnId: string; taskId: string }>
     ) {
@@ -89,7 +89,7 @@ const columnsSlice = createSlice({
       );
       state.byId[action.payload.columnId].taskIds.splice(targetIndex, 1);
     },
-    addTaskToColumn(
+    addTaskToNewColumn(
       state,
       action: PayloadAction<{ columnId: string; taskId: string }>
     ) {
@@ -119,8 +119,8 @@ export const {
   addNewColumns,
   removeOldColumns,
   addNewColumnsOnBoardCreation,
-  removeTaskFromColumn,
-  addTaskToColumn,
+  removeTaskFromOldColumn,
+  addTaskToNewColumn,
   deleteColumns,
   deleteTaskFromColumn,
 } = columnsSlice.actions;

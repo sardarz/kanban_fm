@@ -46,11 +46,7 @@ const ModalWrapper = ({
         ) : type === modalTypes.editTask ? (
           <EditTask task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.viewTask ? (
-          <ViewTaskModal
-            columnId={columnId ? columnId : null}
-            taskId={taskId ? taskId : ""}
-            closeModal={closeModal}
-          />
+          <ViewTaskModal taskId={taskId ? taskId : ""} />
         ) : type === modalTypes.deleteBoard ? (
           <DeleteModal type="board" closeModal={closeModal} />
         ) : type === modalTypes.deleteTask ? (

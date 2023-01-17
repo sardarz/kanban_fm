@@ -6,9 +6,9 @@ import {
 } from "../../../features/boards/boardsSlice";
 import {
   addNewTaskToColumns,
-  addTaskToColumn,
+  addTaskToNewColumn,
   getColumns,
-  removeTaskFromColumn,
+  removeTaskFromOldColumn,
 } from "../../../features/columns/columnsSlice";
 import Dropdown from "../../Dropdown/Dropdown";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
@@ -33,6 +33,7 @@ const EditTask = ({
   closeModal?: () => void;
   task: ITask;
 }) => {
+
   const dispatch = useDispatch();
 
   const [taskTitle, setTaskTitle] = useState(task.title);
@@ -104,13 +105,13 @@ const EditTask = ({
       console.log("task.columnId", task.columnId);
       console.log("updatedTask.columnId", updatedTask.columnId);
       dispatch(
-        removeTaskFromColumn({
+        removeTaskFromOldColumn({
           columnId: task.columnId,
           taskId: task.id,
         })
       );
       dispatch(
-        addTaskToColumn({ columnId: updatedTask.columnId, taskId: task.id })
+        addTaskToNewColumn({ columnId: updatedTask.columnId, taskId: task.id })
       );
     }
     if (closeModal) closeModal();
@@ -173,17 +174,9 @@ const EditTask = ({
         + Add New Subtask
       </button>
 
-      <Dropdown
-        columnNames={columnNames}
-        currentStatus={currentStatus}
-        setCurrentStatus={setCurrentStatus}
-        isEditTaskModal={true}
-        currentColumnId={task.columnId}
-        taskId={task.id}
-        setCurrentColumnOfCurrentTask={setCurrentColumnOfCurrentTask}
-        currentColumnOfCurrentTask={currentColumnOfCurrentTask}
-        columnNamesMap={columnNamesMap}
-      />
+      {/* <Dropdown
+        columns={columnNames}
+      /> */}
 
       <button type="button" className="primary" onClick={onSaveTask}>
         Save Changes

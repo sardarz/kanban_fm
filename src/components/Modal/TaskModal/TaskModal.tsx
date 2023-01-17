@@ -129,11 +129,11 @@ const TaskModal = ({
         + Add New Subtask
       </button>
 
-      <Dropdown
-        columnNames={columnNames}
-        currentStatus={currentStatus}
-        setCurrentStatus={setCurrentStatus}
-      />
+      {/* <Dropdown
+        columns={columnNames}
+        currentColumn={currentColumn}
+        setCurrentColumn={setCurrentColumn}
+      /> */}
 
       <button type="button" className="primary" onClick={onCreateNewTask}>
         Create New Task
