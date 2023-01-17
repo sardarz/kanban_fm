@@ -63,6 +63,7 @@ const boardsSlice = createSlice({
       const currentlySelected = state.currentlySelected;
       const indexOfCS = state.allIds.indexOf(currentlySelected);
       state.allIds.splice(indexOfCS, 1);
+      delete state.byId[currentlySelected]
       state.currentlySelected = state.allIds[0];
     },
   },

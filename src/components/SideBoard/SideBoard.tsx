@@ -4,7 +4,7 @@ import SideBoardCreateItem from "./SideBoardCreateItem";
 import SideBoardToggleWrapper from "../Toggle/SideBoardToggleWrapper";
 import HideSidebar from "./HideSidebar";
 import { ReactComponent as DarkLogo } from "../../assets/logo-dark.svg";
-import { boardCreated, getBoards, updateCurrentlySelected } from "../../features/boards/boardsSlice";
+import { getBoards, updateCurrentlySelected } from "../../features/boards/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 interface SideBoardProps {

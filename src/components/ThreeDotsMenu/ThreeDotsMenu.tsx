@@ -19,7 +19,6 @@ const ThreeDotsMenu = ({
 }: Props) => {
   const text = type === "board" ? "board" : "task";
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const closeModal = () => setIsModalOpen(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -37,7 +36,12 @@ const ThreeDotsMenu = ({
       >
         Edit {text}
       </p>
-      <p className={styles.delete} onClick={() => setIsDeleteModalOpen(true)}>
+      <p
+        className={styles.delete}
+        onClick={() => {
+          setIsDeleteModalOpen(true);
+        }}
+      >
         Delete {text}
       </p>
       {isDeleteModalOpen && (

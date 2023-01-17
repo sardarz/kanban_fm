@@ -50,7 +50,7 @@ const Header = ({
         <div
           onClick={(e) => {
             e.stopPropagation();
-            setIsThreeDotsOpen(true);
+            setIsThreeDotsOpen(!isThreeDotsOpen);
           }}
           className={styles.headerMenuLogoWrapper}
         >

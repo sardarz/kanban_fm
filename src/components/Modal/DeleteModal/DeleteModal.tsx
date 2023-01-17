@@ -11,30 +11,22 @@ import {
   ITask,
 } from "../../../features/tasks/tasksSlice";
 
-const DeleteModal = ({
-  type,
-  closeModal,
-  task,
-}: {
-  type: string;
+interface DeleteModalProps {
+  type: "board" | "task";
   closeModal: () => void;
   task?: ITask;
-}) => {
-  const boardDescription =
-    "Are you sure you want to delete the ‘Platform Launch’ board? This action will remove all columns and tasks and cannot be reversed.";
-  const taskDescription =
-    "Are you sure you want to delete the ‘Build settings UI’ task and its subtasks? This action cannot be reversed.";
+}
 
+const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
   const dispatch = useDispatch();
   const currentlySelected = useSelector(
     (state: RootState) => state.boards.currentlySelected
   );
-
-  const columns = useSelector((state: RootState) => state.columns);
-
-  const currentColumns = useSelector(
-    (state: RootState) => state.boards.byId[currentlySelected].columnIds
+  const currentlySelectedData = useSelector(
+    (state: RootState) => state.boards.byId[currentlySelected]
   );
+  const columns = useSelector((state: RootState) => state.columns);
+  const currentColumns = currentlySelectedData.columnIds
 
   const currentTasks = currentColumns
     .map((column) => columns.byId[column].taskIds)
@@ -59,14 +51,21 @@ const DeleteModal = ({
     }
   };
 
+  let description;
+
+  if (type === "task" && task) {
+    description = getDescriptionOfDeleteModal("task", task.title);
+  }
+  if (type === "board") {
+    description = getDescriptionOfDeleteModal("board", currentlySelectedData.name);
+  }
+
   return (
     <div className="delete">
       <h3 className="title">
         Delete this {type === "board" ? "board" : "task"}?
       </h3>
-      <p className="description">
-        {type === "board" ? boardDescription : taskDescription}
-      </p>
+      <p className="description">{description}</p>
       <div className="deleteBtnsWrapper">
         <button
           type="button"
@@ -81,6 +80,13 @@ const DeleteModal = ({
       </div>
     </div>
   );
+};
+
+const getDescriptionOfDeleteModal = (type: string, name: string) => {
+  const boardDescription = `Are you sure you want to delete the ‘${name}’ board? This action will remove all columns and tasks and cannot be reversed.`;
+  const taskDescription = `Are you sure you want to delete the ‘${name}’ task and its subtasks? This action cannot be reversed.`;
+
+  return type === "board" ? boardDescription : taskDescription;
 };
 
 export default DeleteModal;
