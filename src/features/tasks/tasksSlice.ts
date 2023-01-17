@@ -1,21 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
-import { ID } from "../../common/utils/types";
 
 interface ITasks {
   byId: {
-    [key: ID]: ITask;
+    [key: string]: ITask;
   };
-  allIds: ID[];
+  allIds: string[];
 }
 
 export interface ITask {
   title: string;
   description: string;
   subtasks: { title: string; isCompleted: boolean; id: string }[];
-  columnId: ID;
-  id: ID;
+  columnId: string;
+  id: string;
 }
 
 const initialState: ITasks = {
@@ -220,7 +219,7 @@ const tasksSlice = createSlice({
       state.byId[taskId] = action.payload;
     },
 
-    deleteTasks(state, action: PayloadAction<ID[]>) {
+    deleteTasks(state, action: PayloadAction<string[]>) {
       action.payload.map((task) => {
         const indexOfTask = state.allIds.indexOf(task.toString());
         state.allIds.splice(indexOfTask, 1);
@@ -246,7 +245,7 @@ export const {
   deleteTask,
 } = tasksSlice.actions;
 
-export const getTaskById = (taskId: ID) => (state: RootState) =>
+export const getTaskById = (taskId: string) => (state: RootState) =>
   state.tasks.byId[taskId];
 
 export default tasksSlice.reducer;

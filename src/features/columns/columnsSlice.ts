@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
-import { ID } from "../../common/utils/types";
 
 interface IColumns {
   byId: {
-    [key: ID]: {
-      columnId: ID;
+    [key: string]: {
+      columnId: string;
       status: string;
-      taskIds: ID[];
+      taskIds: string[];
     };
   };
-  allIds: ID[];
+  allIds: string[];
 }
 
 const initialState: IColumns = {
@@ -54,13 +53,13 @@ const columnsSlice = createSlice({
     },
     addNewTaskToColumns(
       state,
-      action: PayloadAction<{ taskID: ID; columnId: string }>
+      action: PayloadAction<{ taskId: string; columnId: string }>
     ) {
-      state.byId[action.payload.columnId].taskIds.push(action.payload.taskID);
+      state.byId[action.payload.columnId].taskIds.push(action.payload.taskId);
     },
     addNewColumns(
       state,
-      action: PayloadAction<{ status: string; columnId: ID }[]>
+      action: PayloadAction<{ status: string; columnId: string }[]>
     ) {
       action.payload.map((col) => {
         if (!state.allIds.includes(col.columnId)) {
@@ -83,7 +82,7 @@ const columnsSlice = createSlice({
 
     removeTaskFromColumn(
       state,
-      action: PayloadAction<{ columnId: string; taskId: ID }>
+      action: PayloadAction<{ columnId: string; taskId: string }>
     ) {
       const targetIndex = state.byId[action.payload.columnId].taskIds.findIndex(
         (el) => el === action.payload.taskId
@@ -92,11 +91,11 @@ const columnsSlice = createSlice({
     },
     addTaskToColumn(
       state,
-      action: PayloadAction<{ columnId: string; taskId: ID }>
+      action: PayloadAction<{ columnId: string; taskId: string }>
     ) {
       state.byId[action.payload.columnId].taskIds.push(action.payload.taskId);
     },
-    deleteColumns(state, action: PayloadAction<ID[]>) {
+    deleteColumns(state, action: PayloadAction<string[]>) {
       action.payload.map((column) => {
         const indexOfColumn = state.allIds.indexOf(column);
         state.allIds.splice(indexOfColumn, 1);

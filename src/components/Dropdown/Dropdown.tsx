@@ -12,17 +12,17 @@ import {
   getColumns,
   removeTaskFromColumn,
 } from "../../features/columns/columnsSlice";
-import { ID } from "../../common/utils/types";
+ 
 import { changeTaskColumnId } from "../../features/tasks/tasksSlice";
 import { StatusMap } from "../Modal/TaskModal/EditTask";
 
 interface Props {
   currentStatus: number;
   setCurrentStatus: (s: number) => void;
-  statuses: { columnId: ID; status: string }[];
+  statuses: { columnId: string; status: string }[];
   isViewTaskModal?: boolean;
   currentColumnId?: string | null;
-  taskId?: ID;
+  taskId?: string;
   isEditTaskModal?: boolean;
   setCurrentColumnOfCurrentTask?: (columnName: string) => void;
   currentColumnOfCurrentTask?: string;

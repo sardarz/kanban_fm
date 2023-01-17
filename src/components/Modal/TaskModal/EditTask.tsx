@@ -18,12 +18,11 @@ import {
   ITask,
   updateTask,
 } from "../../../features/tasks/tasksSlice";
-import { ID } from "../../../common/utils/types";
 
 export interface StatusMap {
   [key: string]: {
     status: string;
-    columnId: ID;
+    columnId: string;
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { ITask } from "../../features/tasks/tasksSlice";
@@ -18,26 +18,17 @@ interface ModalProps {
   task?: ITask;
 }
 
-interface ModalWrapperProps {
-  type: string;
-  closeModal: () => void;
-  taskId?: string;
-  columnId?: string;
-  task?: ITask;
-}
-
 const ModalWrapper = ({
   type,
   closeModal,
   taskId,
   columnId,
   task,
-}: ModalWrapperProps) => {
+}: ModalProps) => {
   return (
     <div
       onClick={(e) => {
-        if (type === modalTypes.editBoard || type === modalTypes.viewTask)
-          e.stopPropagation();
+        e.stopPropagation();
         closeModal();
       }}
       className={`${styles.modalWrapper}`}

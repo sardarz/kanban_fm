@@ -6,6 +6,8 @@ import ThreeDotsMenu from "../ThreeDotsMenu/ThreeDotsMenu";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 const Header = ({
   isSideBoardOpen,
@@ -16,6 +18,9 @@ const Header = ({
   isThreeDotsOpen: boolean;
   setIsThreeDotsOpen: (v: boolean) => void;
 }) => {
+  const boardTitle = useSelector(
+    (state: RootState) => state.boards.byId[state.boards.currentlySelected].name
+  );
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
   const closeAddTaskOpen = () => setIsAddTaskOpen(false);
@@ -30,7 +35,7 @@ const Header = ({
         <DarkLogo />
       </div>
       <div className={`${styles.headerMainWrapper} `}>
-        <h1>Platform Launch</h1>
+        <h1>{boardTitle}</h1>
         <div
           className={styles.buttonHeaderWrapper}
           style={{ maxWidth: "164px" }}

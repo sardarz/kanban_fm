@@ -14,7 +14,6 @@ import {
   getColumns,
   removeOldColumns,
 } from "../../../features/columns/columnsSlice";
-import { ID } from "../../../common/utils/types";
 import { removeOldTasksOnBoardEdit } from "../../../features/tasks/tasksSlice";
 
 const AddBoard = ({
@@ -50,7 +49,7 @@ const AddBoard = ({
   };
 
   const [idsOfRemovedColumns, setIdsOfRemovedColumns] = useState<
-    (ID | undefined)[]
+    (string | undefined)[]
   >([]);
 
   const removeColumn = (idx: number) => {

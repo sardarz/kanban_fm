@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreated, getBoards, getCurrentlySelected } from "../../../features/boards/boardsSlice";
 import { addNewColumnsOnBoardCreation, getColumns } from "../../../features/columns/columnsSlice";
-import { ID } from "../../../common/utils/types";
 
 const AddBoard = ({
   isNewBoard,

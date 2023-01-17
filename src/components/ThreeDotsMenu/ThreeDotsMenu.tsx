@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { ITask } from "../../features/tasks/tasksSlice";
-import DeleteModal from "../Modal/DeleteModal/DeleteModal";
 import Modal from "../Modal/Modal";
 import styles from "./styles.module.css";
 

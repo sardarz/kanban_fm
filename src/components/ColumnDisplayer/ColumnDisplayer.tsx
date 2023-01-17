@@ -1,10 +1,10 @@
 import ColumnItem from "../ColumnItem/ColumnItem";
 import styles from "./styles.module.css";
-import { ID } from "../../common/utils/types";
+ 
 import { getColumns } from "../../features/columns/columnsSlice";
 import { useSelector } from "react-redux";
 
-const ColumnDisplayer = ({ columnId }: { columnId: ID }) => {
+const ColumnDisplayer = ({ columnId }: { columnId: string }) => {
   const columns = useSelector(getColumns);
   const { taskIds, status } = columns.byId[columnId];
   

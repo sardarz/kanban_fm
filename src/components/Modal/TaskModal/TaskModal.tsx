@@ -63,7 +63,7 @@ const TaskModal = ({ isNewTask, closeModal }: { isNewTask: boolean, closeModal?:
     };
 
     dispatch(createNewTask(newTask));
-    dispatch(addNewTaskToColumns({ taskID: newId, columnId }));
+    dispatch(addNewTaskToColumns({ taskId: newId, columnId }));
     if (closeModal) closeModal()
   };
 

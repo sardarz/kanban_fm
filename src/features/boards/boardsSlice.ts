@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
-import { ID } from "../../common/utils/types";
 
 interface IBoards {
   byId: IBoard;
-  allIds: ID[];
-  currentlySelected: ID;
+  allIds: string[];
+  currentlySelected: string;
 }
 
 interface IBoard {
-  [key: ID]: {
-    boardId: ID;
+  [key: string]: {
+    boardId: string;
     name: string;
-    columnIds: ID[];
+    columnIds: string[];
   };
 }
 
@@ -55,7 +54,7 @@ const boardsSlice = createSlice({
     },
     boardEdited(
       state,
-      action: PayloadAction<{ name: string; columnIds: ID[]; id: ID }>
+      action: PayloadAction<{ name: string; columnIds: string[]; id: string }>
     ) {
       state.byId[action.payload.id].name = action.payload.name;
       state.byId[action.payload.id].columnIds = action.payload.columnIds;
