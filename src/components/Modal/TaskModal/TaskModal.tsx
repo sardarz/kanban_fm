@@ -50,12 +50,13 @@ const TaskModal = ({
   const columnNames = columnIds.map((id) => ({
     columnName: columns.byId[id].columnName,
     columnId: id,
+    taskIds: columns.byId[id].taskIds,
   }));
-  const [currentStatus, setCurrentStatus] = useState(0);
+  const [currentColumnId, setCurrentColumnId] = useState(columns.allIds[0]);
 
   const onCreateNewTask = () => {
     const newId = uuidv4();
-    const columnId = columnNames[currentStatus].columnId;
+    const columnId = currentColumnId;
     let newTask = {
       id: newId,
       title: taskTitle,
@@ -129,11 +130,11 @@ const TaskModal = ({
         + Add New Subtask
       </button>
 
-      {/* <Dropdown
+      <Dropdown
         columns={columnNames}
-        currentColumn={currentColumn}
-        setCurrentColumn={setCurrentColumn}
-      /> */}
+        currentColumnId={currentColumnId}
+        setCurrentColumnId={setCurrentColumnId}
+      />
 
       <button type="button" className="primary" onClick={onCreateNewTask}>
         Create New Task

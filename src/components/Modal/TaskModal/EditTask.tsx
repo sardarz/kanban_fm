@@ -5,7 +5,6 @@ import {
   getCurrentlySelected,
 } from "../../../features/boards/boardsSlice";
 import {
-  addNewTaskToColumns,
   addTaskToNewColumn,
   getColumns,
   removeTaskFromOldColumn,
@@ -13,18 +12,7 @@ import {
 import Dropdown from "../../Dropdown/Dropdown";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 import { v4 as uuidv4 } from "uuid";
-import {
-  createNewTask,
-  ITask,
-  updateTask,
-} from "../../../features/tasks/tasksSlice";
-
-export interface ColumnNamesMap {
-  [key: string]: {
-    columnName: string;
-    columnId: string;
-  };
-}
+import { ITask, updateTask } from "../../../features/tasks/tasksSlice";
 
 const EditTask = ({
   closeModal,
@@ -33,13 +21,10 @@ const EditTask = ({
   closeModal?: () => void;
   task: ITask;
 }) => {
-
   const dispatch = useDispatch();
 
   const [taskTitle, setTaskTitle] = useState(task.title);
-
   const [taskText, setTaskText] = useState(task.description);
-
   const [subtasks, setSubtasks] = useState(
     task.subtasks.map((s) => ({
       title: s.title,
@@ -75,15 +60,10 @@ const EditTask = ({
   const columnNames = columnIds.map((id) => ({
     columnName: columns.byId[id].columnName,
     columnId: id,
+    taskIds: columns.byId[id].taskIds,
   }));
-  const columnNamesMap = columnNames.reduce((acc: ColumnNamesMap, cv) => {
-    acc[cv.columnId] = cv;
-    return acc;
-  }, {});
-
-  const [currentStatus, setCurrentStatus] = useState(0);
-  const [currentColumnOfCurrentTask, setCurrentColumnOfCurrentTask] = useState(
-    task.columnId
+  const [currentColumnId, setCurrentColumnId] = useState(
+    columns.byId[task.columnId].columnId
   );
 
   const onSaveTask = () => {
@@ -91,7 +71,7 @@ const EditTask = ({
       id: task.id,
       title: taskTitle,
       description: taskText,
-      columnId: currentColumnOfCurrentTask,
+      columnId: currentColumnId,
       subtasks: subtasks.map((el) => ({
         title: el.title,
         isCompleted: el.isCompleted,
@@ -101,9 +81,6 @@ const EditTask = ({
 
     dispatch(updateTask(updatedTask));
     if (task.columnId !== updatedTask.columnId) {
-      console.log("kek");
-      console.log("task.columnId", task.columnId);
-      console.log("updatedTask.columnId", updatedTask.columnId);
       dispatch(
         removeTaskFromOldColumn({
           columnId: task.columnId,
@@ -174,9 +151,11 @@ const EditTask = ({
         + Add New Subtask
       </button>
 
-      {/* <Dropdown
+      <Dropdown
         columns={columnNames}
-      /> */}
+        currentColumnId={currentColumnId}
+        setCurrentColumnId={setCurrentColumnId}
+      />
 
       <button type="button" className="primary" onClick={onSaveTask}>
         Save Changes
