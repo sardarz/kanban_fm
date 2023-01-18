@@ -9,7 +9,6 @@ import {
 } from "../../../features/boards/boardsSlice";
 import {
   addNewColumnsOnBoardCreation,
-  getColumns,
 } from "../../../features/columns/columnsSlice";
 
 const AddBoard = ({
@@ -74,10 +73,9 @@ const AddBoard = ({
             <InputWithCloseBtn
               onClick={() => removeColumnText(idx)}
               key={col.columnId}
-              placeholder="Enter column name"
               updateGivenText={updateColumnText}
               idx={idx}
-              colName={col.columnName}
+              type="board"
             />
           ))}
         </div>

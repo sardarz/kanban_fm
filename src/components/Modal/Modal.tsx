@@ -6,7 +6,6 @@ import BoardModal from "./BoardModal/BoardModal";
 import EditBoard from "./BoardModal/EditBoard";
 import DeleteModal from "./DeleteModal/DeleteModal";
 import styles from "./styles.module.css";
-import EditTask from "./TaskModal/EditTask";
 import TaskModal from "./TaskModal/TaskModal";
 import ViewTaskModal from "./ViewTaskModal/ViewTaskModal";
 
@@ -42,9 +41,9 @@ const ModalWrapper = ({
         ) : type === modalTypes.editBoard ? (
           <EditBoard isNewBoard={false} closeModal={closeModal} />
         ) : type === modalTypes.addTask ? (
-          <TaskModal isNewTask={true} closeModal={closeModal} />
+          <TaskModal task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.editTask ? (
-          <EditTask task={task as ITask} closeModal={closeModal} />
+          <TaskModal task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.viewTask ? (
           <ViewTaskModal taskId={taskId ? taskId : ""} />
         ) : type === modalTypes.deleteBoard ? (

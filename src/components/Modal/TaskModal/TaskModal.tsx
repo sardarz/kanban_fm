@@ -6,41 +6,70 @@ import {
 } from "../../../features/boards/boardsSlice";
 import {
   addNewTaskToColumns,
+  addTaskToNewColumn,
   getColumns,
+  removeTaskFromOldColumn,
 } from "../../../features/columns/columnsSlice";
 import Dropdown from "../../Dropdown/Dropdown";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 import { v4 as uuidv4 } from "uuid";
-import { createNewTask } from "../../../features/tasks/tasksSlice";
+import {
+  createNewTask,
+  ITask,
+  updateTask,
+} from "../../../features/tasks/tasksSlice";
 
 const TaskModal = ({
-  isNewTask,
   closeModal,
+  task,
 }: {
-  isNewTask: boolean;
   closeModal?: () => void;
+  task: ITask;
 }) => {
+  const isNewTask = task ? false : true;
   const dispatch = useDispatch();
 
-  const [taskTitle, setTaskTitle] = useState("");
-
-  const [taskText, setTaskText] = useState("");
-
-  const [newSubtasks, setNewSubtasks] = useState([
-    { placeholder: "e.g. Make coffee", value: "" },
-    { placeholder: "e.g. Drink coffee and smile", value: "" },
-  ]);
+  const [taskTitle, setTaskTitle] = useState(isNewTask ? "" : task.title);
+  const [taskText, setTaskText] = useState(isNewTask ? "" : task.description);
+  const [subtasks, setSubtasks] = useState(
+    isNewTask
+      ? [
+          {
+            title: "",
+            isCompleted: false,
+            id: uuidv4(),
+          },
+          {
+            title: "",
+            isCompleted: false,
+            id: uuidv4(),
+          },
+        ]
+      : task.subtasks.map((s) => ({
+          title: s.title,
+          isCompleted: s.isCompleted,
+          id: s.id,
+        }))
+  );
 
   const removeSubtask = (idx: number) => {
-    let temp = [...newSubtasks];
+    let temp = subtasks.map((s) => ({
+      title: s.title,
+      isCompleted: s.isCompleted,
+      id: s.id,
+    }));
     temp.splice(idx, 1);
-    setNewSubtasks(temp);
+    setSubtasks(temp);
   };
 
   const updateSubtaskText = (idx: number, v: string) => {
-    let temp = newSubtasks.slice();
-    temp[idx].value = v;
-    setNewSubtasks(temp);
+    let temp = subtasks.map((s) => ({
+      title: s.title,
+      isCompleted: s.isCompleted,
+      id: s.id,
+    }));
+    temp[idx].title = v;
+    setSubtasks(temp);
   };
 
   const currentlySelected = useSelector(getCurrentlySelected);
@@ -52,7 +81,9 @@ const TaskModal = ({
     columnId: id,
     taskIds: columns.byId[id].taskIds,
   }));
-  const [currentColumnId, setCurrentColumnId] = useState(columns.allIds[0]);
+  const [currentColumnId, setCurrentColumnId] = useState(
+    isNewTask ? columnIds[0] : columns.byId[task.columnId].columnId
+  );
 
   const onCreateNewTask = () => {
     const newId = uuidv4();
@@ -62,10 +93,10 @@ const TaskModal = ({
       title: taskTitle,
       description: taskText,
       columnId,
-      subtasks: newSubtasks.map((el) => ({
-        title: el.value,
+      subtasks: subtasks.map((el) => ({
+        title: el.title,
         isCompleted: false,
-        id: uuidv4(),
+        id: el.id,
       })),
     };
 
@@ -74,28 +105,57 @@ const TaskModal = ({
     if (closeModal) closeModal();
   };
 
+  const onSaveTask = () => {
+    const updatedTask = {
+      id: task.id,
+      title: taskTitle,
+      description: taskText,
+      columnId: currentColumnId,
+      subtasks: subtasks.map((el) => ({
+        title: el.title,
+        isCompleted: el.isCompleted,
+        id: el.id,
+      })),
+    };
+
+    dispatch(updateTask(updatedTask));
+    if (task.columnId !== updatedTask.columnId) {
+      dispatch(
+        removeTaskFromOldColumn({
+          columnId: task.columnId,
+          taskId: task.id,
+        })
+      );
+      dispatch(
+        addTaskToNewColumn({ columnId: updatedTask.columnId, taskId: task.id })
+      );
+    }
+    if (closeModal) closeModal();
+  };
+
   return (
     <div className="modalBox">
       <h3 className="title"> {isNewTask ? "Add New " : "Edit "} Task</h3>
 
       <div className="inputWrapper">
-        <label htmlFor="boardName" className="subTitle">
+        <label htmlFor="taskName" className="subTitle">
           Title
         </label>
         <input
           type="text"
-          id="boardName"
+          id="taskName"
           placeholder="e.g. Take coffee break"
           value={taskTitle}
           onChange={(e) => setTaskTitle(e.target.value)}
         />
       </div>
       <div className="inputWrapper">
-        <label htmlFor="boardName" className="subTitle">
+        <label htmlFor="taskDescription" className="subTitle">
           Description
         </label>
         <textarea
           rows={4}
+          id="taskDescription"
           placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
           value={taskText}
           onChange={(e) => setTaskText(e.target.value)}
@@ -105,13 +165,14 @@ const TaskModal = ({
       <div className="columnsWrapper">
         <p className="subTitle">Subtasks</p>
         <div className="columns">
-          {newSubtasks.map((sub, idx) => (
+          {subtasks.map((sub, idx) => (
             <InputWithCloseBtn
               onClick={() => removeSubtask(idx)}
-              key={sub.placeholder}
-              placeholder={sub.placeholder}
+              key={sub.id}
               updateGivenText={updateSubtaskText}
               idx={idx}
+              type="task"
+              subtaskTitle={sub.title}
             />
           ))}
         </div>
@@ -119,9 +180,9 @@ const TaskModal = ({
 
       <button
         onClick={() => {
-          setNewSubtasks([
-            ...newSubtasks,
-            { placeholder: "Enter your subtask", value: "" },
+          setSubtasks([
+            ...subtasks,
+            { title: "", isCompleted: false, id: uuidv4() },
           ]);
         }}
         type="button"
@@ -136,8 +197,12 @@ const TaskModal = ({
         setCurrentColumnId={setCurrentColumnId}
       />
 
-      <button type="button" className="primary" onClick={onCreateNewTask}>
-        Create New Task
+      <button
+        type="button"
+        className="primary"
+        onClick={isNewTask ? onCreateNewTask : onSaveTask}
+      >
+        {isNewTask ? "Create New Task" : "Save Changes"}
       </button>
     </div>
   );
