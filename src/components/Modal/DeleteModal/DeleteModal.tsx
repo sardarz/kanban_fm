@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
 import {
   deleteBoard,
   getBoards,
@@ -15,6 +14,7 @@ import {
   deleteTasks,
   ITask,
 } from "../../../features/tasks/tasksSlice";
+import styles from "../styles.module.css";
 
 interface DeleteModalProps {
   type: "board" | "task";
@@ -65,20 +65,20 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
   }
 
   return (
-    <div className="delete">
-      <h3 className="title">
+    <div className={`${styles.delete}`}>
+      <h3 className={`${styles.title}`}>
         Delete this {type === "board" ? "board" : "task"}?
       </h3>
-      <p className="description">{description}</p>
-      <div className="deleteBtnsWrapper">
+      <p className={`${styles.description}`}>{description}</p>
+      <div className={`${styles.deleteBtnsWrapper}`}>
         <button
           type="button"
-          className="primary"
+          className={`${styles.primary}`}
           onClick={type === "board" ? onDeleteBoard : onDeleteTask}
         >
           Delete
         </button>
-        <button type="button" className="secondary">
+        <button type="button" className={`${styles.secondary}`}>
           Cancel
         </button>
       </div>

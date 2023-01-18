@@ -26,7 +26,7 @@ const Dropdown = ({
     <div
       className={`${styles.selectWrapper} ${isMenuOpen ? styles.menuOpen : ""}`}
     >
-      <p className="subTitle">Current Status</p>
+      <p className={styles.subtitle}>Current Status</p>
       <div
         className={styles.selectBtn}
         onClick={() => setIsMenuOpen(!isMenuOpen)}

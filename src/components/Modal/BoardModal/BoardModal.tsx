@@ -15,6 +15,7 @@ import {
   removeOldColumns,
 } from "../../../features/columns/columnsSlice";
 import { removeOldTasksOnBoardEdit } from "../../../features/tasks/tasksSlice";
+import styles from "../styles.module.css";
 
 const AddBoard = ({
   isNewBoard,
@@ -118,11 +119,13 @@ const AddBoard = ({
   };
 
   return (
-    <div className="modalBox">
-      <h3 className="title">{isNewBoard ? "Add New Board" : "Edit Board"}</h3>
+    <div className={`${styles.modalBox}`}>
+      <h3 className={`${styles.title}`}>
+        {isNewBoard ? "Add New Board" : "Edit Board"}
+      </h3>
 
-      <div className="inputWrapper">
-        <label htmlFor="boardName" className="subTitle">
+      <div className={`${styles.inputWrapper}`}>
+        <label htmlFor="boardName" className={`${styles.subtitle}`}>
           {!isNewBoard && "Board "}Name
         </label>
         <input
@@ -134,9 +137,9 @@ const AddBoard = ({
         />
       </div>
 
-      <div className="columnsWrapper">
-        <p className="subTitle">{!isNewBoard && "Board "}Columns</p>
-        <div className="columns">
+      <div className={`${styles.columnsWrapper}`}>
+        <p className={`${styles.subtitle}`}>{!isNewBoard && "Board "}Columns</p>
+        <div className={`${styles.columns}`}>
           {columns.map((col, idx) => (
             <InputWithCloseBtn
               onClick={() => removeColumn(idx)}
@@ -152,7 +155,7 @@ const AddBoard = ({
 
       <button
         type="button"
-        className="secondary"
+        className={`${styles.secondary}`}
         onClick={() => {
           setColumns([
             ...columns,
@@ -164,7 +167,7 @@ const AddBoard = ({
       </button>
       <button
         type="button"
-        className="primary"
+        className={`${styles.primary}`}
         onClick={isNewBoard ? onCreateNewBoard : onSaveBoard}
       >
         {isNewBoard ? "Create New Board" : "Save Changes"}

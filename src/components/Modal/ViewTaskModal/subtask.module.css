@@ -37,8 +37,3 @@
   font-weight: 700;
   color: var(--clr-dark-600);
 }
-
-.threeDots {
-  position: relative;
-  cursor: pointer;
-}

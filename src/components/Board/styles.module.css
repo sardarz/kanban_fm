@@ -18,13 +18,6 @@
   animation: moveBodyOnSideOpen var(--animationDurationOnSideOpen) ease forwards;
 }
 
-.container {
-
-}
-
-.mainContent {
-}
-
 .emptyBoardWrapper {
   display: flex;
   flex-direction: column;

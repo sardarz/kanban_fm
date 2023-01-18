@@ -13,11 +13,11 @@ import {
 import Dropdown from "../../Dropdown/Dropdown";
 import ThreeDotsMenu from "../../ThreeDotsMenu/ThreeDotsMenu";
 import SubTaskViewer from "./SubTaskViewer";
-import styles from "./subtask.module.css";
 import {
   changeTaskColumnId,
   getTaskById,
 } from "../../../features/tasks/tasksSlice";
+import styles from "../styles.module.css";
 
 const ViewTaskModal = ({ taskId }: { taskId: string }) => {
   const dispatch = useDispatch();
@@ -55,11 +55,14 @@ const ViewTaskModal = ({ taskId }: { taskId: string }) => {
   }, [currentColumnId]);
 
   return (
-    <div className="modalBox" onClick={() => setIsThreeDotsOpen(false)}>
-      <div className="viewTaskHeader">
-        <h3 className="title">{title}</h3>
+    <div
+      className={`${styles.modalBox}`}
+      onClick={() => setIsThreeDotsOpen(false)}
+    >
+      <div className={`${styles.viewTaskHeader}`}>
+        <h3 className={`${styles.title}`}>{title}</h3>
         <div
-          className={`threeDots ${styles.threeDots}`}
+          className={`${styles.threeDots}`}
           onClick={(e) => {
             e.stopPropagation();
             setIsThreeDotsOpen(true);
@@ -74,13 +77,13 @@ const ViewTaskModal = ({ taskId }: { taskId: string }) => {
           />
         </div>
       </div>
-      <p className="description">{description}</p>
+      <p className={`${styles.description}`}>{description}</p>
 
-      <div className="subtasksWrapper">
-        <p className="subTitle">
+      <div className={`${styles.subtasksWrapper}`}>
+        <p className={`${styles.subtitle}`}>
           Subtasks ({completedTaskAmount} of {task.subtasks.length})
         </p>
-        <div className="subtasks">
+        <div className={`${styles.subtasks}`}>
           {task.subtasks.map((subtask, idx) => (
             <SubTaskViewer
               idx={idx}

@@ -19,6 +19,15 @@
   color: var(--clr-dark-600);
 }
 
+.subtitle {
+  display: block;
+  margin-bottom: 8px;
+  font-size: var(--body-m-fs);
+  line-height: var(--body-m-lh);
+  font-weight: var(--body-m-fw);
+  color: var(--clr-gray-600);
+}
+
 .iconWrapper {
   display: flex;
   justify-content: center;

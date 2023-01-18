@@ -18,6 +18,7 @@ import {
   ITask,
   updateTask,
 } from "../../../features/tasks/tasksSlice";
+import styles from "../styles.module.css";
 
 const TaskModal = ({
   closeModal,
@@ -142,11 +143,14 @@ const TaskModal = ({
   };
 
   return (
-    <div className="modalBox">
-      <h3 className="title"> {isNewTask ? "Add New " : "Edit "} Task</h3>
+    <div className={`${styles.modalBox}`}>
+      <h3 className={`${styles.title}`}>
+        {" "}
+        {isNewTask ? "Add New " : "Edit "} Task
+      </h3>
 
-      <div className="inputWrapper">
-        <label htmlFor="taskName" className="subTitle">
+      <div className={`${styles.inputWrapper}`}>
+        <label htmlFor="taskName" className={`${styles.subtitle}`}>
           Title
         </label>
         <input
@@ -157,8 +161,8 @@ const TaskModal = ({
           onChange={(e) => setTaskTitle(e.target.value)}
         />
       </div>
-      <div className="inputWrapper">
-        <label htmlFor="taskDescription" className="subTitle">
+      <div className={`${styles.inputWrapper}`}>
+        <label htmlFor="taskDescription" className={`${styles.subtitle}`}>
           Description
         </label>
         <textarea
@@ -170,9 +174,9 @@ const TaskModal = ({
         ></textarea>
       </div>
 
-      <div className="columnsWrapper">
-        <p className="subTitle">Subtasks</p>
-        <div className="columns">
+      <div className={`${styles.columnsWrapper}`}>
+        <p className={`${styles.subtitle}`}>Subtasks</p>
+        <div className={`${styles.columns}`}>
           {subtasks.map((sub, idx) => (
             <InputWithCloseBtn
               onClick={() => removeSubtask(idx)}
@@ -194,7 +198,7 @@ const TaskModal = ({
           ]);
         }}
         type="button"
-        className="secondary"
+        className={`${styles.secondary}`}
       >
         + Add New Subtask
       </button>
@@ -207,7 +211,7 @@ const TaskModal = ({
 
       <button
         type="button"
-        className="primary"
+        className={`${styles.primary}`}
         onClick={isNewTask ? onCreateNewTask : () => onSaveTask(task as ITask)}
       >
         {isNewTask ? "Create New Task" : "Save Changes"}

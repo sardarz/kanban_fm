@@ -5,7 +5,6 @@
   background-color: #fff;
   height: 9.7rem;
   transition: all 0.3s ease;
-  /* overflow-x: hidden; */
 }
 
 .headerWrapper:before {

@@ -45,14 +45,14 @@
   max-width: 48rem;
 }
 
-.modalWrapper :global(.title) {
+.modalWrapper .title {
   font-size: var(--title-fs);
   line-height: var(--title-lh);
   color: var(--title-font-clr);
   margin-bottom: 2.4rem;
 }
 
-.modalWrapper :global(.subTitle) {
+.modalWrapper .subtitle {
   display: block;
   margin-bottom: 8px;
   font-size: var(--subTitle-fs);
@@ -74,16 +74,16 @@
   font-weight: 700;
 }
 
-.modalWrapper :global(.secondary) {
+.modalWrapper .secondary {
   margin-bottom: 2.4rem;
 }
 
-.modalWrapper :global(.primary) {
+.modalWrapper .primary {
   color: var(--btn-primary-font-clr);
   background-color: var(--btn-primary-bg-clr);
 }
 
-.modalWrapper :global(.secondary) {
+.modalWrapper .secondary {
   color: var(--btn-secondary-font-clr);
   background-color: var(--btn-secondary-bg-clr);
 }
@@ -101,15 +101,15 @@
   width: 100%;
 }
 
-.modalWrapper :global(.inputWrapper) {
+.modalWrapper .inputWrapper {
   margin-bottom: 2.4rem;
 }
 
-.modalWrapper :global(.columnsWrapper) {
+.modalWrapper .columnsWrapper {
   margin-bottom: 1.2rem;
 }
 
-.modalWrapper :global(.columns) {
+.modalWrapper .columns {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -140,8 +140,24 @@
 }
 
 /* ViewTask */
+.modalWrapper .viewTaskHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+}
 
-.modalWrapper :global(.description) {
+.modalWrapper .viewTaskHeader .title {
+  margin-bottom: 0;
+  max-width: 38.7rem;
+}
+
+.modalWrapper .threeDots {
+  position: relative;
+  cursor: pointer;
+}
+
+.modalWrapper .description {
   font-size: var(--body-l-fs);
   line-height: var(--body-l-lh);
   font-weight: var(--body-l-fw);
@@ -149,49 +165,30 @@
   margin-bottom: 2.4rem;
 }
 
-.modalWrapper :global(.subtasksWrapper) {
+.modalWrapper .subtasksWrapper {
   margin-bottom: 2.4rem;
 }
 
-.modalWrapper :global(.viewTaskHeader) {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2.4rem;
-}
-
-.modalWrapper :global(.viewTaskHeader .title) {
-  margin-bottom: 0;
-}
-
-.modalWrapper :global(.viewTaskHeader) h3 {
-  max-width: 38.7rem;
-}
-
-.modalWrapper :global(.subtasks) {
+.modalWrapper .subtasks {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 /* DeleteModal */
-
-.modalWrapper :global(.delete) {
-}
-
-.modalWrapper :global(.delete .title) {
+.modalWrapper .delete .title {
   color: var(--clr-accent-600);
 }
 
-.modalWrapper :global(.deleteBtnsWrapper) {
+.modalWrapper .deleteBtnsWrapper {
   display: flex;
   gap: 1.6rem;
 }
 
-.modalWrapper :global(.deleteBtnsWrapper .primary) {
+.modalWrapper .deleteBtnsWrapper .primary {
   background-color: var(--clr-accent-600);
 }
 
-.modalWrapper :global(.deleteBtnsWrapper button) {
+.modalWrapper .deleteBtnsWrapper button {
   margin: 0;
 }
