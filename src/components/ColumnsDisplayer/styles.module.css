@@ -17,7 +17,7 @@
   );
   border-radius: 6px;
   align-self: end;
-  cursor: pointer;
+  min-height: 8.8rem;
 }
 
 .newColumn p {
@@ -25,4 +25,10 @@
   line-height: var(--heading-xl-lh);
   color: var(--clr-gray-600);
   font-weight: 700;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.newColumn p:hover {
+  color: var(--clr-primary-600);
 }

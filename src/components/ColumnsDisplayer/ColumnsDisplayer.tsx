@@ -1,12 +1,23 @@
-import { useSelector } from "react-redux";
-import { getBoards } from "../../features/boards/boardsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewColumnToCurrentlySelected, getBoards } from "../../features/boards/boardsSlice";
 import ColumnDisplayer from "../ColumnDisplayer/ColumnDisplayer";
 import styles from "./styles.module.css";
+import { v4 as uuidv4 } from "uuid";
+import { createNewColumnById } from "../../features/columns/columnsSlice";
 
 const NewColumn = () => {
+  const dispatch = useDispatch();
   return (
     <div className={styles.newColumn}>
-      <p>+ New Column</p>
+      <p
+        onClick={() => {
+          const id = uuidv4();
+          dispatch(addNewColumnToCurrentlySelected(id));
+          dispatch(createNewColumnById(id));
+        }}
+      >
+        + New Column
+      </p>
     </div>
   );
 };

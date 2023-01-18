@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
 
 interface IBoards {
@@ -48,6 +47,7 @@ const boardsSlice = createSlice({
         columnIds: action.payload.columnIds,
       };
       state.allIds.push(id);
+      state.currentlySelected = id;
     },
     updateCurrentlySelected(state, action) {
       state.currentlySelected = action.payload;
@@ -63,9 +63,12 @@ const boardsSlice = createSlice({
       const currentlySelected = state.currentlySelected;
       const indexOfCS = state.allIds.indexOf(currentlySelected);
       state.allIds.splice(indexOfCS, 1);
-      delete state.byId[currentlySelected]
-      state.currentlySelected = state.allIds[0];
+      delete state.byId[currentlySelected];
+      state.currentlySelected = state.allIds[0] || ""
     },
+    addNewColumnToCurrentlySelected(state, action: PayloadAction<string>) {
+      state.byId[state.currentlySelected].columnIds.push(action.payload)
+    }
   },
 });
 
@@ -74,6 +77,7 @@ export const {
   boardEdited,
   updateCurrentlySelected,
   deleteBoard,
+  addNewColumnToCurrentlySelected
 } = boardsSlice.actions;
 
 export const getBoards = (state: RootState) => state.boards;

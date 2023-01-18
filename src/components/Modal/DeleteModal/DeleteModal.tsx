@@ -78,7 +78,11 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
         >
           Delete
         </button>
-        <button type="button" className={`${styles.secondary}`} onClick={closeModal}> 
+        <button
+          type="button"
+          className={`${styles.secondary}`}
+          onClick={closeModal}
+        >
           Cancel
         </button>
       </div>

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../app/store";
 
 interface IColumns {
@@ -111,6 +110,14 @@ const columnsSlice = createSlice({
       );
       state.byId[action.payload.columnId].taskIds.splice(indexOfTask, 1);
     },
+    createNewColumnById(state, action: PayloadAction<string>) {
+      state.allIds.push(action.payload)
+      state.byId[action.payload] = {
+        columnId: action.payload,
+        columnName: "Column Name",
+        taskIds: []
+      }
+    }
   },
 });
 
@@ -123,6 +130,7 @@ export const {
   addTaskToNewColumn,
   deleteColumns,
   deleteTaskFromColumn,
+  createNewColumnById
 } = columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;

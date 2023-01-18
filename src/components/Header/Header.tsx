@@ -19,7 +19,7 @@ const Header = ({
   setIsThreeDotsOpen: (v: boolean) => void;
 }) => {
   const boardTitle = useSelector(
-    (state: RootState) => state.boards.byId[state.boards.currentlySelected].name
+    (state: RootState) => state.boards.byId[state.boards.currentlySelected]?.name || "Need to create a board"
   );
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const ColumnDisplayer = ({ columnId }: { columnId: string }) => {
   const columns = useSelector(getColumns);
-  const { taskIds, columnName } = columns.byId[columnId];
+  const { taskIds, columnName } = columns?.byId[columnId] || {taskIds: [], columnName: ""}
 
   return (
     <div className={styles.wrapper}>
