@@ -19,7 +19,13 @@ import {
 } from "../../../features/tasks/tasksSlice";
 import styles from "../styles.module.css";
 
-const ViewTaskModal = ({ taskId }: { taskId: string }) => {
+const ViewTaskModal = ({
+  taskId,
+  closeModal,
+}: {
+  taskId: string;
+  closeModal: () => void;
+}) => {
   const dispatch = useDispatch();
 
   const boards = useSelector(getBoards);
@@ -74,6 +80,7 @@ const ViewTaskModal = ({ taskId }: { taskId: string }) => {
             task={task}
             isThreeDotsOpen={isThreeDotsOpen}
             setIsThreeDotsOpen={setIsThreeDotsOpen}
+            closeParentModal={closeModal}
           />
         </div>
       </div>

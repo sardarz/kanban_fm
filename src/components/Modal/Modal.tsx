@@ -12,17 +12,10 @@ interface ModalProps {
   type: string;
   closeModal: () => void;
   taskId?: string;
-  columnId?: string;
   task?: ITask;
 }
 
-const ModalWrapper = ({
-  type,
-  closeModal,
-  taskId,
-  columnId,
-  task,
-}: ModalProps) => {
+const ModalWrapper = ({ type, closeModal, taskId, task }: ModalProps) => {
   return (
     <div
       onClick={(e) => {
@@ -44,7 +37,10 @@ const ModalWrapper = ({
         ) : type === modalTypes.editTask ? (
           <TaskModal task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.viewTask ? (
-          <ViewTaskModal taskId={taskId ? taskId : ""} />
+          <ViewTaskModal
+            closeModal={closeModal}
+            taskId={taskId ? taskId : ""}
+          />
         ) : type === modalTypes.deleteBoard ? (
           <DeleteModal type="board" closeModal={closeModal} />
         ) : type === modalTypes.deleteTask ? (
@@ -59,7 +55,7 @@ const ModalWrapper = ({
   );
 };
 
-const Modal = ({ type, closeModal, taskId, columnId, task }: ModalProps) => {
+const Modal = ({ type, closeModal, taskId, task }: ModalProps) => {
   const containerElement = useMemo(
     () => document.getElementById("modal-container") as HTMLElement,
     []
@@ -67,7 +63,6 @@ const Modal = ({ type, closeModal, taskId, columnId, task }: ModalProps) => {
 
   return createPortal(
     <ModalWrapper
-      columnId={columnId}
       taskId={taskId}
       closeModal={closeModal}
       type={type}

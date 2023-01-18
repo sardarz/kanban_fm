@@ -9,6 +9,7 @@ interface Props {
   isThreeDotsOpen: boolean;
   setIsThreeDotsOpen: (v: boolean) => void;
   task?: ITask;
+  closeParentModal?: () => void;
 }
 
 const ThreeDotsMenu = ({
@@ -16,6 +17,7 @@ const ThreeDotsMenu = ({
   isThreeDotsOpen,
   setIsThreeDotsOpen,
   task,
+  closeParentModal,
 }: Props) => {
   const text = type === "board" ? "board" : "task";
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,8 +31,8 @@ const ThreeDotsMenu = ({
       <p
         onClick={(e) => {
           e.stopPropagation();
-          setIsThreeDotsOpen(false);
           setIsModalOpen(true);
+          setIsThreeDotsOpen(false);
         }}
         className={styles.edit}
       >
@@ -38,8 +40,10 @@ const ThreeDotsMenu = ({
       </p>
       <p
         className={styles.delete}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setIsDeleteModalOpen(true);
+          setIsThreeDotsOpen(false);
         }}
       >
         Delete {text}
@@ -50,13 +54,22 @@ const ThreeDotsMenu = ({
             type === "board" ? modalTypes.deleteBoard : modalTypes.deleteTask
           }
           task={task}
-          closeModal={() => setIsDeleteModalOpen(false)}
+          closeModal={() => {
+            setIsThreeDotsOpen(false);
+            setIsDeleteModalOpen(false);
+            closeModal();
+          }}
         />
       )}
       {isModalOpen && (
         <Modal
           type={type === "board" ? modalTypes.editBoard : modalTypes.editTask}
-          closeModal={closeModal}
+          closeModal={() => {
+            setIsThreeDotsOpen(false);
+            setIsDeleteModalOpen(false);
+            if (closeParentModal) closeParentModal();
+            closeModal();
+          }}
           task={task}
         />
       )}

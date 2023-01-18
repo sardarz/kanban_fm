@@ -6,13 +6,7 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
 
-const ColumnItem = ({
-  taskId,
-  columnId,
-}: {
-  taskId: string;
-  columnId: string;
-}) => {
+const ColumnItem = ({ taskId }: { taskId: string }) => {
   const task = useSelector(getTaskById(taskId));
   const completedTaskAmount = task.subtasks.filter(
     (el) => el.isCompleted
@@ -33,7 +27,6 @@ const ColumnItem = ({
           taskId={taskId}
           type={modalTypes.viewTask}
           closeModal={closeModal}
-          columnId={columnId}
         />
       )}
     </div>

@@ -15,7 +15,7 @@ const ColumnDisplayer = ({ columnId }: { columnId: string }) => {
       </p>
       <div className={styles.columnDisplayer}>
         {taskIds.map((taskId) => (
-          <ColumnItem key={taskId} columnId={columnId} taskId={taskId} />
+          <ColumnItem key={taskId} taskId={taskId} />
         ))}
       </div>
     </div>
