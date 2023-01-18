@@ -24,32 +24,40 @@ const TaskModal = ({
   task,
 }: {
   closeModal?: () => void;
-  task: ITask;
+  task: ITask | null;
 }) => {
   const isNewTask = task ? false : true;
   const dispatch = useDispatch();
 
-  const [taskTitle, setTaskTitle] = useState(isNewTask ? "" : task.title);
-  const [taskText, setTaskText] = useState(isNewTask ? "" : task.description);
+  if (!task) {
+    task = {
+      title: "",
+      description: "",
+      subtasks: [
+        {
+          title: "",
+          isCompleted: false,
+          id: uuidv4(),
+        },
+        {
+          title: "",
+          isCompleted: false,
+          id: uuidv4(),
+        },
+      ],
+      columnId: "",
+      id: uuidv4(),
+    };
+  }
+
+  const [taskTitle, setTaskTitle] = useState(task.title);
+  const [taskText, setTaskText] = useState(task.description);
   const [subtasks, setSubtasks] = useState(
-    isNewTask
-      ? [
-          {
-            title: "",
-            isCompleted: false,
-            id: uuidv4(),
-          },
-          {
-            title: "",
-            isCompleted: false,
-            id: uuidv4(),
-          },
-        ]
-      : task.subtasks.map((s) => ({
-          title: s.title,
-          isCompleted: s.isCompleted,
-          id: s.id,
-        }))
+    task.subtasks.map((s) => ({
+      title: s.title,
+      isCompleted: s.isCompleted,
+      id: s.id,
+    }))
   );
 
   const removeSubtask = (idx: number) => {
@@ -105,7 +113,7 @@ const TaskModal = ({
     if (closeModal) closeModal();
   };
 
-  const onSaveTask = () => {
+  const onSaveTask = (task: ITask) => {
     const updatedTask = {
       id: task.id,
       title: taskTitle,
@@ -172,7 +180,7 @@ const TaskModal = ({
               updateGivenText={updateSubtaskText}
               idx={idx}
               type="task"
-              subtaskTitle={sub.title}
+              title={sub.title}
             />
           ))}
         </div>
@@ -200,7 +208,7 @@ const TaskModal = ({
       <button
         type="button"
         className="primary"
-        onClick={isNewTask ? onCreateNewTask : onSaveTask}
+        onClick={isNewTask ? onCreateNewTask : () => onSaveTask(task as ITask)}
       >
         {isNewTask ? "Create New Task" : "Save Changes"}
       </button>

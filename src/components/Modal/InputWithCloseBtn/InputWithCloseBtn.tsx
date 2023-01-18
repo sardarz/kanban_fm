@@ -6,24 +6,25 @@ interface Props {
   onClick: () => void;
   updateGivenText: (idx: number, v: string) => void;
   idx: number;
-  subtaskTitle?: string;
-  type: "task" | "board"
+  title: string;
+  type: "task" | "board";
 }
 
 const InputWithCloseBtn = ({
   onClick,
   updateGivenText,
   idx,
-  subtaskTitle,
-  type
+  title,
+  type,
 }: Props) => {
-  const [value, setValue] = useState(subtaskTitle ? subtaskTitle : "");
+  const [value, setValue] = useState(title);
 
   useEffect(() => {
     updateGivenText(idx, value);
   }, [value]);
 
-  const placeholder = type === "board" ? "Enter column name" : "Enter Task Name"
+  const placeholder =
+    type === "board" ? "Enter column name" : "Enter Subtask Name";
   return (
     <div className={styles.wrapper}>
       <input

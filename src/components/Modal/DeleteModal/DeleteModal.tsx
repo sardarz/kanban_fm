@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
-import { deleteBoard } from "../../../features/boards/boardsSlice";
+import {
+  deleteBoard,
+  getBoards,
+  getCurrentlySelected,
+} from "../../../features/boards/boardsSlice";
 import {
   deleteColumns,
   deleteTaskFromColumn,
+  getColumns,
 } from "../../../features/columns/columnsSlice";
 import {
   deleteTask,
@@ -19,13 +24,9 @@ interface DeleteModalProps {
 
 const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
   const dispatch = useDispatch();
-  const currentlySelected = useSelector(
-    (state: RootState) => state.boards.currentlySelected
-  );
-  const currentlySelectedData = useSelector(
-    (state: RootState) => state.boards.byId[currentlySelected]
-  );
-  const columns = useSelector((state: RootState) => state.columns);
+  const currentlySelected = useSelector(getCurrentlySelected);
+  const currentlySelectedData = useSelector(getBoards).byId[currentlySelected];
+  const columns = useSelector(getColumns);
   const currentColumns = currentlySelectedData.columnIds;
 
   const currentTasks = currentColumns

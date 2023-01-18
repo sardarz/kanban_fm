@@ -4,12 +4,17 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import {
   boardCreated,
+  boardEdited,
   getBoards,
   getCurrentlySelected,
 } from "../../../features/boards/boardsSlice";
 import {
+  addNewColumns,
   addNewColumnsOnBoardCreation,
+  getColumns,
+  removeOldColumns,
 } from "../../../features/columns/columnsSlice";
+import { removeOldTasksOnBoardEdit } from "../../../features/tasks/tasksSlice";
 
 const AddBoard = ({
   isNewBoard,
@@ -20,22 +25,57 @@ const AddBoard = ({
 }) => {
   const dispatch = useDispatch();
 
-  const [boardTitle, setBoardTitle] = useState("");
-  const [columns, setColumns] = useState([
-    { columnName: "Todo", columnId: uuidv4() },
-    { columnName: "Doing", columnId: uuidv4() },
-  ]);
+  const currentlySelected = useSelector(getCurrentlySelected);
+  const boards = useSelector(getBoards);
+  const allColumns = useSelector(getColumns);
+
+  const currentBoard = isNewBoard
+    ? {
+        boardId: uuidv4(),
+        name: "",
+        columnIds: [],
+      }
+    : boards.byId[currentlySelected];
+  const boardsColumns = currentBoard.columnIds.map((c) => allColumns.byId[c]);
+
+  const [boardTitle, setBoardTitle] = useState(currentBoard.name);
+  const [columns, setColumns] = useState(
+    isNewBoard
+      ? [
+          { columnName: "Todo", columnId: uuidv4(), taskIds: [] },
+          { columnName: "Doing", columnId: uuidv4(), taskIds: [] },
+        ]
+      : boardsColumns
+  );
 
   const updateColumnText = (idx: number, v: string) => {
-    const temp = columns.slice();
+    const temp = columns.map((col) => {
+      return {
+        columnId: col.columnId,
+        columnName: col.columnName,
+        taskIds: col.taskIds.slice(),
+      };
+    });
     temp[idx].columnName = v;
     setColumns(temp);
   };
 
-  const removeColumnText = (idx: number) => {
-    const newColumns = columns.slice();
-    newColumns.splice(idx, 1);
-    setColumns(newColumns);
+  const [idsOfRemovedColumns, setIdsOfRemovedColumns] = useState<string[]>([]);
+
+  const removeColumn = (idx: number) => {
+    const temp = columns.map((col, index) => {
+      const column = {
+        columnId: col.columnId,
+        columnName: col.columnName,
+        taskIds: col.taskIds.slice(),
+      };
+      if (idx === index) {
+        setIdsOfRemovedColumns([...idsOfRemovedColumns, columns[idx].columnId]);
+        column.columnId = "";
+      }
+      return column;
+    });
+    setColumns(temp.filter((el) => el.columnId.length));
   };
 
   const onCreateNewBoard = () => {
@@ -43,9 +83,37 @@ const AddBoard = ({
       boardCreated({
         name: boardTitle,
         columnIds: columns.map((el) => el.columnId),
+        id: uuidv4(),
       })
     );
     dispatch(addNewColumnsOnBoardCreation(columns));
+    if (closeModal) closeModal();
+  };
+
+  const onSaveBoard = () => {
+    const newColumns = columns.filter((col) => {
+      return !idsOfRemovedColumns.includes(col.columnId);
+    });
+
+    const idsOfRemovedTasks = boardsColumns
+      .map((col) => {
+        if (idsOfRemovedColumns.includes(col.columnId)) {
+          return col.taskIds;
+        } else return [];
+      })
+      .flat();
+
+    dispatch(removeOldTasksOnBoardEdit(idsOfRemovedTasks));
+    dispatch(removeOldColumns(idsOfRemovedColumns));
+    dispatch(addNewColumns(newColumns));
+    dispatch(
+      boardEdited({
+        name: boardTitle,
+        id: currentlySelected,
+        columnIds: newColumns.map((el) => el.columnId),
+      })
+    );
+
     if (closeModal) closeModal();
   };
 
@@ -71,11 +139,12 @@ const AddBoard = ({
         <div className="columns">
           {columns.map((col, idx) => (
             <InputWithCloseBtn
-              onClick={() => removeColumnText(idx)}
+              onClick={() => removeColumn(idx)}
               key={col.columnId}
               updateGivenText={updateColumnText}
               idx={idx}
               type="board"
+              title={col.columnName}
             />
           ))}
         </div>
@@ -85,12 +154,19 @@ const AddBoard = ({
         type="button"
         className="secondary"
         onClick={() => {
-          setColumns([...columns, { columnName: "", columnId: uuidv4() }]);
+          setColumns([
+            ...columns,
+            { columnName: "", columnId: uuidv4(), taskIds: [] },
+          ]);
         }}
       >
         + Add New Column
       </button>
-      <button type="button" className="primary" onClick={onCreateNewBoard}>
+      <button
+        type="button"
+        className="primary"
+        onClick={isNewBoard ? onCreateNewBoard : onSaveBoard}
+      >
         {isNewBoard ? "Create New Board" : "Save Changes"}
       </button>
     </div>

@@ -39,9 +39,9 @@ const boardsSlice = createSlice({
   reducers: {
     boardCreated(
       state,
-      action: PayloadAction<{ name: string; columnIds: string[] }>
+      action: PayloadAction<{ name: string; columnIds: string[]; id: string }>
     ) {
-      const id = uuidv4();
+      const id = action.payload.id;
       state.byId[id] = {
         boardId: id,
         name: action.payload.name,

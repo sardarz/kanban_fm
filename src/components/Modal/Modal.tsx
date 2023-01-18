@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { ITask } from "../../features/tasks/tasksSlice";
 import BoardModal from "./BoardModal/BoardModal";
-import EditBoard from "./BoardModal/EditBoard";
 import DeleteModal from "./DeleteModal/DeleteModal";
 import styles from "./styles.module.css";
 import TaskModal from "./TaskModal/TaskModal";
@@ -39,9 +38,9 @@ const ModalWrapper = ({
         {type === modalTypes.addBoard ? (
           <BoardModal isNewBoard={true} closeModal={closeModal} />
         ) : type === modalTypes.editBoard ? (
-          <EditBoard isNewBoard={false} closeModal={closeModal} />
+          <BoardModal isNewBoard={false} closeModal={closeModal} />
         ) : type === modalTypes.addTask ? (
-          <TaskModal task={task as ITask} closeModal={closeModal} />
+          <TaskModal task={null} closeModal={closeModal} />
         ) : type === modalTypes.editTask ? (
           <TaskModal task={task as ITask} closeModal={closeModal} />
         ) : type === modalTypes.viewTask ? (
