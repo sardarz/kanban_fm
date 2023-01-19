@@ -94,7 +94,20 @@ const TaskModal = ({
     isNewTask ? columnIds[0] : columns.byId[task.columnId].columnId
   );
 
+  const [canCreateOrUpdateComponent, setCanCreateOrUpdateComponent] =
+    useState(true);
+
+  const componentHasEmptyField = () => {
+    const hasEmptySubtask = subtasks.find((s) => s.title.length === 0);
+    if (!taskTitle.length || hasEmptySubtask) return true;
+    return false;
+  };
+
   const onCreateNewTask = () => {
+    if (componentHasEmptyField()) {
+      setCanCreateOrUpdateComponent(false);
+      return;
+    }
     const newId = uuidv4();
     const columnId = currentColumnId;
     let newTask = {
@@ -115,6 +128,10 @@ const TaskModal = ({
   };
 
   const onSaveTask = (task: ITask) => {
+    if (componentHasEmptyField()) {
+      setCanCreateOrUpdateComponent(false);
+      return;
+    }
     const updatedTask = {
       id: task.id,
       title: taskTitle,
@@ -143,13 +160,23 @@ const TaskModal = ({
   };
 
   return (
-    <div className={`${styles.modalBox}`}>
+    <div
+      className={`${styles.modalBox} ${
+        !canCreateOrUpdateComponent ? styles.cannotCreateOrUpdateComponent : ""
+      }`}
+    >
       <h3 className={`${styles.title}`}>
         {" "}
         {isNewTask ? "Add New " : "Edit "} Task
       </h3>
 
-      <div className={`${styles.inputWrapper}`}>
+      <div
+        className={`${styles.inputWrapper} ${
+          taskTitle.length === 0 && !canCreateOrUpdateComponent
+            ? styles.emptyInputTitle
+            : ""
+        }`}
+      >
         <label htmlFor="taskName" className={`${styles.subtitle}`}>
           Title
         </label>
@@ -185,6 +212,7 @@ const TaskModal = ({
               idx={idx}
               type="task"
               title={sub.title}
+              shouldShowWarning={!canCreateOrUpdateComponent}
             />
           ))}
         </div>

@@ -49,6 +49,9 @@ const AddBoard = ({
       : boardsColumns
   );
 
+  const [canCreateOrUpdateComponent, setCanCreateOrUpdateComponent] =
+    useState(true);
+
   const updateColumnText = (idx: number, v: string) => {
     const temp = columns.map((col) => {
       return {
@@ -79,7 +82,17 @@ const AddBoard = ({
     setColumns(temp.filter((el) => el.columnId.length));
   };
 
+  const componentHasEmptyField = () => {
+    const hasEmptyColumn = columns.find((el) => el.columnName.length === 0);
+    if (!boardTitle.length || hasEmptyColumn) return true;
+    return false;
+  };
+
   const onCreateNewBoard = () => {
+    if (componentHasEmptyField()) {
+      setCanCreateOrUpdateComponent(false);
+      return;
+    }
     dispatch(
       boardCreated({
         name: boardTitle,
@@ -92,6 +105,10 @@ const AddBoard = ({
   };
 
   const onSaveBoard = () => {
+    if (componentHasEmptyField()) {
+      setCanCreateOrUpdateComponent(false);
+      return;
+    }
     const newColumns = columns.filter((col) => {
       return !idsOfRemovedColumns.includes(col.columnId);
     });
@@ -119,12 +136,22 @@ const AddBoard = ({
   };
 
   return (
-    <div className={`${styles.modalBox}`}>
+    <div
+      className={`${styles.modalBox} ${
+        !canCreateOrUpdateComponent ? styles.cannotCreateOrUpdate : ""
+      }`}
+    >
       <h3 className={`${styles.title}`}>
         {isNewBoard ? "Add New Board" : "Edit Board"}
       </h3>
 
-      <div className={`${styles.inputWrapper}`}>
+      <div
+        className={`${styles.inputWrapper} ${
+          boardTitle.length === 0 && !canCreateOrUpdateComponent
+            ? styles.emptyInputTitle
+            : ""
+        }`}
+      >
         <label htmlFor="boardName" className={`${styles.subtitle}`}>
           {!isNewBoard && "Board "}Name
         </label>
@@ -148,6 +175,7 @@ const AddBoard = ({
               idx={idx}
               type="board"
               title={col.columnName}
+              shouldShowWarning={!canCreateOrUpdateComponent}
             />
           ))}
         </div>

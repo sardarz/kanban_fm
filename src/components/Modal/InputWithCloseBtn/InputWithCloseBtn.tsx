@@ -8,6 +8,7 @@ interface Props {
   idx: number;
   title: string;
   type: "task" | "board";
+  shouldShowWarning?: boolean;
 }
 
 const InputWithCloseBtn = ({
@@ -16,6 +17,7 @@ const InputWithCloseBtn = ({
   idx,
   title,
   type,
+  shouldShowWarning,
 }: Props) => {
   const [value, setValue] = useState(title);
 
@@ -26,7 +28,11 @@ const InputWithCloseBtn = ({
   const placeholder =
     type === "board" ? "Enter column name" : "Enter Subtask Name";
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${
+        !value.length && shouldShowWarning ? styles.emptyInput : ""
+      }`}
+    >
       <input
         type="text"
         value={value}
