@@ -8,15 +8,21 @@ import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { ReactComponent as MobileAddIcon } from "../../assets/icon-add-task-mobile.svg";
+import { ReactComponent as MobileLogo } from "../../assets/logo-mobile.svg";
+import { ReactComponent as IconDown } from "../../assets/icon-chevron-down.svg";
+import { ReactComponent as IconUp } from "../../assets/icon-chevron-up.svg";
 
 const Header = ({
   isSideBoardOpen,
   isThreeDotsOpen,
   setIsThreeDotsOpen,
+  setIsSideBoardOpen,
 }: {
   isSideBoardOpen: boolean;
   isThreeDotsOpen: boolean;
   setIsThreeDotsOpen: (v: boolean) => void;
+  setIsSideBoardOpen: (v: boolean) => void;
 }) => {
   const boardTitle = useSelector(
     (state: RootState) =>
@@ -34,24 +40,52 @@ const Header = ({
 
   const closeAddTaskOpen = () => setIsAddTaskOpen(false);
 
+  const bodyWidth = document.body.clientWidth;
+
   return (
     <div
       className={`${styles.headerWrapper} ${
         isSideBoardOpen ? styles.sideOpen : ""
       }`}
+      onResize={(e) => {
+        console.log("kek");
+        console.log(e.target);
+      }}
     >
       <div className={styles.headerLogoWrapper}>
         <DarkLogo />
       </div>
+      <div className={styles.mobileHeaderLogoWrapper}>
+        <MobileLogo />
+      </div>
       <div className={`${styles.headerMainWrapper} `}>
-        <h1>{boardTitle}</h1>
+        <div
+          className={`${styles.headerTitleWrapper}`}
+          onClick={() => {
+            if (bodyWidth < 700) setIsSideBoardOpen(!isSideBoardOpen);
+          }}
+        >
+          <h1>{boardTitle}</h1>
+          <div
+            className={`${styles.chevronWrapper} ${
+              isSideBoardOpen ? styles.sideOpen : ""
+            }`}
+          >
+            <div className={`${styles.chevronUp}`}>
+              <IconUp />
+            </div>
+            <div className={`${styles.chevronDown}`}>
+              <IconDown />
+            </div>
+          </div>
+        </div>
         <div
           className={styles.buttonHeaderWrapper}
           style={{ maxWidth: "164px" }}
         >
           <Button
             typeOfBtn="primary"
-            text="+ Add New Task"
+            text={bodyWidth < 700 ? <MobileAddIcon /> : "+ Add New Task"}
             onClick={() => {
               setIsAddTaskOpen(true);
             }}

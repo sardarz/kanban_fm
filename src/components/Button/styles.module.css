@@ -81,3 +81,14 @@
 .modalDelete:hover {
   background-color: var(--clr-accent-300);
 }
+
+
+
+/* Mobile version */
+@media screen and (max-width: 700px) {
+  .primary {
+    display: flex;
+    padding: 1rem 1.8rem;
+    max-height: 3.2rem;
+  }
+}

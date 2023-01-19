@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 
 interface ButtonProps {
-  text: string;
+  text: string | React.ReactNode;
   onClick: () => void;
   isDisabled?: boolean;
   typeOfBtn: "primary" | "modalPrimary" | "modalSecondary" | "modalDelete";

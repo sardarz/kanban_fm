@@ -26,6 +26,7 @@ function App() {
       />
       <Header
         isSideBoardOpen={isSideBoardOpen}
+        setIsSideBoardOpen={setIsSideBoardOpen}
         isThreeDotsOpen={isThreeDotsOpen}
         setIsThreeDotsOpen={setIsThreeDotsOpen}
       />

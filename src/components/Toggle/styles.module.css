@@ -18,7 +18,7 @@
   background-color: var(--clr-primary-600);
   cursor: pointer;
   user-select: none;
-  transition: background-color .3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .outer:hover {
@@ -33,14 +33,14 @@
   border-radius: 50%;
   top: 3px;
   left: 3px;
-  transition: left .3s ease;
+  transition: left 0.3s ease;
 }
 
 .outer.dark .inner {
   left: 2.3rem;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 700px) {
   .toggleWrapper {
     max-width: 23.5rem;
     margin-left: 1.6rem;

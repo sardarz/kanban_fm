@@ -4,7 +4,9 @@
   --animationDurationOnSideClose: 0.5s;
 
   --mainPadding: 2.4rem;
-  --emptyBoardHeight: calc(100vh - var(--header-height) - 2 * var(--mainPadding));
+  --emptyBoardHeight: calc(
+    100vh - var(--header-height) - 2 * var(--mainPadding)
+  );
 }
 
 .main {
@@ -55,5 +57,16 @@
   to {
     transform: translateX(0);
     width: 100%;
+  }
+}
+
+/* Mobile Version */
+@media screen and (max-width: 700px) {
+  .main {
+    animation: none;
+  }
+
+  .main.sideOpen {
+    animation: none;
   }
 }

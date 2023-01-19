@@ -109,7 +109,7 @@
 }
 
 /* MOBILE */
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 700px) {
   .sideBoardWrapper {
     box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
     border-radius: 8px;
@@ -117,13 +117,13 @@
     padding: 1.6rem 0;
     max-width: 26.4rem;
     top: 8rem;
-    left: 5.4rem;
-    transform: translateY(-200%);
+    left: 50%;
+    transform: translate(-50%, -200%);
     transition: all 0.5s ease;
   }
 
   .sideBoardWrapper.sideBoardOpen {
-    transform: translateY(0);
+    transform: translate(-50%, 0%);
   }
 
   .sideBoardWrapper::before {
@@ -131,7 +131,7 @@
   }
 
   .createItem {
-    margin-bottom: 3.1rem;
+    margin-bottom: 1.6rem;
   }
 
   .sideBoardLogoWrapper {

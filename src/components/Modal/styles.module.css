@@ -206,3 +206,22 @@
 .cannotCreateOrUpdateComponent input:hover {
   border-color: var(--clr-accent-600);
 }
+
+/* Mobile Version */
+@media screen and (max-width: 700px) {
+  .modalWrapper {
+    padding: 1.6rem;
+  }
+
+  .modalContent {
+    padding: 2.4rem 2.4rem 3.2rem 2.4rem;
+  }
+
+  .emptyInputTitle::before {
+    font-size: 1rem;
+  }
+
+  .deleteBtnsWrapper {
+    flex-direction: column;
+  }
+}

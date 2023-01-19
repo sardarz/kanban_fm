@@ -13,3 +13,9 @@
 .showButton:hover {
   background-color: var(--clr-primary-300);
 }
+
+@media screen and (max-width: 700px) {
+  .showButton {
+    display: none;
+  }
+}

@@ -43,3 +43,9 @@
 .emptyInput.emptyInput input {
   border-color: var(--clr-accent-600);
 }
+
+@media screen and (max-width: 700px) {
+  .emptyInput::before {
+    font-size: 1rem;
+  }
+}
