@@ -30,7 +30,7 @@ const InputWithCloseBtn = ({
   return (
     <div
       className={`${styles.wrapper} ${
-        !value.length && shouldShowWarning ? styles.emptyInput : ""
+        !value.length && shouldShowWarning ? styles.emptyInput : styles.notEmptyInput
       }`}
     >
       <input

@@ -162,7 +162,9 @@ const TaskModal = ({
   return (
     <div
       className={`${styles.modalBox} ${
-        !canCreateOrUpdateComponent ? styles.cannotCreateOrUpdateComponent : ""
+        !canCreateOrUpdateComponent && !taskTitle.length
+          ? styles.cannotCreateOrUpdateComponent
+          : ""
       }`}
     >
       <h3 className={`${styles.title}`}>

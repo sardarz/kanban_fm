@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 
-.emptyInput.emptyInput input {
+.emptyInput input {
   border-color: var(--clr-accent-600);
 }
 
@@ -25,4 +25,12 @@
 
 .emptyInput path {
   fill: var(--clr-accent-600);
+}
+
+.emptyInput input:hover {
+  border-color: var(--clr-accent-600);
+}
+
+.notEmptyInput input:hover {
+  border-color: var(--clr-primary-600);
 }

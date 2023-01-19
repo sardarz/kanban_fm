@@ -99,6 +99,8 @@
   color: var(--clr-dark-600);
   font-weight: 500;
   width: 100%;
+  cursor: pointer;
+  transition: border-color .3s ease;
 }
 
 .modalWrapper .inputWrapper {
@@ -209,6 +211,17 @@
   color: var(--clr-accent-600);
 }
 
-.emptyInputTitle input {
+.emptyInputTitle > input {
+  border-color: var(--clr-accent-600);
+}
+
+/* On Hover */
+
+
+.modalWrapper input:hover {
+  border-color: var(--clr-primary-600);
+}
+
+.cannotCreateOrUpdateComponent input:hover {
   border-color: var(--clr-accent-600);
 }

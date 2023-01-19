@@ -138,7 +138,7 @@ const AddBoard = ({
   return (
     <div
       className={`${styles.modalBox} ${
-        !canCreateOrUpdateComponent ? styles.cannotCreateOrUpdate : ""
+        !canCreateOrUpdateComponent && !boardTitle.length ? styles.cannotCreateOrUpdateComponent : ""
       }`}
     >
       <h3 className={`${styles.title}`}>
