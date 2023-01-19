@@ -16,6 +16,7 @@ import {
 } from "../../../features/columns/columnsSlice";
 import { removeOldTasksOnBoardEdit } from "../../../features/tasks/tasksSlice";
 import styles from "../styles.module.css";
+import Button from "../../Button/Button";
 
 const AddBoard = ({
   isNewBoard,
@@ -138,7 +139,9 @@ const AddBoard = ({
   return (
     <div
       className={`${styles.modalBox} ${
-        !canCreateOrUpdateComponent && !boardTitle.length ? styles.cannotCreateOrUpdateComponent : ""
+        !canCreateOrUpdateComponent && !boardTitle.length
+          ? styles.cannotCreateOrUpdateComponent
+          : ""
       }`}
     >
       <h3 className={`${styles.title}`}>
@@ -181,25 +184,21 @@ const AddBoard = ({
         </div>
       </div>
 
-      <button
-        type="button"
-        className={`${styles.secondary}`}
+      <Button
+        typeOfBtn="modalSecondary"
         onClick={() => {
           setColumns([
             ...columns,
             { columnName: "", columnId: uuidv4(), taskIds: [] },
           ]);
         }}
-      >
-        + Add New Column
-      </button>
-      <button
-        type="button"
-        className={`${styles.primary}`}
+        text="+ Add New Column"
+      />
+      <Button
+        typeOfBtn="modalPrimary"
         onClick={isNewBoard ? onCreateNewBoard : onSaveBoard}
-      >
-        {isNewBoard ? "Create New Board" : "Save Changes"}
-      </button>
+        text={isNewBoard ? "Create New Board" : "Save Changes"}
+      />
     </div>
   );
 };

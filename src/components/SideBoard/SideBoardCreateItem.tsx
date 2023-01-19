@@ -10,10 +10,15 @@ const SideBoardCreateItem = () => {
   const closeModal = () => setIsAddBoardOpen(false);
 
   return (
-    <div className={`${styles.sideBoardItemWrapper} ${styles.createItem}`}>
-      {isAddBoardOpen && <Modal closeModal={closeModal} type={modalTypes.addBoard} />}
+    <div
+      className={`${styles.sideBoardItemWrapper} ${styles.createItem}`}
+      onClick={() => setIsAddBoardOpen(true)}
+    >
+      {isAddBoardOpen && (
+        <Modal closeModal={closeModal} type={modalTypes.addBoard} />
+      )}
       <SideBoardLogo />
-      <p onClick={() => setIsAddBoardOpen(true)} className={styles.button}>+ Create New Board</p>
+      <p className={styles.button}>+ Create New Board</p>
     </div>
   );
 };

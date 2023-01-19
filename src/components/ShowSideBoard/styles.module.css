@@ -7,4 +7,9 @@
   border-radius: 0 10rem 10rem 0;
   background-color: var(--clr-primary-600);
   cursor: pointer;
+  transition: background-color .3s ease;
+}
+
+.showButton:hover {
+  background-color: var(--clr-primary-300);
 }

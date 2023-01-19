@@ -19,7 +19,13 @@ const Header = ({
   setIsThreeDotsOpen: (v: boolean) => void;
 }) => {
   const boardTitle = useSelector(
-    (state: RootState) => state.boards.byId[state.boards.currentlySelected]?.name || "Need to create a board"
+    (state: RootState) =>
+      state.boards.byId[state.boards.currentlySelected]?.name ||
+      "Need to create a board"
+  );
+  const columnCount = useSelector(
+    (state: RootState) =>
+      state.boards.byId[state.boards.currentlySelected].columnIds.length
   );
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
@@ -41,10 +47,12 @@ const Header = ({
           style={{ maxWidth: "164px" }}
         >
           <Button
+            typeOfBtn="primary"
             text="+ Add New Task"
             onClick={() => {
               setIsAddTaskOpen(true);
             }}
+            isDisabled={columnCount === 0}
           />
         </div>
         <div

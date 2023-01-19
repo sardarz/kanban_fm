@@ -13,9 +13,10 @@ const SideBoardItem = ({ text, active, onClick }: Props) => {
       className={`${styles.sideBoardItemWrapper} ${
         active ? styles.active : ""
       }`}
+      onClick={onClick}
     >
       <SideBoardLogo />
-      <p onClick={onClick}>{text}</p>
+      <p>{text}</p>
     </div>
   );
 };

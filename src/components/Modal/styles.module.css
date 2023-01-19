@@ -61,33 +61,6 @@
   color: var(--subTitle-font-clr);
 }
 
-.modalWrapper button {
-  display: block;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: var(--btn-padding);
-  border-radius: var(--btn-border-radius);
-  cursor: pointer;
-  font-size: var(--body-fs);
-  line-height: var(--body-lh);
-  font-weight: 700;
-}
-
-.modalWrapper .secondary {
-  margin-bottom: 2.4rem;
-}
-
-.modalWrapper .primary {
-  color: var(--btn-primary-font-clr);
-  background-color: var(--btn-primary-bg-clr);
-}
-
-.modalWrapper .secondary {
-  color: var(--btn-secondary-font-clr);
-  background-color: var(--btn-secondary-bg-clr);
-}
-
 .modalWrapper input {
   display: block;
   padding: 0.7rem 1.6rem 0.8rem;
@@ -100,7 +73,7 @@
   font-weight: 500;
   width: 100%;
   cursor: pointer;
-  transition: border-color .3s ease;
+  transition: border-color 0.3s ease;
 }
 
 .modalWrapper .inputWrapper {
@@ -217,8 +190,7 @@
 
 /* On Hover */
 
-
-.modalWrapper input:hover {
+.inputWrapper input:hover {
   border-color: var(--clr-primary-600);
 }
 

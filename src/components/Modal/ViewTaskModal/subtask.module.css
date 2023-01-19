@@ -7,6 +7,7 @@
   border: 1px solid rgba(130, 143, 163, 0.248914);
   border-radius: 2px;
   transition: all 0.3s ease;
+  background-color: white;
 }
 
 .isDone .checkboxWrapper {
@@ -29,6 +30,11 @@
   cursor: pointer;
   border-radius: 4px;
   user-select: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.subtask:hover {
+  background-color: hsl(242, 48%, 58%, 0.25);
 }
 
 .subtask p {

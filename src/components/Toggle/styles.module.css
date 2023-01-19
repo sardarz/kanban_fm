@@ -18,6 +18,11 @@
   background-color: var(--clr-primary-600);
   cursor: pointer;
   user-select: none;
+  transition: background-color .3s ease;
+}
+
+.outer:hover {
+  background-color: var(--clr-primary-300);
 }
 
 .inner {

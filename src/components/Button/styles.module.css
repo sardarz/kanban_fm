@@ -1,12 +1,80 @@
+/* Variables */
 .button {
-  padding: 1.4rem 2.4rem 1.5rem;
+  --btn-modalPrimary-bg-clr: var(--clr-primary-600);
+  --btn-modalPrimary-font-clr: white;
+
+  --btn-modalSecondary-bg-clr: rgba(99, 95, 199, 0.1);
+  --btn-modalSecondary-font-clr: var(--clr-primary-600);
+
+  --btn-modalPadding: 0.8rem 0 0.9rem 0;
+  --btn-modal-border-radius: 2rem;
+}
+
+.button {
+  display: block;
   border: none;
   outline: none;
-  color: white;
-  background-color: var(--clr-primary-600);
-  font-size: var(--heading-m-fs);
-  line-height: var(--heading-m-lh);
-  border-radius: 2.4rem;
   text-align: center;
   cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease-out;
+}
+
+.primary {
+  padding: 1.4rem 2.4rem 1.5rem;
+  background-color: var(--clr-primary-600);
+  font-size: var(--heading-m-fs);
+  color: white;
+  line-height: var(--heading-m-lh);
+  border-radius: 2.4rem;
+}
+
+.primary:hover {
+  background-color: var(--clr-primary-300);
+}
+
+.primary:disabled:hover {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--clr-primary-600);
+}
+
+/* Modal buttons */
+
+.modalPrimary,
+.modalSecondary,
+.modalDelete {
+  width: 100%;
+  padding: var(--btn-modalPadding);
+  border-radius: var(--btn-modal-border-radius);
+  font-size: var(--body-l-fs);
+  line-height: var(--body-l-lh);
+}
+
+.modalPrimary {
+  background-color: var(--btn-modalPrimary-bg-clr);
+  color: var(--btn-modalPrimary-font-clr);
+}
+
+.modalPrimary:hover {
+  background-color: var(--clr-primary-300);
+}
+
+.modalSecondary {
+  background-color: var(--btn-modalSecondary-bg-clr);
+  color: var(--btn-modalSecondary-font-clr);
+  margin-bottom: 2.4rem;
+}
+
+.modalSecondary:hover {
+  background-color: rgba(99, 95, 199, 0.25);
+}
+
+.modalDelete {
+  background-color: var(--clr-accent-600);
+  color: white;
+}
+
+.modalDelete:hover {
+  background-color: var(--clr-accent-300);
 }

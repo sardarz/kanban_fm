@@ -19,6 +19,7 @@ import {
   updateTask,
 } from "../../../features/tasks/tasksSlice";
 import styles from "../styles.module.css";
+import Button from "../../Button/Button";
 
 const TaskModal = ({
   closeModal,
@@ -220,18 +221,16 @@ const TaskModal = ({
         </div>
       </div>
 
-      <button
+      <Button
+        text="+ Add New Subtask"
         onClick={() => {
           setSubtasks([
             ...subtasks,
             { title: "", isCompleted: false, id: uuidv4() },
           ]);
         }}
-        type="button"
-        className={`${styles.secondary}`}
-      >
-        + Add New Subtask
-      </button>
+        typeOfBtn="modalSecondary"
+      />
 
       <Dropdown
         columns={columnNames}
@@ -239,13 +238,11 @@ const TaskModal = ({
         setCurrentColumnId={setCurrentColumnId}
       />
 
-      <button
-        type="button"
-        className={`${styles.primary}`}
+      <Button
+        typeOfBtn="modalPrimary"
         onClick={isNewTask ? onCreateNewTask : () => onSaveTask(task as ITask)}
-      >
-        {isNewTask ? "Create New Task" : "Save Changes"}
-      </button>
+        text={isNewTask ? "Create New Task" : "Save Changes"}
+      />
     </div>
   );
 };

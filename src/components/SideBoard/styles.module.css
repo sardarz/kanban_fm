@@ -46,11 +46,16 @@
   height: 4.8rem;
   transition: all 0.5s ease;
   margin-right: 2.3rem;
+  cursor: pointer;
 }
 
-.sideBoardItemWrapper:has(p:hover) {
+.sideBoardItemWrapper:hover {
   border-radius: 0 10rem 10rem 0;
   background-color: var(--clr-gray-500);
+}
+
+.sideBoardItemWrapper:hover p {
+  color: var(--clr-primary-600);
 }
 
 .logoWrapper {
@@ -61,7 +66,7 @@
 .sideBoardItemWrapper p {
   font-size: var(--heading-m-fs);
   color: var(--clr-gray-600);
-  cursor: pointer;
+  font-weight: 700;
 }
 
 .sideBoardItemWrapper.active.active {

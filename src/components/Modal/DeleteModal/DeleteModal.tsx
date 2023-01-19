@@ -14,6 +14,7 @@ import {
   deleteTasks,
   ITask,
 } from "../../../features/tasks/tasksSlice";
+import Button from "../../Button/Button";
 import styles from "../styles.module.css";
 
 interface DeleteModalProps {
@@ -71,20 +72,12 @@ const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
       </h3>
       <p className={`${styles.description}`}>{description}</p>
       <div className={`${styles.deleteBtnsWrapper}`}>
-        <button
-          type="button"
-          className={`${styles.primary}`}
+        <Button
+          typeOfBtn="modalDelete"
+          text="Delete"
           onClick={type === "board" ? onDeleteBoard : onDeleteTask}
-        >
-          Delete
-        </button>
-        <button
-          type="button"
-          className={`${styles.secondary}`}
-          onClick={closeModal}
-        >
-          Cancel
-        </button>
+        />
+        <Button text="Cancel" onClick={closeModal} typeOfBtn="modalSecondary" />
       </div>
     </div>
   );

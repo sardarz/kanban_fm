@@ -9,8 +9,12 @@
   cursor: pointer;
 }
 
-.emptyInput input {
-  border-color: var(--clr-accent-600);
+.closeBtn path {
+  transition: all 0.3s ease;
+}
+
+.closeBtn:hover path {
+  fill: var(--clr-accent-600);
 }
 
 .emptyInput::before {
@@ -29,8 +33,13 @@
 
 .emptyInput input:hover {
   border-color: var(--clr-accent-600);
+  border-color: purple;
 }
 
-.notEmptyInput input:hover {
+.notEmptyInput.notEmptyInput input:hover {
   border-color: var(--clr-primary-600);
+}
+
+.emptyInput.emptyInput input {
+  border-color: var(--clr-accent-600);
 }

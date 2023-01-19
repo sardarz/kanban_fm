@@ -26,6 +26,7 @@ const EmptyBoard = () => {
         This board is empty. Create a new column to get started.
       </p>
       <Button
+        typeOfBtn="primary"
         onClick={() => {
           const id = uuidv4();
           dispatch(addNewColumnToCurrentlySelected(id));
@@ -48,6 +49,7 @@ const CreateBoard = () => {
         app.
       </p>
       <Button
+        typeOfBtn="primary"
         onClick={() => {
           setIsAddBoardOpen(true);
         }}
