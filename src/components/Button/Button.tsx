@@ -12,7 +12,9 @@ const Button = ({ text, onClick, isDisabled, typeOfBtn }: ButtonProps) => {
       disabled={isDisabled}
       onClick={onClick}
       type="button"
-      className={`${styles.button} ${styles[typeOfBtn]}`}
+      className={`${styles.button} ${styles[typeOfBtn]} ${
+        isDisabled ? styles.disabled : ""
+      }`}
     >
       {text}
     </button>

@@ -26,7 +26,9 @@ const ThreeDotsMenu = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${isThreeDotsOpen ? styles.isOpen : ""}`}
+      className={`${styles.wrapper} ${
+        type === "board" ? styles.posForBoard : styles.posForTask
+      } ${isThreeDotsOpen ? styles.isOpen : ""}`}
     >
       <p
         onClick={(e) => {

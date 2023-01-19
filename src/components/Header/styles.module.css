@@ -38,6 +38,9 @@
 .headerMenuLogoWrapper {
   position: relative;
   margin-right: 3.2rem;
+}
+
+.headerMenuLogoWrapper svg {
   cursor: pointer;
 }
 

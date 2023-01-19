@@ -107,11 +107,17 @@
   border: 1px solid rgba(130, 143, 163, 0.25);
   border-radius: 4px;
   resize: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .modalWrapper textarea::placeholder {
   color: black;
   opacity: 0.25;
+}
+
+.modalWrapper textarea:hover {
+  border-color: var(--clr-primary-600);
 }
 
 /* ViewTask */
@@ -129,6 +135,9 @@
 
 .modalWrapper .threeDots {
   position: relative;
+}
+
+.modalWrapper .threeDots svg {
   cursor: pointer;
 }
 

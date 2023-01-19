@@ -23,9 +23,12 @@ const Header = ({
       state.boards.byId[state.boards.currentlySelected]?.name ||
       "Need to create a board"
   );
+  const currentlySelected = useSelector(
+    (state: RootState) => state.boards.currentlySelected
+  );
   const columnCount = useSelector(
     (state: RootState) =>
-      state.boards.byId[state.boards.currentlySelected].columnIds.length
+      state.boards.byId[state.boards.currentlySelected]?.columnIds?.length
   );
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
@@ -52,13 +55,13 @@ const Header = ({
             onClick={() => {
               setIsAddTaskOpen(true);
             }}
-            isDisabled={columnCount === 0}
+            isDisabled={columnCount === 0 || currentlySelected === ""}
           />
         </div>
         <div
           onClick={(e) => {
             e.stopPropagation();
-            setIsThreeDotsOpen(!isThreeDotsOpen);
+            setIsThreeDotsOpen(true);
           }}
           className={styles.headerMenuLogoWrapper}
         >
