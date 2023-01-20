@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import { ReactComponent as MobileAddIcon } from "../../assets/icon-add-task-mobile.svg";
 
 interface ButtonProps {
   text: string | React.ReactNode;
@@ -16,7 +17,10 @@ const Button = ({ text, onClick, isDisabled, typeOfBtn }: ButtonProps) => {
         isDisabled ? styles.disabled : ""
       }`}
     >
-      {text}
+      <span className={styles.addIcon}>
+        <MobileAddIcon />
+      </span>
+      <span className={styles.text}>{text}</span>
     </button>
   );
 };

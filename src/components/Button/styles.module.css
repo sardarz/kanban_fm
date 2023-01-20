@@ -25,6 +25,8 @@
 }
 
 .primary {
+  display: flex;
+  align-items: center;
   padding: 1.4rem 2.4rem 1.5rem;
   background-color: var(--clr-primary-600);
   font-size: var(--heading-m-fs);
@@ -82,6 +84,10 @@
   background-color: var(--clr-accent-300);
 }
 
+.addIcon {
+  display: none;
+}
+
 /* Dark theme */
 :global(.dark-mode) .modalSecondary {
   background-color: white;
@@ -90,11 +96,19 @@
 :global(.dark-mode) .modalSecondary:hover {
   background-color: #eee;
 }
+
 /* Mobile version */
 @media screen and (max-width: 700px) {
   .primary {
     display: flex;
     padding: 1rem 1.8rem;
     max-height: 3.2rem;
+  }
+  .primary .addIcon {
+    display: inline;
+  }
+
+  .primary .text {
+    display: none;
   }
 }

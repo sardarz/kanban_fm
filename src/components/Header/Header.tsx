@@ -62,7 +62,7 @@ const Header = ({
         <div
           className={`${styles.headerTitleWrapper}`}
           onClick={(e) => {
-            e.stopPropagation()
+            e.stopPropagation();
             if (bodyWidth < 700) setIsSideBoardOpen(!isSideBoardOpen);
           }}
         >
@@ -86,7 +86,7 @@ const Header = ({
         >
           <Button
             typeOfBtn="primary"
-            text={bodyWidth < 700 ? <MobileAddIcon /> : "+ Add New Task"}
+            text="+ Add New Task"
             onClick={() => {
               setIsAddTaskOpen(true);
             }}
