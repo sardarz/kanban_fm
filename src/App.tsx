@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./App.css";
 import Board from "./components/Board/Board";
 import Header from "./components/Header/Header";
@@ -11,6 +12,18 @@ function App() {
   const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(false);
 
   const bodyWidth = document.body.clientWidth;
+  const allState = useSelector((state) => state);
+
+  useEffect(() => {
+    const saveData = () => {
+      localStorage.setItem("kanban-data", JSON.stringify(allState));
+    };
+    window.addEventListener("unload", saveData);
+    return () => {
+      window.removeEventListener("unload", saveData);
+    };
+  }, [allState]);
+
   return (
     <div
       className="App"

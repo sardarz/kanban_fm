@@ -15,23 +15,15 @@ interface IBoard {
   };
 }
 
-const initialState: IBoards = {
-  byId: {
-    pl: {
-      boardId: "pl",
-      name: "Platform Launch",
-      columnIds: ["aaa", "bbb"],
-    },
-    mp: {
-      boardId: "mp",
-      name: "Marketing Plan",
-      columnIds: ["ccc"],
-    },
-  },
-  allIds: ["pl", "mp"],
-  currentlySelected: "pl",
-};
+const data =
+  localStorage.getItem("kanban-data") ||
+  '{"boards":{"byId":{},"allIds":[],"currentlySelected":""},"columns":{"byId":{},"allIds":[]},"tasks":{"byId":{},"allIds":[]}}';
 
+const allState = JSON.parse(data);
+
+const initialState: IBoards = allState.boards;
+
+console.log(allState);
 const boardsSlice = createSlice({
   name: "boards",
   initialState,
@@ -64,11 +56,11 @@ const boardsSlice = createSlice({
       const indexOfCS = state.allIds.indexOf(currentlySelected);
       state.allIds.splice(indexOfCS, 1);
       delete state.byId[currentlySelected];
-      state.currentlySelected = state.allIds[0] || ""
+      state.currentlySelected = state.allIds[0] || "";
     },
     addNewColumnToCurrentlySelected(state, action: PayloadAction<string>) {
-      state.byId[state.currentlySelected].columnIds.push(action.payload)
-    }
+      state.byId[state.currentlySelected].columnIds.push(action.payload);
+    },
   },
 });
 
@@ -77,7 +69,7 @@ export const {
   boardEdited,
   updateCurrentlySelected,
   deleteBoard,
-  addNewColumnToCurrentlySelected
+  addNewColumnToCurrentlySelected,
 } = boardsSlice.actions;
 
 export const getBoards = (state: RootState) => state.boards;

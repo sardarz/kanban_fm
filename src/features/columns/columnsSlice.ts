@@ -11,27 +11,11 @@ interface IColumns {
   };
   allIds: string[];
 }
+const data = localStorage.getItem("kanban-data") || '{"boards":{"byId":{},"allIds":[],"currentlySelected":""},"columns":{"byId":{},"allIds":[]},"tasks":{"byId":{},"allIds":[]}}';
 
-const initialState: IColumns = {
-  byId: {
-    aaa: {
-      columnId: "aaa",
-      columnName: "Todo",
-      taskIds: ["1", "2"],
-    },
-    bbb: {
-      columnId: "bbb",
-      columnName: "Doing",
-      taskIds: ["3", "4", "5"],
-    },
-    ccc: {
-      columnId: "ccc",
-      columnName: "Todo",
-      taskIds: ["6", "7", "8"],
-    },
-  },
-  allIds: ["aaa", "bbb", "ccc"],
-};
+const allState = JSON.parse(data);
+
+const initialState: IColumns = allState.columns;
 
 const columnsSlice = createSlice({
   name: "columns",
@@ -111,13 +95,13 @@ const columnsSlice = createSlice({
       state.byId[action.payload.columnId].taskIds.splice(indexOfTask, 1);
     },
     createNewColumnById(state, action: PayloadAction<string>) {
-      state.allIds.push(action.payload)
+      state.allIds.push(action.payload);
       state.byId[action.payload] = {
         columnId: action.payload,
         columnName: "Column Name",
-        taskIds: []
-      }
-    }
+        taskIds: [],
+      };
+    },
   },
 });
 
@@ -130,7 +114,7 @@ export const {
   addTaskToNewColumn,
   deleteColumns,
   deleteTaskFromColumn,
-  createNewColumnById
+  createNewColumnById,
 } = columnsSlice.actions;
 
 export const getColumns = (state: RootState): IColumns => state.columns;
