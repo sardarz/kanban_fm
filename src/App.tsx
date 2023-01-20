@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import ShowSideBoard from "./components/ShowSideBoard/ShowSideBoard";
 import SideBoard from "./components/SideBoard/SideBoard";
 import styles from "./styles.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [isSideBoardOpen, setIsSideBoardOpen] = useState(false);

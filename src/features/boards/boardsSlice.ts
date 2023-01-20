@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import baseState from "../../app/data";
 
 interface IBoards {
   byId: IBoard;
@@ -15,15 +16,12 @@ interface IBoard {
   };
 }
 
-const data =
-  localStorage.getItem("kanban-data") ||
-  '{"boards":{"byId":{},"allIds":[],"currentlySelected":""},"columns":{"byId":{},"allIds":[]},"tasks":{"byId":{},"allIds":[]}}';
+const data = localStorage.getItem("kanban-data") || baseState;
 
 const allState = JSON.parse(data);
 
 const initialState: IBoards = allState.boards;
 
-console.log(allState);
 const boardsSlice = createSlice({
   name: "boards",
   initialState,
