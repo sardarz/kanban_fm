@@ -24,6 +24,7 @@ const SideBoard = ({ isOpen, closeSideBoard }: SideBoardProps) => {
       className={`${styles.sideBoardWrapper} ${
         isOpen ? styles.sideBoardOpen : ""
       }`}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className={styles.sideBoardLogoWrapper}>
         <DarkLogo />

@@ -10,11 +10,13 @@ function App() {
   const [isSideBoardOpen, setIsSideBoardOpen] = useState(false);
   const [isThreeDotsOpen, setIsThreeDotsOpen] = useState(false);
 
+  const bodyWidth = document.body.clientWidth;
   return (
     <div
       className="App"
       onClick={() => {
         setIsThreeDotsOpen(false);
+        if (bodyWidth <= 700) setIsSideBoardOpen(false);
       }}
     >
       <div className={styles.showButtonWrapper}>

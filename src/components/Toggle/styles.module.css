@@ -40,6 +40,11 @@
   left: 2.3rem;
 }
 
+/* Dark theme */
+body:global(.dark-mode) .toggleWrapper {
+  background-color: var(--clr-dark-500);
+}
+
 @media screen and (max-width: 700px) {
   .toggleWrapper {
     max-width: 23.5rem;

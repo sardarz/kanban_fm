@@ -6,10 +6,14 @@
 .selectBtn {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #635fc7;
+  border: 1px solid rgba(130, 143, 163, 0.25);;
   border-radius: 4px;
   padding: 0.7rem 1.6rem 0.8rem;
   cursor: pointer;
+}
+
+.menuOpen .selectBtn {
+  border-color: var(--clr-primary-600);
 }
 
 .selectBtn p {
@@ -71,4 +75,13 @@
 
 .selectMenu li {
   cursor: pointer;
+}
+
+/* Dark theme */
+body:global(.dark-mode) .selectBtn p{
+  color: white; 
+}
+
+body:global(.dark-mode) .selectMenu {
+  background-color: var(--clr-dark-500);
 }

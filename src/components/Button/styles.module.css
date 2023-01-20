@@ -82,8 +82,14 @@
   background-color: var(--clr-accent-300);
 }
 
+/* Dark theme */
+body:global(.dark-mode) .modalSecondary {
+  background-color: white;
+}
 
-
+body:global(.dark-mode) .modalSecondary:hover {
+  background-color: #eee;
+}
 /* Mobile version */
 @media screen and (max-width: 700px) {
   .primary {

@@ -7,7 +7,13 @@ interface ShowProps {
 
 const ShowSideBoard = ({ onClick }: ShowProps) => {
   return (
-    <div className={styles.showButton} onClick={onClick}>
+    <div
+      className={styles.showButton}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+    >
       <EyeLogo />
     </div>
   );

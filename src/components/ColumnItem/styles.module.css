@@ -7,7 +7,7 @@
 }
 
 .title {
-  margin-bottom: .8rem;
+  margin-bottom: 0.8rem;
   font-size: var(--heading-m-fs);
   line-height: var(--heading-m-lh);
   color: var(--clr-dark-600);
@@ -18,4 +18,13 @@
   line-height: var(--body-m-lh);
   font-weight: 700;
   color: var(--clr-gray-600);
+}
+
+/* Dark theme */
+body:global(.dark-mode) .cardWrapper {
+  background-color: var(--clr-dark-400);
+}
+
+body:global(.dark-mode) .title {
+  color: white;
 }

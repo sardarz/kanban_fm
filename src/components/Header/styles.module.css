@@ -7,7 +7,7 @@
   transition: all 0.3s ease;
 }
 
-.headerWrapper:before {
+.headerWrapper::before {
   content: "";
   position: absolute;
   height: 9.7rem;
@@ -71,6 +71,20 @@
 
 .chevronWrapper path {
   stroke: var(--clr-primary-600);
+}
+
+/* Dark version */
+body:global(.dark-mode) .headerWrapper {
+  background-color: var(--clr-dark-400);
+  color: white;
+}
+
+body:global(.dark-mode) .headerLogoWrapper path {
+  fill: white;
+}
+
+body:global(.dark-mode) .headerWrapper::before {
+  background-color: var(--clr-dark-300);
 }
 
 /* TabletVersion */

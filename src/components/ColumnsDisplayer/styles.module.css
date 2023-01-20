@@ -32,3 +32,12 @@
 .newColumn p:hover {
   color: var(--clr-primary-600);
 }
+
+/* Dark theme */
+body:global(.dark-mode) .newColumn {
+  background: linear-gradient(
+    180deg,
+    rgba(43, 44, 55, 0.25) 0%,
+    rgba(43, 44, 55, 0.125) 100%
+  );
+}

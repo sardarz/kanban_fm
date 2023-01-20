@@ -31,6 +31,7 @@
   border-radius: 4px;
   user-select: none;
   transition: background-color 0.3s ease-in-out;
+  color: var(--clr-dark-600);
 }
 
 .subtask:hover {
@@ -41,5 +42,22 @@
   font-size: 1.2rem;
   line-height: 1.5rem;
   font-weight: 700;
-  color: var(--clr-dark-600);
+}
+
+/* Dark theme */
+body:global(.dark-mode) .subtask {
+  background-color: var(--clr-dark-500);
+  color: white;
+}
+
+body:global(.dark-mode) .checkboxWrapper {
+  background-color: var(--clr-dark-400);
+}
+
+body:global(.dark-mode) .isDone .checkboxWrapper {
+  background-color: var(--clr-primary-600);
+}
+
+body:global(.dark-mode) .isDone p {
+  color: rgba(255, 255, 255, 0.5);
 }

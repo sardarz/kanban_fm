@@ -61,7 +61,8 @@ const Header = ({
       <div className={`${styles.headerMainWrapper} `}>
         <div
           className={`${styles.headerTitleWrapper}`}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             if (bodyWidth < 700) setIsSideBoardOpen(!isSideBoardOpen);
           }}
         >

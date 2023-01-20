@@ -40,3 +40,9 @@
 .delete {
   color: #ea5555;
 }
+
+/* Dark theme */
+body:global(.dark-mode) .wrapper {
+  background-color: var(--clr-dark-500);
+  box-shadow: 0px 10px 20px rgba(60, 65, 75, 0.25);
+}
