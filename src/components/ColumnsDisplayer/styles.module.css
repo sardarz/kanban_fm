@@ -34,7 +34,7 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .newColumn {
+:global(.dark-mode) .newColumn {
   background: linear-gradient(
     180deg,
     rgba(43, 44, 55, 0.25) 0%,

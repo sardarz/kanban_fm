@@ -83,11 +83,11 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .modalSecondary {
+:global(.dark-mode) .modalSecondary {
   background-color: white;
 }
 
-body:global(.dark-mode) .modalSecondary:hover {
+:global(.dark-mode) .modalSecondary:hover {
   background-color: #eee;
 }
 /* Mobile version */

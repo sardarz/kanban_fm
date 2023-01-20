@@ -21,10 +21,10 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .cardWrapper {
+:global(.dark-mode) .cardWrapper {
   background-color: var(--clr-dark-400);
 }
 
-body:global(.dark-mode) .title {
+:global(.dark-mode) .title {
   color: white;
 }

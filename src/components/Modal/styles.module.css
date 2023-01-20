@@ -208,22 +208,22 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .modalContent {
+:global(.dark-mode) .modalContent {
   background-color: var(--clr-dark-400);
 }
 
-body:global(.dark-mode) .title {
+:global(.dark-mode) .title {
   color: white;
 }
 
-body:global(.dark-mode) .modalWrapper input,
-body:global(.dark-mode) .modalWrapper textarea {
+:global(.dark-mode) .modalWrapper input,
+:global(.dark-mode) .modalWrapper textarea {
   background-color: transparent;
   color: white;
 }
 
-body:global(.dark-mode) .modalWrapper input::placeholder,
-body:global(.dark-mode) .modalWrapper textarea::placeholder {
+:global(.dark-mode) .modalWrapper input::placeholder,
+:global(.dark-mode) .modalWrapper textarea::placeholder {
   color: white;
 }
 

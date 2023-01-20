@@ -130,19 +130,19 @@
 }
 
 /* DarkTheme */
-body:global(.dark-mode) .sideBoardWrapper {
+:global(.dark-mode) .sideBoardWrapper {
   background-color: var(--clr-dark-400);
 }
 
-body:global(.dark-mode) .hideWrapper:hover {
+:global(.dark-mode) .hideWrapper:hover {
   background-color: #fff;
 }
 
-body:global(.dark-mode) .sideBoardLogoWrapper path {
+:global(.dark-mode) .sideBoardLogoWrapper path {
   fill: white;
 }
 
-body:global(.dark-mode) .sideBoardWrapper::before {
+:global(.dark-mode) .sideBoardWrapper::before {
   background-color: var(--clr-dark-300);
 }
 

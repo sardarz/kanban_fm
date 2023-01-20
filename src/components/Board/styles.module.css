@@ -88,7 +88,7 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .main {
+:global(.dark-mode) .main {
   background-color: var(--clr-dark-500);
 }
 

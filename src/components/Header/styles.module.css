@@ -74,16 +74,16 @@
 }
 
 /* Dark version */
-body:global(.dark-mode) .headerWrapper {
+:global(.dark-mode) .headerWrapper {
   background-color: var(--clr-dark-400);
   color: white;
 }
 
-body:global(.dark-mode) .headerLogoWrapper path {
+:global(.dark-mode) .headerLogoWrapper path {
   fill: white;
 }
 
-body:global(.dark-mode) .headerWrapper::before {
+:global(.dark-mode) .headerWrapper::before {
   background-color: var(--clr-dark-300);
 }
 

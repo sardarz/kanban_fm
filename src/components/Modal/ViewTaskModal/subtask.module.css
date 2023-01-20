@@ -45,19 +45,19 @@
 }
 
 /* Dark theme */
-body:global(.dark-mode) .subtask {
+:global(.dark-mode) .subtask {
   background-color: var(--clr-dark-500);
   color: white;
 }
 
-body:global(.dark-mode) .checkboxWrapper {
+:global(.dark-mode) .checkboxWrapper {
   background-color: var(--clr-dark-400);
 }
 
-body:global(.dark-mode) .isDone .checkboxWrapper {
+:global(.dark-mode) .isDone .checkboxWrapper {
   background-color: var(--clr-primary-600);
 }
 
-body:global(.dark-mode) .isDone p {
+:global(.dark-mode) .isDone p {
   color: rgba(255, 255, 255, 0.5);
 }
