@@ -35,6 +35,7 @@ const tasksSlice = createSlice({
       action.payload.map((id) => {
         delete state.byId[id];
         state.allIds = state.allIds.filter((el) => el !== id);
+        return null
       });
     },
     updateSubtaskStatus(
@@ -64,6 +65,7 @@ const tasksSlice = createSlice({
         const indexOfTask = state.allIds.indexOf(task.toString());
         state.allIds.splice(indexOfTask, 1);
         delete state.byId[task];
+        return null
       });
     },
     deleteTask(state, action: PayloadAction<string>) {

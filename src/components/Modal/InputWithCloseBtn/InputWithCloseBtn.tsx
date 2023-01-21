@@ -23,7 +23,7 @@ const InputWithCloseBtn = ({
 
   useEffect(() => {
     updateGivenText(idx, value);
-  }, [value]);
+  }, [value, idx, updateGivenText]);
 
   const placeholder =
     type === "board" ? "Enter column name" : "Enter Subtask Name";

@@ -33,6 +33,7 @@ const columnsSlice = createSlice({
           taskIds: [],
         };
         state.allIds.push(item.columnId);
+        return null
       });
     },
     addNewTaskToColumns(
@@ -54,6 +55,7 @@ const columnsSlice = createSlice({
           taskIds: state.byId[col.columnId]?.taskIds || [],
         };
         state.allIds.push(col.columnId);
+        return null
       });
     },
 
@@ -61,6 +63,7 @@ const columnsSlice = createSlice({
       action.payload.map((id) => {
         delete state.byId[id];
         state.allIds = state.allIds.filter((el) => el !== id);
+        return null
       });
     },
 
@@ -84,6 +87,7 @@ const columnsSlice = createSlice({
         const indexOfColumn = state.allIds.indexOf(column);
         state.allIds.splice(indexOfColumn, 1);
         delete state.byId[column];
+        return null
       });
     },
     deleteTaskFromColumn(

@@ -489,7 +489,9 @@ const baseState = parsedData.boards.reduce((acc, cv) => {
     tasks.map((t) => {
       acc.tasks.allIds.push(t.id);
       acc.tasks.byId[t.id] = t;
+      return null
     });
+    return null
   });
 
   return acc;

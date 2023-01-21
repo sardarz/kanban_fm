@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ReactComponent as Check } from "../../../assets/icon-check.svg";
 import { updateSubtaskStatus } from "../../../features/tasks/tasksSlice";

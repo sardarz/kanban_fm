@@ -58,7 +58,7 @@ const ViewTaskModal = ({
       dispatch(addTaskToNewColumn(newData));
       dispatch(changeTaskColumnId(newData));
     }
-  }, [currentColumnId]);
+  }, [currentColumnId, dispatch, task.columnId, taskId]);
 
   return (
     <div

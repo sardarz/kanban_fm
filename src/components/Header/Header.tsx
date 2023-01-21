@@ -8,7 +8,6 @@ import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { ReactComponent as MobileAddIcon } from "../../assets/icon-add-task-mobile.svg";
 import { ReactComponent as MobileLogo } from "../../assets/logo-mobile.svg";
 import { ReactComponent as IconDown } from "../../assets/icon-chevron-down.svg";
 import { ReactComponent as IconUp } from "../../assets/icon-chevron-up.svg";
