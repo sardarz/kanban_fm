@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { modalTypes } from "../../common/utils/modalTypes";
 import {
   addNewColumnToCurrentlySelected,
@@ -18,7 +18,7 @@ interface BoardProps {
 }
 
 const EmptyBoard = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.emptyBoardWrapper}>
@@ -68,9 +68,9 @@ const displayByColumnAmount = (columnAmount: number) => {
 };
 
 const Board = ({ isSideBoardOpen }: BoardProps) => {
-  const currentlySelected = useSelector(getCurrentlySelected);
+  const currentlySelected = useAppSelector(getCurrentlySelected);
   const columnAmountByThisBoard =
-    useSelector(getBoards).byId[currentlySelected]?.columnIds?.length;
+    useAppSelector(getBoards).byId[currentlySelected]?.columnIds?.length;
 
   return (
     <main

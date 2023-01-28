@@ -1,12 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addNewColumnToCurrentlySelected, getBoards } from "../../features/boards/boardsSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+  addNewColumnToCurrentlySelected,
+  getBoards,
+} from "../../features/boards/boardsSlice";
 import ColumnDisplayer from "../ColumnDisplayer/ColumnDisplayer";
 import styles from "./styles.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { createNewColumnById } from "../../features/columns/columnsSlice";
 
 const NewColumn = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className={styles.newColumn}>
       <p
@@ -23,9 +26,9 @@ const NewColumn = () => {
 };
 
 const ColumnsDisplayer = () => {
-  const currentlySelected = useSelector(getBoards).currentlySelected;
+  const currentlySelected = useAppSelector(getBoards).currentlySelected;
   const currentBoardColumns =
-    useSelector(getBoards).byId[currentlySelected].columnIds;
+    useAppSelector(getBoards).byId[currentlySelected].columnIds;
 
   return (
     <div className={styles.columnsDisplayer}>

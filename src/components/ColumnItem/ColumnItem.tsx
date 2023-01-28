@@ -1,13 +1,12 @@
 import styles from "./styles.module.css";
-
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 import { getTaskById } from "../../features/tasks/tasksSlice";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
 
 const ColumnItem = ({ taskId }: { taskId: string }) => {
-  const task = useSelector(getTaskById(taskId));
+  const task = useAppSelector(getTaskById(taskId));
   const completedTaskAmount = task.subtasks.filter(
     (el) => el.isCompleted
   ).length;

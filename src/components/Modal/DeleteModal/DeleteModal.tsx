@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   deleteBoard,
   getBoards,
@@ -24,10 +24,10 @@ interface DeleteModalProps {
 }
 
 const DeleteModal = ({ type, closeModal, task }: DeleteModalProps) => {
-  const dispatch = useDispatch();
-  const currentlySelected = useSelector(getCurrentlySelected);
-  const currentlySelectedData = useSelector(getBoards).byId[currentlySelected];
-  const columns = useSelector(getColumns);
+  const dispatch = useAppDispatch();
+  const currentlySelected = useAppSelector(getCurrentlySelected);
+  const currentlySelectedData = useAppSelector(getBoards).byId[currentlySelected];
+  const columns = useAppSelector(getColumns);
   const currentColumns = currentlySelectedData.columnIds;
 
   const currentTasks = currentColumns

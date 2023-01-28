@@ -1,7 +1,7 @@
 import { useState } from "react";
 import InputWithCloseBtn from "../InputWithCloseBtn/InputWithCloseBtn";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   boardCreated,
   boardEdited,
@@ -25,11 +25,11 @@ const AddBoard = ({
   isNewBoard: boolean;
   closeModal?: () => void;
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const currentlySelected = useSelector(getCurrentlySelected);
-  const boards = useSelector(getBoards);
-  const allColumns = useSelector(getColumns);
+  const currentlySelected = useAppSelector(getCurrentlySelected);
+  const boards = useAppSelector(getBoards);
+  const allColumns = useAppSelector(getColumns);
 
   const currentBoard = isNewBoard
     ? {

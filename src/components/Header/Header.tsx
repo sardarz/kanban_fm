@@ -6,11 +6,10 @@ import ThreeDotsMenu from "../ThreeDotsMenu/ThreeDotsMenu";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { modalTypes } from "../../common/utils/modalTypes";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
 import { ReactComponent as MobileLogo } from "../../assets/logo-mobile.svg";
 import { ReactComponent as IconDown } from "../../assets/icon-chevron-down.svg";
 import { ReactComponent as IconUp } from "../../assets/icon-chevron-up.svg";
+import { useAppSelector } from "../../app/hooks";
 
 const Header = ({
   isSideBoardOpen,
@@ -23,16 +22,16 @@ const Header = ({
   setIsThreeDotsOpen: (v: boolean) => void;
   setIsSideBoardOpen: (v: boolean) => void;
 }) => {
-  const boardTitle = useSelector(
-    (state: RootState) =>
+  const boardTitle = useAppSelector(
+    (state) =>
       state.boards.byId[state.boards.currentlySelected]?.name ||
       "Need to create a board"
   );
-  const currentlySelected = useSelector(
-    (state: RootState) => state.boards.currentlySelected
+  const currentlySelected = useAppSelector(
+    (state) => state.boards.currentlySelected
   );
-  const columnCount = useSelector(
-    (state: RootState) =>
+  const columnCount = useAppSelector(
+    (state) =>
       state.boards.byId[state.boards.currentlySelected]?.columnIds?.length
   );
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);

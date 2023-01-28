@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ReactComponent as ThreeDots } from "../../../assets/icon-vertical-ellipsis.svg";
 import {
   getBoards,
@@ -26,19 +26,19 @@ const ViewTaskModal = ({
   taskId: string;
   closeModal: () => void;
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const boards = useSelector(getBoards);
-  const currentlySelected = useSelector(getCurrentlySelected);
+  const boards = useAppSelector(getBoards);
+  const currentlySelected = useAppSelector(getCurrentlySelected);
   const columnIds = boards.byId[currentlySelected].columnIds;
-  const columns = useSelector(getColumns);
+  const columns = useAppSelector(getColumns);
   const columnNames = columnIds.map((id) => ({
     columnName: columns.byId[id].columnName,
     columnId: id,
     taskIds: columns.byId[id].taskIds,
   }));
 
-  const task = useSelector(getTaskById(taskId));
+  const task = useAppSelector(getTaskById(taskId));
   const title = task.title;
   const description = task.description;
 

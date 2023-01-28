@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../app/hooks";
 import { ReactComponent as Check } from "../../../assets/icon-check.svg";
 import { updateSubtaskStatus } from "../../../features/tasks/tasksSlice";
 import styles from "./subtask.module.css";
@@ -20,7 +20,7 @@ const SubTaskViewer = ({
   idx: number;
   taskId: string;
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
     <div

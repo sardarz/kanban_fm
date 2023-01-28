@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   getBoards,
   getCurrentlySelected,
@@ -29,7 +29,7 @@ const TaskModal = ({
   task: ITask | null;
 }) => {
   const isNewTask = task ? false : true;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   if (!task) {
     task = {
@@ -82,10 +82,10 @@ const TaskModal = ({
     setSubtasks(temp);
   };
 
-  const currentlySelected = useSelector(getCurrentlySelected);
-  const boards = useSelector(getBoards);
+  const currentlySelected = useAppSelector(getCurrentlySelected);
+  const boards = useAppSelector(getBoards);
   const columnIds = boards.byId[currentlySelected].columnIds;
-  const columns = useSelector(getColumns);
+  const columns = useAppSelector(getColumns);
   const columnNames = columnIds.map((id) => ({
     columnName: columns.byId[id].columnName,
     columnId: id,

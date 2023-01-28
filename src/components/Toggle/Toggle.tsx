@@ -6,7 +6,10 @@ const Toggle = () => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
   return (
-    <div className={`${styles.outer} ${theme !== "" ? styles.dark : ""}`} onClick={changeTheme}>
+    <div
+      className={`${styles.outer} ${theme !== "" ? styles.dark : ""}`}
+      onClick={changeTheme}
+    >
       <div className={styles.inner}></div>
     </div>
   );

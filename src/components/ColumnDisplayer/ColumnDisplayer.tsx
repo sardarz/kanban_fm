@@ -2,10 +2,10 @@ import ColumnItem from "../ColumnItem/ColumnItem";
 import styles from "./styles.module.css";
 
 import { getColumns } from "../../features/columns/columnsSlice";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 
 const ColumnDisplayer = ({ columnId }: { columnId: string }) => {
-  const columns = useSelector(getColumns);
+  const columns = useAppSelector(getColumns);
   const { taskIds, columnName } = columns?.byId[columnId] || {taskIds: [], columnName: ""}
 
   return (

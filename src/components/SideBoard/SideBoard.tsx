@@ -8,7 +8,7 @@ import {
   getBoards,
   updateCurrentlySelected,
 } from "../../features/boards/boardsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 interface SideBoardProps {
   isOpen: boolean;
@@ -16,8 +16,8 @@ interface SideBoardProps {
 }
 
 const SideBoard = ({ isOpen, closeSideBoard }: SideBoardProps) => {
-  const boards = useSelector(getBoards);
-  const dispatch = useDispatch();
+  const boards = useAppSelector(getBoards);
+  const dispatch = useAppDispatch();
 
   return (
     <div
